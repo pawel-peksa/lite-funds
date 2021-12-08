@@ -1,7 +1,7 @@
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SignIn } from "./pages/SignIn";
 import CssBaseline from "@mui/material/CssBaseline";
-import customTheme from "./settings/customTheme";
+import { customTheme } from "./settings/customTheme";
 import { ThemeProvider } from "@mui/material/styles";
 
 const App = () => {
