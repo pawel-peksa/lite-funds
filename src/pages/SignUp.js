@@ -1,34 +1,91 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { createUser } from "../auth/createUser";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  InputAdornment,
+} from "@mui/material";
+import MailIcon from "@mui/icons-material/Mail";
+import { OutlinedInputPassword } from "../components/OutlinedInputPassword";
 
-export const Signup = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    createUser(data);
+export const SignUp = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        Email
-        <input
-          type="email"
+    <>
+      <Typography component="h1" variant="h4" sx={{ mt: 3 }}>
+        Sign Up
+      </Typography>
+      <Box
+        onSubmit={handleSubmit}
+        component="form"
+        noValidate
+        autoComplete
+        sx={{
+          m: 2,
+        }}
+      >
+        <TextField
+          margin="normal"
+          fullWidth
           name="email"
-          placeholder="Email"
-          {...register("email", { required: true })}
+          label="Email Address"
+          autoComplete="email"
+          autoFocus
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <MailIcon sx={{ mr: "-5px" }} />
+              </InputAdornment>
+            ),
+          }}
         />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          {...register("password", { required: true, minLength: 6 })}
-        />
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
+        <FormControl margin="normal" fullWidth variant="outlined">
+          <InputLabel htmlFor="password-with-toggle-sign-up">
+            Password
+          </InputLabel>
+          <OutlinedInputPassword
+            id="password-with-toggle-sign-up"
+            name="password"
+            label="Password"
+          />
+        </FormControl>
+
+        <FormControl margin="normal" fullWidth variant="outlined">
+          <InputLabel htmlFor="password-with-toggle-sign-up-confirmation">
+            Confirm Password
+          </InputLabel>
+          <OutlinedInputPassword
+            id="password-with-toggle-sign-up-confirmation"
+            name="confirmPassword"
+            label="Confirm Password"
+          />
+        </FormControl>
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 1 }}
+        >
+          Create an account
+        </Button>
+
+        <Button
+          fullWidth
+          href="/sign-in"
+          size="large"
+          color="primary"
+          sx={{ mt: 6 }}
+        >
+          Already a memeber? Sign In
+        </Button>
+      </Box>
+    </>
   );
 };
