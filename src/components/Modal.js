@@ -19,6 +19,8 @@ export const Modal = ({ children }) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            zIndex: 1,
+            position: "relative",
           }}
         >
           <Outlet />
@@ -29,6 +31,7 @@ export const Modal = ({ children }) => {
             bottom: 5,
             left: "50%",
             transform: "translateX(-50%)",
+            zIndex: 0,
           }}
         />
       </Container>

@@ -9,6 +9,7 @@ import {
   Link,
   FormControl,
   InputLabel,
+  InputAdornment,
 } from "@mui/material";
 import { OutlinedInputPassword } from "../components/OutlinedInputPassword";
 
@@ -38,6 +39,9 @@ export const SignIn = () => {
           label="Email Address"
           autoComplete="email"
           autoFocus
+          InputProps={{
+            startAdornment: <InputAdornment position="start"></InputAdornment>,
+          }}
         />
         {/* <TextField
           margin="normal"
