@@ -1,4 +1,6 @@
 import { Grid, Paper, Container } from "@mui/material";
+import { Outlet } from "react-router-dom";
+import { Copyright } from "./Copyright";
 
 export const Modal = ({ children }) => {
   return (
@@ -19,8 +21,16 @@ export const Modal = ({ children }) => {
             alignItems: "center",
           }}
         >
-          {children}
+          <Outlet />
         </Paper>
+        <Copyright
+          sx={{
+            position: "fixed",
+            bottom: 5,
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        />
       </Container>
     </Grid>
   );

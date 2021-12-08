@@ -1,5 +1,4 @@
 import React from "react";
-import { Modal } from "../components/Modal";
 import {
   Box,
   Typography,
@@ -10,14 +9,19 @@ import {
   Link,
 } from "@mui/material";
 
+const handleSubmit = (e) => {
+  e.preventDefault();
+};
+
 export const SignIn = () => {
   return (
-    <Modal>
+    <>
       <Typography component="h1" variant="h4" sx={{ mt: 3 }}>
         Sign in
       </Typography>
       <Box
         component="form"
+        onSubmit={handleSubmit}
         noValidate
         autoComplete
         sx={{
@@ -55,10 +59,16 @@ export const SignIn = () => {
         <Link href="#" color="secondary.500" sx={{ float: "right" }}>
           Forgot password?
         </Link>
-        <Button fullWidth href="#" size="large" color="primary" sx={{ mt: 6 }}>
+        <Button
+          fullWidth
+          href="/sign-up"
+          size="large"
+          color="primary"
+          sx={{ mt: 6 }}
+        >
           Don't have an account? Sign Up
         </Button>
       </Box>
-    </Modal>
+    </>
   );
 };

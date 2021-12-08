@@ -1,34 +1,67 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { createUser } from "../auth/createUser";
+import { Box, Typography, TextField, Button } from "@mui/material";
 
-export const Signup = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    createUser(data);
+export const SignUp = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        Email
-        <input
-          type="email"
+    <>
+      <Typography component="h1" variant="h4" sx={{ mt: 3 }}>
+        Sign Up
+      </Typography>
+      <Box
+        onSubmit={handleSubmit}
+        component="form"
+        noValidate
+        autoComplete
+        sx={{
+          m: 2,
+        }}
+      >
+        <TextField
+          margin="normal"
+          fullWidth
           name="email"
-          placeholder="Email"
-          {...register("email", { required: true })}
+          label="Email Address"
+          autoComplete="email"
+          autoFocus
         />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
+        <TextField
+          margin="normal"
+          fullWidth
           name="password"
-          placeholder="Password"
-          {...register("password", { required: true, minLength: 6 })}
+          label="Password"
+          type="password"
         />
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
+        <TextField
+          margin="normal"
+          fullWidth
+          name="confirmPassword"
+          label="Confirm Password"
+          type="password"
+        />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 1 }}
+        >
+          Create an account
+        </Button>
+
+        <Button
+          fullWidth
+          href="/sign-in"
+          size="large"
+          color="primary"
+          sx={{ mt: 6 }}
+        >
+          Already a memeber? Sign In
+        </Button>
+      </Box>
+    </>
   );
 };
