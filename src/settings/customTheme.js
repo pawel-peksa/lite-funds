@@ -1,15 +1,9 @@
 import { createTheme } from "@mui/material/styles";
-import { purple } from "@mui/material/colors";
+import { grey, teal } from "@mui/material/colors";
 
-export const theme = createTheme({
+export const customTheme = createTheme({
   palette: {
-    primary: {
-      main: "#efefef",
-    },
-    secondary: purple,
-  },
-  typography: {
-    fontFamily: "Quicksand", //need to be imported!
-    fontWeightLight: 500,
+    primary: teal,
+    secondary: grey,
   },
 });
