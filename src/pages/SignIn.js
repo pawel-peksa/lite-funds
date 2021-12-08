@@ -7,7 +7,10 @@ import {
   Checkbox,
   Button,
   Link,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
+import { OutlinedInputPassword } from "../components/OutlinedInputPassword";
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -36,14 +39,26 @@ export const SignIn = () => {
           autoComplete="email"
           autoFocus
         />
-        <TextField
+        {/* <TextField
           margin="normal"
           fullWidth
           name="password"
           label="Password"
           type="password"
           autoComplete="current-password"
-        />
+        /> */}
+        <FormControl margin="normal" fullWidth variant="outlined">
+          <InputLabel htmlFor="password-with-toggle-sign-in">
+            Password
+          </InputLabel>
+          <OutlinedInputPassword
+            id="password-with-toggle-sign-in"
+            name="password"
+            label="Password"
+            autoComplete="current-password"
+          />
+        </FormControl>
+
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me"

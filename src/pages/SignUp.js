@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
+import { OutlinedInputPassword } from "../components/OutlinedInputPassword";
 
 export const SignUp = () => {
   const handleSubmit = (e) => {
@@ -28,20 +36,27 @@ export const SignUp = () => {
           autoComplete="email"
           autoFocus
         />
-        <TextField
-          margin="normal"
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-        />
-        <TextField
-          margin="normal"
-          fullWidth
-          name="confirmPassword"
-          label="Confirm Password"
-          type="password"
-        />
+        <FormControl margin="normal" fullWidth variant="outlined">
+          <InputLabel htmlFor="password-with-toggle-sign-up">
+            Password
+          </InputLabel>
+          <OutlinedInputPassword
+            id="password-with-toggle-sign-up"
+            name="password"
+            label="Password"
+          />
+        </FormControl>
+
+        <FormControl margin="normal" fullWidth variant="outlined">
+          <InputLabel htmlFor="password-with-toggle-sign-up-confirmation">
+            Confirm Password
+          </InputLabel>
+          <OutlinedInputPassword
+            id="password-with-toggle-sign-up-confirmation"
+            name="confirmPassword"
+            label="Confirm Password"
+          />
+        </FormControl>
 
         <Button
           type="submit"
