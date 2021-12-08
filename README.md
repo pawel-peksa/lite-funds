@@ -2,7 +2,7 @@
 
 Simple and lightweight web app to help you keep track of all your investments in one place.
 
-### Created with love by pawel-peksa
+#### Created with :heart: by pawel-peksa
 
 Hey! This is my first project (from idea to deployment) in JavaScript & React.
 It has three main goals:
