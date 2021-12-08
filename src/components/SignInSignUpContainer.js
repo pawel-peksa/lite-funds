@@ -2,7 +2,7 @@ import { Grid, Paper, Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { Copyright } from "./Copyright";
 
-export const Modal = ({ children }) => {
+export const SignInSignUpContainer = ({ children }) => {
   return (
     <Grid
       container

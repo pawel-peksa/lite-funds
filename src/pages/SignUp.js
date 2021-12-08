@@ -9,7 +9,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
-import { OutlinedInputPassword } from "../components/OutlinedInputPassword";
+import { InputToggleView } from "../components/InputToggleView";
 
 export const SignUp = () => {
   const handleSubmit = (e) => {
@@ -49,7 +49,7 @@ export const SignUp = () => {
           <InputLabel htmlFor="password-with-toggle-sign-up">
             Password
           </InputLabel>
-          <OutlinedInputPassword
+          <InputToggleView
             id="password-with-toggle-sign-up"
             name="password"
             label="Password"
@@ -60,7 +60,7 @@ export const SignUp = () => {
           <InputLabel htmlFor="password-with-toggle-sign-up-confirmation">
             Confirm Password
           </InputLabel>
-          <OutlinedInputPassword
+          <InputToggleView
             id="password-with-toggle-sign-up-confirmation"
             name="confirmPassword"
             label="Confirm Password"

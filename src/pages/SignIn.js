@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
-import { OutlinedInputPassword } from "../components/OutlinedInputPassword";
+import { InputToggleView } from "../components/InputToggleView";
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -54,7 +54,7 @@ export const SignIn = () => {
           <InputLabel htmlFor="password-with-toggle-sign-in">
             Password
           </InputLabel>
-          <OutlinedInputPassword
+          <InputToggleView
             id="password-with-toggle-sign-in"
             name="password"
             label="Password"

@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-export const OutlinedInputPassword = (props) => {
+export const InputToggleView = (props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {

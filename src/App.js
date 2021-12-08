@@ -5,7 +5,7 @@ import { SignUp } from "./pages/SignUp";
 import CssBaseline from "@mui/material/CssBaseline";
 import { customTheme } from "./settings/customTheme";
 import { ThemeProvider } from "@mui/material/styles";
-import { Modal } from "./components/Modal";
+import { SignInSignUpContainer } from "./components/SignInSignUpContainer";
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
       <CssBaseline />
       <ThemeProvider theme={customTheme}>
         <Routes>
-          <Route element={<Modal />}>
+          <Route element={<SignInSignUpContainer />}>
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
           </Route>
