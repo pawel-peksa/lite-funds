@@ -11,6 +11,8 @@ import {
   InputLabel,
   InputAdornment,
 } from "@mui/material";
+import MailIcon from "@mui/icons-material/Mail";
+import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import { OutlinedInputPassword } from "../components/OutlinedInputPassword";
 
 const handleSubmit = (e) => {
@@ -40,17 +42,14 @@ export const SignIn = () => {
           autoComplete="email"
           autoFocus
           InputProps={{
-            startAdornment: <InputAdornment position="start"></InputAdornment>,
+            endAdornment: (
+              <InputAdornment position="end">
+                <MailIcon sx={{ mr: "-5px" }} />
+              </InputAdornment>
+            ),
           }}
         />
-        {/* <TextField
-          margin="normal"
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-        /> */}
+
         <FormControl margin="normal" fullWidth variant="outlined">
           <InputLabel htmlFor="password-with-toggle-sign-in">
             Password
@@ -84,6 +83,7 @@ export const SignIn = () => {
           size="large"
           color="primary"
           sx={{ mt: 6 }}
+          endIcon={<PersonAddAltRoundedIcon />}
         >
           Don't have an account? Sign Up
         </Button>
