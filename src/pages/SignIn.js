@@ -48,14 +48,14 @@ export const SignIn = () => {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 3, mb: 1 }}
         >
           Sign In
         </Button>
-        <Link href="#" color="secondary.500">
+        <Link href="#" color="secondary.500" sx={{ float: "right" }}>
           Forgot password?
         </Link>
-        <Button fullWidth href="#" color="primary" sx={{ mt: 5 }}>
+        <Button fullWidth href="#" size="large" color="primary" sx={{ mt: 6 }}>
           Don't have an account? Sign Up
         </Button>
       </Box>
