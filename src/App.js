@@ -14,7 +14,7 @@ const App = () => {
       <ThemeProvider theme={customTheme}>
         <CssBaseline />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route element={<SignInSignUpContainer />}>
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />

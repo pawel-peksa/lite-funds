@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -15,7 +16,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailIcon from "@mui/icons-material/Mail";
-// import { createUser } from "../auth/createUser";
+import { createUser } from "../auth/createUser";
 
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,6 +26,7 @@ export const SignUp = () => {
     getValues,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -34,11 +36,6 @@ export const SignUp = () => {
     event.preventDefault(); //don't loose focus on password input
   };
 
-  // const onSubmit = (e, data) => {
-  //   handleSubmit(console.log(data));
-  //   e.preventDefault();
-  // };
-
   return (
     <>
       <Typography component="h1" variant="h4" sx={{ mt: 3 }}>
@@ -46,11 +43,9 @@ export const SignUp = () => {
       </Typography>
       <Box
         onSubmit={handleSubmit((data) => {
-          console.log(data);
-          // createUser(data);
+          createUser(data, navigate);
         })}
         component="form"
-        // noValidate
         autoComplete="true"
         sx={{
           m: 2,
@@ -123,11 +118,11 @@ export const SignUp = () => {
             id="password-with-toggle-sign-up-confirmation"
             autoComplete="new-password"
             {...register("confirmPassword", {
-              required: "Please confirm password!",
+              required: "Please confirm password",
               validate: {
                 matchesPreviousPassword: (value) => {
                   const { password } = getValues();
-                  return password === value || "Passwords should match!";
+                  return password === value || "Passwords should match";
                 },
               },
             })}
