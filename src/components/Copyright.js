@@ -1,5 +1,4 @@
 import { Typography, Link } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export const Copyright = (props) => {
   return (
@@ -18,11 +17,7 @@ export const Copyright = (props) => {
     >
       Lite Funds {new Date().getFullYear()}
       <br />
-      {" Created with "}
-      <FavoriteIcon
-        fontSize="small"
-        sx={{ position: "relative", top: 5 }}
-      /> by{" "}
+      {" Created with joy by "}
       <Link
         href="https://github.com/pawel-peksa"
         color="inherit"
