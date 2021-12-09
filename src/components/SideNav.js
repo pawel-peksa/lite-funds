@@ -16,8 +16,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 export const SideNav = () => {
-  const drawerWidth = 70;
-
   const icons = [
     <AccountBalanceWalletOutlinedIcon />,
     <PaidOutlinedIcon />,
@@ -30,7 +28,7 @@ export const SideNav = () => {
   return (
     <Drawer
       sx={{
-        width: drawerWidth,
+        width: 70,
         flexShrink: 0,
         // "& .MuiDrawer-paper": {
         //   width: drawerWidth,
@@ -75,8 +73,8 @@ export const SideNav = () => {
         )}
         {/* <Divider component="li" /> */}
       </List>
-      <List sx={{ mt: "auto" }}>
-        <Divider component="li" />
+      <List sx={{ mt: "auto", pb: 0 }}>
+        {/* <Divider component="li" /> */}
 
         <ListItemButton
           sx={{
@@ -94,6 +92,8 @@ export const SideNav = () => {
             primaryTypographyProps={{ fontSize: 13, fontWeight: "medium" }}
           />
         </ListItemButton>
+        <Divider component="li" />
+
         <ListItemButton
           sx={{
             flexDirection: "column",

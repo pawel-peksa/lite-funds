@@ -6,13 +6,7 @@ export const Copyright = (props) => {
       variant="body2"
       noWrap
       align="center"
-      sx={{
-        position: "fixed",
-        bottom: 5,
-        left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 0,
-      }}
+      sx={{ position: "relative", pt: 1, bottom: 0 }}
       {...props}
     >
       Lite Funds {new Date().getFullYear()}

@@ -1,26 +1,45 @@
 import { Box, Paper, Typography, Container, Grid } from "@mui/material";
 import { Copyright } from "../components/Copyright";
 import { SideNav } from "../components/SideNav";
-
+import { BottomNav } from "../components/BottomNav";
+import useMediaQuery from "@mui/material/useMediaQuery";
 export const Dashboard = () => {
+  const sideNavigation = useMediaQuery("(min-width:700px)");
   return (
     <>
-      <SideNav />
-
+      {!sideNavigation && (
+        <Paper
+          sx={{ position: "fixed", top: 0, left: 0, right: 0 }}
+          variant="outlined"
+          square
+        >
+          <Typography
+            variant="body1"
+            component="h1"
+            align="center"
+            color="primary.main"
+            sx={{ mt: 1, mb: 1, fontWeight: 500 }}
+          >
+            Lite Funds
+          </Typography>
+        </Paper>
+      )}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          height: "100vh",
           overflow: "auto",
           backgroundColor: "#f5f5f5",
-          ml: "102px",
+          height: sideNavigation ? "100vh" : "calc(100vh-62px)",
+          ml: sideNavigation ? "102px" : "",
+          mt: sideNavigation ? "" : "22px",
+          mb: sideNavigation ? "" : "40px",
         }}
       >
-        <Container maxWidth="xl" sx={{ pt: 3, pb: 3, height: "100vh" }}>
+        <Container maxWidth="xl" sx={{ pt: 3, pb: 3 }}>
           <Grid
             container
-            rowSpacing={{ xs: 3, sm: 1, md: 2, lg: 3 }}
+            rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }}
             columnSpacing={{ sm: 1, md: 2, lg: 3 }}
           >
             {/* Recent Deposits */}
@@ -89,10 +108,10 @@ export const Dashboard = () => {
               </Paper>
             </Grid>
           </Grid>
-
           <Copyright color="primary.main" />
         </Container>
       </Box>
+      {sideNavigation ? <SideNav /> : <BottomNav />}
     </>
   );
 };
