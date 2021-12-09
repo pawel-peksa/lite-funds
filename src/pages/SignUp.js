@@ -1,20 +1,43 @@
-import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   Box,
   Typography,
   TextField,
   Button,
+  IconButton,
   FormControl,
   InputLabel,
   InputAdornment,
+  OutlinedInput,
+  FormHelperText,
 } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailIcon from "@mui/icons-material/Mail";
-import { InputToggleView } from "../components/InputToggleView";
+// import { createUser } from "../auth/createUser";
 
 export const SignUp = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
   };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault(); //don't loose focus on password input
+  };
+
+  // const onSubmit = (e, data) => {
+  //   handleSubmit(console.log(data));
+  //   e.preventDefault();
+  // };
 
   return (
     <>
@@ -22,21 +45,33 @@ export const SignUp = () => {
         Sign Up
       </Typography>
       <Box
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+          // createUser(data);
+        })}
         component="form"
-        noValidate
-        autoComplete
+        // noValidate
+        autoComplete="true"
         sx={{
           m: 2,
         }}
       >
         <TextField
-          margin="normal"
+          autoFocus
           fullWidth
-          name="email"
+          error={errors.email ? true : false}
+          helperText={errors?.email?.message}
+          {...register("email", {
+            required: "Please type your email",
+            pattern: {
+              value:
+                /^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$/,
+              message: "Invalid email address",
+            },
+          })}
           label="Email Address"
           autoComplete="email"
-          autoFocus
+          margin="normal"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -49,22 +84,70 @@ export const SignUp = () => {
           <InputLabel htmlFor="password-with-toggle-sign-up">
             Password
           </InputLabel>
-          <InputToggleView
+          <OutlinedInput
+            type={showPassword ? "text" : "password"}
+            error={errors.password ? true : false}
+            {...register("password", {
+              required: "Please specify a password",
+              minLength: {
+                value: 6,
+                message: "Password must have at least 6 characters",
+              },
+            })}
             id="password-with-toggle-sign-up"
-            name="password"
+            autoComplete="new-password"
             label="Password"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
+          <FormHelperText error>{errors?.password?.message}</FormHelperText>
         </FormControl>
 
         <FormControl margin="normal" fullWidth variant="outlined">
           <InputLabel htmlFor="password-with-toggle-sign-up-confirmation">
             Confirm Password
           </InputLabel>
-          <InputToggleView
+          <OutlinedInput
+            type={showPassword ? "text" : "password"}
+            error={errors.confirmPassword ? true : false}
             id="password-with-toggle-sign-up-confirmation"
-            name="confirmPassword"
+            autoComplete="new-password"
+            {...register("confirmPassword", {
+              required: "Please confirm password!",
+              validate: {
+                matchesPreviousPassword: (value) => {
+                  const { password } = getValues();
+                  return password === value || "Passwords should match!";
+                },
+              },
+            })}
             label="Confirm Password"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
+          <FormHelperText error>
+            {errors?.confirmPassword?.message}
+          </FormHelperText>
         </FormControl>
 
         <Button
