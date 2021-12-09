@@ -25,15 +25,7 @@ export const SignInSignUpContainer = ({ children }) => {
         >
           <Outlet />
         </Paper>
-        <Copyright
-          sx={{
-            position: "fixed",
-            bottom: 5,
-            left: "50%",
-            transform: "translateX(-50%)",
-            zIndex: 0,
-          }}
-        />
+        <Copyright color="secondary.light" />
       </Container>
     </Grid>
   );
