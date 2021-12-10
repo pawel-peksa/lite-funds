@@ -12,6 +12,8 @@ import {
   InputAdornment,
   OutlinedInput,
   FormHelperText,
+  Alert,
+  CircularProgress,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -20,6 +22,8 @@ import { createUser } from "../auth/createUser";
 
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userExists, setUserExists] = useState(null);
   const {
     register,
     handleSubmit,
@@ -43,7 +47,7 @@ export const SignUp = () => {
       </Typography>
       <Box
         onSubmit={handleSubmit((data) => {
-          createUser(data, navigate);
+          createUser(data, navigate, setUserExists, setIsLoading);
         })}
         component="form"
         autoComplete="true"
@@ -153,7 +157,16 @@ export const SignUp = () => {
         >
           Create an account
         </Button>
-
+        {userExists && (
+          <Alert severity="warning">
+            User already exists. Go to sign in page
+          </Alert>
+        )}
+        {isLoading && (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <CircularProgress color="primary" />
+          </Box>
+        )}
         <Button
           fullWidth
           href="/sign-in"
@@ -161,7 +174,7 @@ export const SignUp = () => {
           color="primary"
           sx={{ mt: 6 }}
         >
-          Already a memeber? Sign In
+          Already a member? Sign In
         </Button>
       </Box>
     </>
