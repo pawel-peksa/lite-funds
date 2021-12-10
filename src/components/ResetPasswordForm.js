@@ -23,8 +23,7 @@ export const ResetPasswordForm = ({ setForgotPassword }) => {
       <Box
         onSubmit={handleSubmit}
         component="form"
-        noValidate
-        autoComplete
+        autoComplete="true"
         sx={{
           m: 2,
         }}

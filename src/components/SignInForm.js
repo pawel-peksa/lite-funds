@@ -1,4 +1,6 @@
-import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -10,14 +12,31 @@ import {
   FormControl,
   InputLabel,
   InputAdornment,
+  FormHelperText,
+  OutlinedInput,
+  IconButton,
 } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailIcon from "@mui/icons-material/Mail";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
-import { InputToggleView } from "../components/InputToggleView";
 
 export const SignInForm = ({ setForgotPassword }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault(); //don't loose focus on password input
   };
   return (
     <>
@@ -27,8 +46,7 @@ export const SignInForm = ({ setForgotPassword }) => {
       <Box
         component="form"
         onSubmit={handleSubmit}
-        noValidate
-        autoComplete
+        autoComplete="true"
         sx={{
           m: 2,
           pt: 2,
@@ -49,8 +67,39 @@ export const SignInForm = ({ setForgotPassword }) => {
             ),
           }}
         />
-
         <FormControl margin="normal" fullWidth variant="outlined">
+          <InputLabel htmlFor="password-with-toggle-sign-up">
+            Password
+          </InputLabel>
+          <OutlinedInput
+            type={showPassword ? "text" : "password"}
+            error={errors.password ? true : false}
+            {...register("password", {
+              required: "Please specify a password",
+              minLength: {
+                value: 6,
+                message: "Password must have at least 6 characters",
+              },
+            })}
+            id="password-with-toggle-sign-up"
+            autoComplete="new-password"
+            label="Password"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+          <FormHelperText error>{errors?.password?.message}</FormHelperText>
+        </FormControl>
+        {/* <FormControl margin="normal" fullWidth variant="outlined">
           <InputLabel htmlFor="password-with-toggle-sign-in">
             Password
           </InputLabel>
@@ -60,7 +109,7 @@ export const SignInForm = ({ setForgotPassword }) => {
             label="Password"
             autoComplete="current-password"
           />
-        </FormControl>
+        </FormControl> */}
 
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
