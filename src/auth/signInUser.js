@@ -11,6 +11,7 @@ export const signInUser = (
   setWrongCredentials("");
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
+      // console.log(userCredential.user);
       setIsLoading(false);
       navigate("/dashboard");
     })

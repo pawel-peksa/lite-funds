@@ -77,7 +77,7 @@ export const SignInForm = ({ setForgotPassword }) => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <MailIcon sx={{ mr: "-10px", width: "1.5em" }} />
+                <MailIcon sx={{ mr: "-10px", width: "1.6em" }} />
               </InputAdornment>
             ),
           }}
