@@ -3,27 +3,13 @@ import { Copyright } from "../components/Copyright";
 import { SideNav } from "../components/SideNav";
 import { BottomNav } from "../components/BottomNav";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { MobileTitle } from "../components/MobileTitle";
 export const Dashboard = () => {
   const sideNavigation = useMediaQuery("(min-width:700px)");
+  // const sideNavigation = !useMediaQuery("(max-width:700px)");
   return (
     <>
-      {!sideNavigation && (
-        <Paper
-          sx={{ position: "fixed", top: 0, left: 0, right: 0 }}
-          variant="outlined"
-          square
-        >
-          <Typography
-            variant="body1"
-            component="h1"
-            align="center"
-            color="primary.main"
-            sx={{ mt: 1, mb: 1, fontWeight: 500 }}
-          >
-            Lite Funds
-          </Typography>
-        </Paper>
-      )}
+      {!sideNavigation && <MobileTitle />}
       <Box
         component="main"
         sx={{
