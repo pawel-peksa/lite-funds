@@ -25,9 +25,8 @@ export const createUser = (
     .then(() => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          console.log("zalogowano");
-          const user = userCredential.user;
-          console.log(user);
+          // const user = userCredential.user;
+          // console.log(user);
         })
         .then(() => {
           setIsLoading(false);

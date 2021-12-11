@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { signInUser } from "../auth/signInUser";
 import {
   Box,
   Typography,
@@ -15,6 +16,8 @@ import {
   FormHelperText,
   OutlinedInput,
   IconButton,
+  CircularProgress,
+  Alert,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -23,6 +26,7 @@ import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 
 export const SignInForm = ({ setForgotPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [wrongCredentials, setWrongCredentials] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -45,7 +49,9 @@ export const SignInForm = ({ setForgotPassword }) => {
       </Typography>
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit((data) => {
+          signInUser(data, navigate, setIsLoading, setWrongCredentials);
+        })}
         autoComplete="true"
         sx={{
           m: 2,
@@ -55,14 +61,23 @@ export const SignInForm = ({ setForgotPassword }) => {
         <TextField
           margin="normal"
           fullWidth
-          name="email"
+          error={errors.email ? true : false}
+          helperText={errors?.email?.message}
+          {...register("email", {
+            required: "Please type your email",
+            pattern: {
+              value:
+                /^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$/,
+              message: "Invalid email address",
+            },
+          })}
           label="Email Address"
           autoComplete="email"
           autoFocus
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <MailIcon sx={{ mr: "-5px" }} />
+                <MailIcon sx={{ mr: "-10px", width: "1.5em" }} />
               </InputAdornment>
             ),
           }}
@@ -99,17 +114,6 @@ export const SignInForm = ({ setForgotPassword }) => {
           />
           <FormHelperText error>{errors?.password?.message}</FormHelperText>
         </FormControl>
-        {/* <FormControl margin="normal" fullWidth variant="outlined">
-          <InputLabel htmlFor="password-with-toggle-sign-in">
-            Password
-          </InputLabel>
-          <InputToggleView
-            id="password-with-toggle-sign-in"
-            name="password"
-            label="Password"
-            autoComplete="current-password"
-          />
-        </FormControl> */}
 
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
@@ -130,6 +134,16 @@ export const SignInForm = ({ setForgotPassword }) => {
         >
           Forgot password?
         </Link>
+        <div style={{ clear: "both" }}>
+          {wrongCredentials.length > 0 && (
+            <Alert severity="error">{wrongCredentials}</Alert>
+          )}
+          {isLoading && (
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <CircularProgress color="primary" />
+            </Box>
+          )}
+        </div>
         <Button
           fullWidth
           href="/sign-up"

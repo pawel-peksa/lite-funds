@@ -1,8 +1,8 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-const auth = getAuth();
 
 //
 export const addAuthListener = (callback) => {
+  const auth = getAuth();
   //normally onAuthStateChanged calls the callback that we provide with user obj(when just logged in) or null (when just logged out)
   //add sort of "intermediate" callback that we pass to onAuthStateChanged function which takes user obj and pass only the relevant parts of it to our callback function
   const onChange = (user) => {

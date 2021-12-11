@@ -3,17 +3,13 @@ import { getCurrentUser } from "./getCurrentUser";
 import { addAuthListener } from "./addAuthListener";
 
 export const useAuth = () => {
-  const [authInfo, setAuthInfo] = useState(() => {
-    const user = getCurrentUser();
-    const isLoading = !user; //true when there is no user, false when user exists
-    return { isLoading, user };
-  });
+  const [authInfo, setAuthInfo] = useState(getCurrentUser());
 
   useEffect(() => {
     const unsubscribe = addAuthListener((user) => {
-      setAuthInfo({ isLoading: false, user });
+      setAuthInfo(user);
     });
-    return unsubscribe; //function that is called automatically when components unmounts
-  }, []);
+    return () => unsubscribe(); //unsubscribe when components unmounts
+  }, []); //add Event Listener only when component mounts
   return authInfo;
 };

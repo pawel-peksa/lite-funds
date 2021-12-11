@@ -1,3 +1,4 @@
+import { signOutUser } from "../auth/signOutUser";
 import {
   Drawer,
   List,
@@ -95,6 +96,7 @@ export const SideNav = () => {
         <Divider component="li" />
 
         <ListItemButton
+          onClick={signOutUser}
           sx={{
             flexDirection: "column",
           }}
