@@ -16,7 +16,7 @@ import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
-export const SideNav = () => {
+export const SideNav = ({ setShow }) => {
   const icons = [
     <AccountBalanceWalletOutlinedIcon />,
     <PaidOutlinedIcon />,
@@ -31,10 +31,6 @@ export const SideNav = () => {
       sx={{
         width: 70,
         flexShrink: 0,
-        // "& .MuiDrawer-paper": {
-        //   width: drawerWidth,
-        //   boxSizing: "border-box",
-        // },
       }}
       variant="permanent"
       anchor="left"
@@ -54,6 +50,7 @@ export const SideNav = () => {
         {["Portfolio", "Transaction", "History", "Wallets", "Market"].map(
           (text, index) => (
             <ListItemButton
+              onClick={() => setShow(text.toLowerCase())}
               key={text}
               sx={{
                 flexDirection: "column",
@@ -78,6 +75,7 @@ export const SideNav = () => {
         {/* <Divider component="li" /> */}
 
         <ListItemButton
+          onClick={() => setShow("account")}
           sx={{
             flexDirection: "column",
           }}
