@@ -28,12 +28,12 @@ export const SignInForm = ({ setForgotPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [wrongCredentials, setWrongCredentials] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);

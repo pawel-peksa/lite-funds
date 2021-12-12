@@ -4,9 +4,12 @@ import { SideNav } from "../components/SideNav";
 import { BottomNav } from "../components/BottomNav";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MobileTitle } from "../components/MobileTitle";
+import { useTheme } from "@mui/material/styles";
+
 export const Dashboard = () => {
-  const sideNavigation = useMediaQuery("(min-width:700px)");
-  // const sideNavigation = !useMediaQuery("(max-width:700px)");
+  const theme = useTheme();
+  const sideNavigation = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
     <>
       {!sideNavigation && <MobileTitle />}
@@ -22,14 +25,22 @@ export const Dashboard = () => {
           mb: sideNavigation ? "" : "40px",
         }}
       >
-        <Container maxWidth="xl" sx={{ pt: 3, pb: 3 }}>
+        <Container
+          maxWidth="xl"
+          sx={{
+            pl: sideNavigation ? null : 1,
+            pr: sideNavigation ? null : 1,
+            pt: 3,
+            pb: 3,
+          }}
+        >
           <Grid
             container
             rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }}
             columnSpacing={{ sm: 1, md: 2, lg: 3 }}
           >
-            {/* Recent Deposits */}
-            <Grid item xs={12} sm={5} md={4}>
+            {/* Status */}
+            <Grid item xs={12} sm={6} md={4}>
               <Paper
                 sx={{
                   p: 2,
@@ -38,11 +49,20 @@ export const Dashboard = () => {
                   height: 240,
                 }}
               >
-                <Typography>Tutaj był portfel</Typography>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  Status
+                </Typography>
               </Paper>
             </Grid>
-            {/* Chart */}
-            <Grid item xs={12} sm={7} md={4}>
+            {/* Pie Chart / allocation */}
+            <Grid item xs={12} sm={6} md={4}>
               <Paper
                 sx={{
                   p: 2,
@@ -51,10 +71,19 @@ export const Dashboard = () => {
                   height: 240,
                 }}
               >
-                <Typography>Tutaj był chart</Typography>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  Allocation on Pie Chart / Bar Chart
+                </Typography>
               </Paper>
             </Grid>
-            {/* MENU */}
+            {/* Free Slot */}
             <Grid item xs={12} md={4}>
               <Paper
                 sx={{
@@ -64,11 +93,20 @@ export const Dashboard = () => {
                   height: 240,
                 }}
               >
-                <Typography>Tutaj był chart</Typography>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  Don't know yet...
+                </Typography>
               </Paper>
             </Grid>
 
-            {/* Recent Orders */}
+            {/* Table of assets */}
             <Grid item xs={12} md={4}>
               <Paper
                 sx={{
@@ -78,9 +116,19 @@ export const Dashboard = () => {
                   height: 400,
                 }}
               >
-                <Typography>Tutaj była tabela</Typography>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  Table of assets
+                </Typography>
               </Paper>
             </Grid>
+            {/* Value over Time Chart */}
             <Grid item xs={12} md={8}>
               <Paper
                 sx={{
@@ -90,7 +138,16 @@ export const Dashboard = () => {
                   height: 400,
                 }}
               >
-                <Typography>Tutaj była tabela</Typography>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  Value over Time Chart
+                </Typography>
               </Paper>
             </Grid>
           </Grid>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
@@ -24,13 +24,24 @@ export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [userExists, setUserExists] = useState(null);
+  const [userCreated, setUserCreated] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log("userCreated === true", userCreated === true);
+    if (userCreated === true) {
+      const id = setTimeout(() => {
+        navigate("/dashboard");
+      }, 3000);
+      return () => clearTimeout(id);
+    }
+  }, [userCreated]);
+
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -47,7 +58,7 @@ export const SignUp = () => {
       </Typography>
       <Box
         onSubmit={handleSubmit((data) => {
-          createUser(data, navigate, setUserExists, setIsLoading);
+          createUser(data, setUserExists, setIsLoading, setUserCreated);
         })}
         component="form"
         autoComplete="true"
@@ -160,6 +171,12 @@ export const SignUp = () => {
         {userExists && (
           <Alert severity="warning">
             User already exists. Go to sign in page
+          </Alert>
+        )}
+        {userCreated && (
+          <Alert>
+            Account created! <br />
+            Verification message has been sent to your Email address.
           </Alert>
         )}
         {isLoading && (
