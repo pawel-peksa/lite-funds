@@ -34,7 +34,7 @@ export const SignUp = () => {
       }, 3000);
       return () => clearTimeout(id);
     }
-  }, [userCreated]);
+  }, [userCreated, navigate]);
 
   const {
     register,
