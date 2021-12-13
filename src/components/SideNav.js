@@ -87,7 +87,7 @@ export const SideNav = ({ setShow }) => {
           <ListItemIcon
             sx={{ justifyContent: "center", color: "primary.main" }}
           >
-            {ifEmailProvider ? (
+            {ifEmailProvider(user) ? (
               <AccountCircleIcon fontSize="large" />
             ) : (
               <Avatar

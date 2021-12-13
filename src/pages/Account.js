@@ -29,7 +29,7 @@ export const Account = () => {
           >
             {user.email}
           </Typography>
-          {ifEmailProvider ? <AccountMail /> : <AccountGoogle />}
+          {ifEmailProvider(user) ? <AccountMail /> : <AccountGoogle />}
         </Paper>
       </Grid>
     </Grid>
