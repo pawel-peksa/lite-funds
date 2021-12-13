@@ -21,8 +21,14 @@ export const changePassword = async (
     setStatus(true);
     setMessage("Password has been changed");
   } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode === "auth/wrong-password") {
+      setMessage("Wrong Password");
+    } else {
+      setMessage(errorMessage);
+    }
     setIsLoading(false);
     setStatus(false);
-    setMessage(error.message);
   }
 };
