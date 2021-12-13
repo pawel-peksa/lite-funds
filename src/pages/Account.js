@@ -14,6 +14,7 @@ import {
   Box,
   Alert,
   TextField,
+  CircularProgress,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -28,6 +29,7 @@ export const Account = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -87,7 +89,8 @@ export const Account = () => {
                 currentPassword,
                 password,
                 setStatus,
-                setMessage
+                setMessage,
+                setIsLoading
               );
             })}
             component="form"
@@ -119,7 +122,7 @@ export const Account = () => {
               </InputLabel>
               <OutlinedInput
                 type={showPassword ? "text" : "password"}
-                error={errors.password ? true : false}
+                error={errors.currentPassword ? true : false}
                 {...register("currentPassword", {
                   required: "Please type your current password",
                   minLength: {
@@ -129,7 +132,7 @@ export const Account = () => {
                 })}
                 id="old-password-with-toggle-sign-up"
                 autoComplete="current-password"
-                label="Old Password"
+                label="Current Password"
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -143,7 +146,9 @@ export const Account = () => {
                   </InputAdornment>
                 }
               />
-              <FormHelperText error>{errors?.password?.message}</FormHelperText>
+              <FormHelperText error>
+                {errors?.currentPassword?.message}
+              </FormHelperText>
             </FormControl>
             <FormControl
               margin="dense"
@@ -231,6 +236,11 @@ export const Account = () => {
             >
               Change Password
             </Button>
+            {isLoading && (
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <CircularProgress color="primary" />
+              </Box>
+            )}
             {alert}
             <FormControlLabel
               sx={{ mt: 5 }}
