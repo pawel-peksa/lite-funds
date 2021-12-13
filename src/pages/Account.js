@@ -3,8 +3,6 @@ import {
   Paper,
   Typography,
   Button,
-  Checkbox,
-  FormControlLabel,
   FormControl,
   InputLabel,
   OutlinedInput,
@@ -22,18 +20,15 @@ import { useSession } from "../auth/UserProvider";
 import { changePassword } from "../auth/changePassword";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { DeleteAccount } from "../components/DeleteAccount";
 
 export const Account = () => {
-  const [checked, setChecked] = useState(false);
   const { user } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
   const {
     register,
     handleSubmit,
@@ -242,34 +237,7 @@ export const Account = () => {
               </Box>
             )}
             {alert}
-            <FormControlLabel
-              sx={{ mt: 5 }}
-              control={
-                <Checkbox
-                  checked={checked}
-                  color="error"
-                  size="small"
-                  onChange={handleChange}
-                  inputProps={{ "aria-label": "controlled" }}
-                />
-              }
-              label="I want to delete my account and erase all data"
-            />
-            {checked && (
-              <Alert severity="error">
-                Delete account cannot be recovered. All data will be deleted
-                permanently.
-              </Alert>
-            )}
-            <br />
-            <Button
-              color="error"
-              variant="contained"
-              size="small"
-              disabled={!checked}
-            >
-              Delete account
-            </Button>
+            <DeleteAccount />
           </Box>
         </Paper>
       </Grid>
