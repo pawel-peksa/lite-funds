@@ -15,7 +15,7 @@ export const deleteCurrentUser = async (
     await reauthenticateWithCredential(user, credential);
     await deleteUser(user);
     setStatus(true);
-    setMessage("Password has been changed");
+    setMessage("User deleted");
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
