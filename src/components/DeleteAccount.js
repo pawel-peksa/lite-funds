@@ -79,7 +79,7 @@ export const DeleteAccount = () => {
       />
       {checked && (
         <Alert severity="error">
-          Delete account cannot be recovered. All data will be deleted
+          Deleted account cannot be recovered. All data will be deleted
           permanently.
         </Alert>
       )}
