@@ -1,0 +1,15 @@
+#googleLogIn {
+  height: 45px !important;
+  width: 100% !important;
+}
+#googleLogIn:hover {
+  box-shadow: rgba(0, 128, 128, 0.479) 0 0 3px 3px !important;
+}
+#googleLogIn div {
+  width: 25px !important;
+  height: 25px !important;
+}
+#googleLogIn div svg {
+  width: 43px !important;
+  height: 43px !important;
+}
