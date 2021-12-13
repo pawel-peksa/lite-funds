@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import GoogleButton from "react-google-button";
 import { signInUser } from "../auth/signInUser";
+import { logInWithGoogle } from "../auth/logInWithGoogle";
 import {
   Box,
   Typography,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
   Link,
   FormControl,
@@ -115,44 +115,50 @@ export const SignInForm = ({ setForgotPassword }) => {
           <FormHelperText error>{errors?.password?.message}</FormHelperText>
         </FormControl>
 
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
         <Button
           type="submit"
           fullWidth
+          size="large"
           variant="contained"
-          sx={{ mt: 3, mb: 1 }}
+          sx={{ mt: 3 }}
         >
           Sign In
         </Button>
+
         <Link
           onClick={() => setForgotPassword(true)}
           color="secondary.500"
-          sx={{ float: "right", cursor: "pointer" }}
+          variant="body2"
+          sx={{ cursor: "pointer" }}
         >
           Forgot password?
         </Link>
-        <div style={{ clear: "both" }}>
+        <GoogleButton
+          type="light"
+          id="googleLogIn"
+          style={{
+            marginTop: "24px",
+            borderRadius: 5,
+          }}
+          onClick={logInWithGoogle}
+        />
+
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           {wrongCredentials.length > 0 && (
             <Alert severity="error">{wrongCredentials}</Alert>
           )}
-          {isLoading && (
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <CircularProgress color="primary" />
-            </Box>
-          )}
-        </div>
+          {isLoading && <CircularProgress color="primary" />}
+        </Box>
         <Button
           fullWidth
+          variant="outlined"
           href="/sign-up"
           size="large"
           color="primary"
-          sx={{ mt: 6 }}
+          sx={{ mt: 3 }}
           endIcon={<PersonAddAltRoundedIcon />}
         >
-          Don't have an account? Sign Up
+          Don't have an account? REGISTER
         </Button>
       </Box>
     </>

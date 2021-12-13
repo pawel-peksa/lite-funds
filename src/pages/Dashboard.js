@@ -13,7 +13,6 @@ export const Dashboard = () => {
   const [show, setShow] = useState("portfolio");
   const theme = useTheme();
   const sideNavigation = useMediaQuery(theme.breakpoints.up("sm"));
-
   return (
     <>
       {!sideNavigation && <MobileTitle />}
