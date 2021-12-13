@@ -7,6 +7,7 @@ import {
   ListItemText,
   Typography,
   Divider,
+  Avatar,
 } from "@mui/material";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
@@ -15,8 +16,11 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { useSession } from "../auth/UserProvider";
+import { ifEmailProvider } from "../auth/ifEmailProvider";
 
 export const SideNav = ({ setShow }) => {
+  const { user } = useSession();
   const icons = [
     <AccountBalanceWalletOutlinedIcon />,
     <PaidOutlinedIcon />,
@@ -83,7 +87,15 @@ export const SideNav = ({ setShow }) => {
           <ListItemIcon
             sx={{ justifyContent: "center", color: "primary.main" }}
           >
-            <AccountCircleIcon fontSize="large" />
+            {ifEmailProvider ? (
+              <AccountCircleIcon fontSize="large" />
+            ) : (
+              <Avatar
+                sx={{ margin: "0 auto" }}
+                alt={user.displayName}
+                src={user.photoURL}
+              />
+            )}
           </ListItemIcon>
 
           <ListItemText
