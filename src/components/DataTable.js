@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { TextField, Paper } from "@mui/material";
+import { TextField, Paper, Typography } from "@mui/material";
 import { useState } from "react";
 import { searchEndpoint } from "../api/searchEndpoint";
 
@@ -7,39 +7,40 @@ const columns = [
   {
     field: "id",
     headerName: "Symbol",
-    minWidth: 60,
+    minWidth: 50,
     flex: 0.1,
   },
   {
     field: "name",
     headerName: "Name",
-    minWidth: 170,
+    minWidth: 130,
     flex: 0.5,
   },
   {
     field: "type",
     headerName: "Type",
-    minWidth: 80,
+    minWidth: 50,
     flex: 0.1,
   },
   {
     field: "price",
     headerName: "Price",
     type: "number",
-    minWidth: 80,
+    minWidth: 50,
     flex: 0.1,
   },
   {
     field: "currency",
     headerName: "Currency",
-    minWidth: 80,
+    minWidth: 50,
     flex: 0.1,
   },
 ];
 
-export const DataTable = () => {
+export const DataTable = ({ setAsset }) => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectionModel, setSelectionModel] = useState([]);
 
   const handleChange = (e) => {
     searchEndpoint(e.target.value, setResults, setIsLoading);
@@ -64,29 +65,52 @@ export const DataTable = () => {
     <Paper
       sx={{
         p: 2,
+        pt: 1,
+        pb: 1,
         display: "flex",
         flexDirection: "column",
-        height: 370,
+        height: 360,
       }}
     >
+      <Typography
+        variant="h6"
+        component="div"
+        color="primary.main"
+        align="center"
+      >
+        Search asset
+      </Typography>
       <TextField
+        autoComplete="off"
         sx={{ mb: 2 }}
         id="standard-basic"
-        label="Search equity, crypto..."
+        label="Start typing to search..."
         variant="standard"
         onChange={handleChange}
       />
       <DataGrid
-        disableColumnMenu="true"
-        hideFooterSelectedRowCount="true"
+        disableColumnMenu={true}
+        hideFooterSelectedRowCount={true}
         density="compact"
+        onSelectionModelChange={(newSelectionModel) => {
+          setSelectionModel(newSelectionModel);
+          let selected = results.find(
+            (result) => result["1. symbol"] === newSelectionModel.join()
+          );
+          setAsset({
+            name: selected["2. name"],
+            symbol: selected["1. symbol"],
+            currency: selected["8. currency"],
+          });
+        }}
+        selectionModel={selectionModel}
         loading={isLoading}
         rows={rows}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        rowsPerPageOptions={[4]}
+        pageSize={4}
         sx={{
-          bgcolor: "white",
+          backgroundColor: "white",
           border: "none",
         }}
       />
