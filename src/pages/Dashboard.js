@@ -7,6 +7,7 @@ import { MobileTitle } from "../components/MobileTitle";
 import { useTheme } from "@mui/material/styles";
 import { Portfolio } from "./Portfolio";
 import { Account } from "./Account";
+import { Market } from "./Market";
 import { useState } from "react";
 
 export const Dashboard = () => {
@@ -38,6 +39,7 @@ export const Dashboard = () => {
           }}
         >
           {show === "portfolio" && <Portfolio />}
+          {show === "market" && <Market />}
           {show === "account" && <Account />}
 
           <Copyright color="primary.main" />

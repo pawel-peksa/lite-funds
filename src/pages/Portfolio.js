@@ -81,7 +81,7 @@ export const Portfolio = () => {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 400,
+            height: 350,
           }}
         >
           <Typography
@@ -103,7 +103,7 @@ export const Portfolio = () => {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 400,
+            height: 350,
           }}
         >
           <Typography
