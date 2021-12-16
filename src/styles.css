@@ -1,6 +1,3 @@
-* {
-  /* border: 1px solid green !important; */
-}
 #googleLogIn {
   height: 45px !important;
   width: 100% !important;
@@ -15,4 +12,7 @@
 #googleLogIn div svg {
   width: 43px !important;
   height: 43px !important;
+}
+.MuiDataGrid-row {
+  cursor: pointer;
 }
