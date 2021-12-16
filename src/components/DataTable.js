@@ -1,7 +1,9 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { TextField, Paper, Typography } from "@mui/material";
+import { TextField, Paper, Typography, Box } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
 import { searchEndpoint } from "../api/searchEndpoint";
+import SearchIcon from "@mui/icons-material/Search";
 
 const columns = [
   {
@@ -39,10 +41,22 @@ const columns = [
 export const DataTable = ({ setAsset }) => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectionModel, setSelectionModel] = useState([]);
+  const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
-    searchEndpoint(e.target.value, setResults, setIsLoading);
+    setSearch(e.target.value);
+  };
+
+  const handleClick = () => {
+    searchEndpoint(search, setResults, setIsLoading);
+  };
+
+  const onRowClick = (row) => {
+    setAsset({
+      name: row.row.name,
+      symbol: row.row.id,
+      currency: row.row.currency,
+    });
   };
 
   let rows;
@@ -68,43 +82,52 @@ export const DataTable = ({ setAsset }) => {
         pb: 1,
         display: "flex",
         flexDirection: "column",
-        height: 360,
+        height: 340,
       }}
     >
-      <Typography
-        variant="h6"
-        component="div"
-        color="primary.main"
-        align="center"
+      <Box
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleClick();
+        }}
+        component="form"
+        sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}
       >
-        Search asset
-      </Typography>
-      <TextField
-        autoComplete="off"
-        sx={{ mb: 2 }}
-        id="standard-basic"
-        label="Start typing to search..."
-        variant="standard"
-        onChange={handleChange}
-      />
+        <Typography
+          variant="h6"
+          component="div"
+          color="primary.main"
+          align="center"
+          sx={{ ml: 8 }}
+        >
+          Search asset:
+        </Typography>
+        <TextField
+          sx={{ ml: 4 }}
+          variant="standard"
+          autoComplete="off"
+          id="standard-basic"
+          label="Asset name..."
+          onChange={handleChange}
+        />
+        <LoadingButton
+          disableElevation
+          size="small"
+          sx={{ ml: 2 }}
+          onClick={handleClick}
+          endIcon={<SearchIcon />}
+          loading={isLoading}
+          loadingPosition="end"
+          variant="contained"
+        >
+          Search
+        </LoadingButton>
+      </Box>
       <DataGrid
         disableColumnMenu={true}
         hideFooterSelectedRowCount={true}
         density="compact"
-        onSelectionModelChange={(newSelectionModel) => {
-          setSelectionModel(newSelectionModel);
-          let selected = results.find(
-            (result) => result["1. symbol"] === newSelectionModel.join()
-          );
-          if (selected) {
-            setAsset({
-              name: selected["2. name"],
-              symbol: selected["1. symbol"],
-              currency: selected["8. currency"],
-            });
-          }
-        }}
-        selectionModel={selectionModel}
+        onRowClick={onRowClick}
         loading={isLoading}
         rows={rows}
         columns={columns}

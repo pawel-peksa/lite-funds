@@ -1,4 +1,5 @@
 import { API, FIN_API_KEY } from "../settings/api";
+import { checkNote } from "./checkNote";
 
 export const searchEndpoint = (keyword, setResults, setIsLoading) => {
   setIsLoading(true);
@@ -7,9 +8,9 @@ export const searchEndpoint = (keyword, setResults, setIsLoading) => {
   fetch(apiCall)
     .then((data) => data.json())
     .then((data) => {
+      checkNote(data);
       let results = data["bestMatches"];
       setResults(results);
-      console.log(results);
       setIsLoading(false);
     })
     .catch((error) => {
