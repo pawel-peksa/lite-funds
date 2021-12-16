@@ -9,6 +9,7 @@ export const searchEndpoint = (keyword, setResults, setIsLoading) => {
     .then((data) => {
       let results = data["bestMatches"];
       setResults(results);
+      console.log(results);
       setIsLoading(false);
     })
     .catch((error) => {

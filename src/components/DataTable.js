@@ -23,11 +23,10 @@ const columns = [
     flex: 0.1,
   },
   {
-    field: "price",
-    headerName: "Price",
-    type: "number",
-    minWidth: 50,
-    flex: 0.1,
+    field: "region",
+    headerName: "Region",
+    minWidth: 70,
+    flex: 0.15,
   },
   {
     field: "currency",
@@ -55,7 +54,7 @@ export const DataTable = ({ setAsset }) => {
         id: result["1. symbol"],
         name: result["2. name"],
         type: result["3. type"],
-        price: result["9. matchScore"],
+        region: result["4. region"],
         currency: result["8. currency"],
       };
     });
@@ -97,11 +96,13 @@ export const DataTable = ({ setAsset }) => {
           let selected = results.find(
             (result) => result["1. symbol"] === newSelectionModel.join()
           );
-          setAsset({
-            name: selected["2. name"],
-            symbol: selected["1. symbol"],
-            currency: selected["8. currency"],
-          });
+          if (selected) {
+            setAsset({
+              name: selected["2. name"],
+              symbol: selected["1. symbol"],
+              currency: selected["8. currency"],
+            });
+          }
         }}
         selectionModel={selectionModel}
         loading={isLoading}
