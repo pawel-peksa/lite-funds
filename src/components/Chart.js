@@ -229,7 +229,7 @@ export const Chart = ({ asset }) => {
               value:
                 getSymbolFromCurrency(asset.currency) +
                 data.at(0)?.value.toFixed(1),
-              fill: "#6c9df5",
+              fill: "#6495ed",
               fontSize: 13,
             }}
             stroke="#acddff"
