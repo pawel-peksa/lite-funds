@@ -5,7 +5,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { parseISO, format, getDate } from "date-fns";
+import { parseISO, format } from "date-fns";
 import { fetchDailyAdjusted } from "../api/fetchDailyAdjusted";
 import { useEffect, useState } from "react";
 import {
@@ -17,16 +17,17 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import getSymbolFromCurrency from "currency-symbol-map";
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label, currency }) => {
   if (active) {
     return (
       <Paper elevation={14} sx={{ p: 2 }}>
         <Typography variant="body2">
           {format(parseISO(label), "eeee, d MMM, yyyy")}
         </Typography>
-
         <Typography align="center" variant="body1" color="primary.main">
+          {getSymbolFromCurrency(currency)}
           {payload[0].value.toFixed(2)}
         </Typography>
       </Paper>
@@ -38,11 +39,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 export const Chart = ({ asset }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [performance, setPerformance] = useState();
 
   useEffect(() => {
-    fetchDailyAdjusted(asset.symbol, setData, setIsLoading);
+    fetchDailyAdjusted(asset.symbol, setData, setPerformance, setIsLoading);
   }, [asset]);
-
   return (
     <Paper
       sx={{
@@ -84,6 +85,16 @@ export const Chart = ({ asset }) => {
           <Button sx={{ minWidth: "40px" }}>5Y</Button>
         </Box>
       </Box>
+      <Typography
+        sx={{ ml: 9, pb: 1, display: "inline-block" }}
+        variant="body2"
+      >
+        Performance for selected period:{" "}
+        <span style={{ color: performance < 0 ? "red" : "teal" }}>
+          {performance}%
+        </span>
+      </Typography>
+
       <ResponsiveContainer width="99%" height={350}>
         <AreaChart data={data}>
           <defs>
@@ -101,7 +112,15 @@ export const Chart = ({ asset }) => {
             tickLine={false}
             reversed={true}
             angle={-30}
-            tickFormatter={(str) => format(parseISO(str), "dd MMM yy")}
+            dx={5}
+            dy={5}
+            tickFormatter={(str) => {
+              // before print check for correct data type
+              if (str !== 0 && str !== "auto") {
+                return format(parseISO(str), "dd MMM");
+              }
+              return str;
+            }}
           />
           <YAxis
             width={70}
@@ -110,9 +129,11 @@ export const Chart = ({ asset }) => {
             axisLine={false}
             tickLine={false}
             tickCount={8}
-            tickFormatter={(number) => `${number.toFixed(2)}`}
+            tickFormatter={(number) =>
+              `${getSymbolFromCurrency(asset.currency)}${number.toFixed(2)}`
+            }
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip content={<CustomTooltip currency={asset.currency} />} />
           <CartesianGrid opacity={0.3} vertical={false} />
         </AreaChart>
       </ResponsiveContainer>

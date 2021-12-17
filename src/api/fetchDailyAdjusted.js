@@ -1,9 +1,11 @@
 import { API, FIN_API_KEY } from "../settings/api";
 import { checkNote } from "./checkNote";
+import { calculatePerformance } from "../functions/calculatePerformance";
 
 export const fetchDailyAdjusted = (
   stockSymbol = "IBM",
   setData,
+  setPerformance,
   setIsLoading
 ) => {
   const apiFunction = "TIME_SERIES_DAILY_ADJUSTED";
@@ -22,7 +24,11 @@ export const fetchDailyAdjusted = (
         }));
         setIsLoading(false);
         setData(toPlot);
+        let performance = calculatePerformance(
+          toPlot.at(-1).value,
+          toPlot[0].value
+        );
+        setPerformance(performance);
       }
-    })
-    .catch((err) => alert("fetch daily adjusted", err));
+    });
 };

@@ -11,7 +11,7 @@ export const Copyright = (props) => {
     >
       Lite Funds {new Date().getFullYear()}
       <br />
-      {" Created with joy by "}
+      {" Created by "}
       <Link
         href="https://github.com/pawel-peksa"
         color="inherit"
