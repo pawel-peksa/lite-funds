@@ -6,7 +6,8 @@ export const fetchMonthlyAdjusted = (
   stockSymbol,
   setData,
   setPerformance,
-  setIsLoading
+  setIsLoading,
+  setSnackbar
 ) => {
   const apiFunction = "TIME_SERIES_MONTHLY_ADJUSTED";
   const apiCall = `${API}function=${apiFunction}&symbol=${stockSymbol}&apikey=${FIN_API_KEY}`;
@@ -14,7 +15,7 @@ export const fetchMonthlyAdjusted = (
   fetch(apiCall)
     .then((data) => data.json())
     .then((data) => {
-      checkNote(data);
+      checkNote(data, setSnackbar);
       let series = data["Monthly Adjusted Time Series"];
       if (series) {
         let entries = Object.entries(series);

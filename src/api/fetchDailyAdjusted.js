@@ -7,7 +7,8 @@ export const fetchDailyAdjusted = (
   setData,
   setPerformance,
   setIsLoading,
-  short = false
+  short = false,
+  setSnackbar
 ) => {
   const apiFunction = "TIME_SERIES_DAILY_ADJUSTED";
   const apiCall = `${API}function=${apiFunction}&symbol=${stockSymbol}&apikey=${FIN_API_KEY}`;
@@ -15,7 +16,7 @@ export const fetchDailyAdjusted = (
   fetch(apiCall)
     .then((data) => data.json())
     .then((data) => {
-      checkNote(data);
+      checkNote(data, setSnackbar);
       let series = data["Time Series (Daily)"];
       if (series) {
         let entries = Object.entries(series);

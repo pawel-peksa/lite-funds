@@ -91,19 +91,24 @@ export const DataTable = ({ setAsset }) => {
           handleClick();
         }}
         component="form"
-        sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end",
+          mb: 2,
+        }}
       >
         <Typography
           variant="h6"
           component="div"
           color="primary.main"
           align="center"
-          sx={{ ml: 8 }}
+          sx={{ ml: -2 }}
         >
           Search asset:
         </Typography>
         <TextField
-          sx={{ ml: 4 }}
+          sx={{ ml: 2 }}
           variant="standard"
           autoComplete="off"
           id="standard-basic"

@@ -7,7 +7,8 @@ export const fetchWeeklyAdjusted = (
   setData,
   setPerformance,
   setIsLoading,
-  short
+  short,
+  setSnackbar
 ) => {
   const apiFunction = "TIME_SERIES_WEEKLY_ADJUSTED";
   const apiCall = `${API}function=${apiFunction}&symbol=${stockSymbol}&apikey=${FIN_API_KEY}`;
@@ -15,7 +16,7 @@ export const fetchWeeklyAdjusted = (
   fetch(apiCall)
     .then((data) => data.json())
     .then((data) => {
-      checkNote(data);
+      checkNote(data, setSnackbar);
       let series = data["Weekly Adjusted Time Series"];
       if (series) {
         let entries = Object.entries(series);

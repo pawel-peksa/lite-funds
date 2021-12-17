@@ -17,10 +17,19 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  ReferenceLine,
   CartesianGrid,
 } from "recharts";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { ApiSnackbar } from "./ApiSnackbar";
 
+const CustomLabel = () => {
+  return (
+    <div style={{ widht: 200, height: 200, border: "1px solid red" }}>
+      LABEL
+    </div>
+  );
+};
 const CustomTooltip = ({ active, payload, label, currency }) => {
   if (active) {
     let data = label;
@@ -33,7 +42,7 @@ const CustomTooltip = ({ active, payload, label, currency }) => {
         <Typography variant="body2">{data}</Typography>
         <Typography align="center" variant="body1" color="primary.main">
           {getSymbolFromCurrency(currency)}
-          {payload[0].value.toFixed(2)}
+          {payload && payload[0].value.toFixed(2)}
         </Typography>
       </Paper>
     );
@@ -47,6 +56,7 @@ export const Chart = ({ asset }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [performance, setPerformance] = useState();
   const [message, setMessage] = useState("Performance: ");
+  const [snackbar, setSnackbar] = useState(false);
 
   useEffect(() => {
     switch (interval) {
@@ -56,7 +66,8 @@ export const Chart = ({ asset }) => {
           setData,
           setPerformance,
           setIsLoading,
-          true
+          true,
+          setSnackbar
         );
         setMessage("1 Month performance: ");
         break;
@@ -67,7 +78,8 @@ export const Chart = ({ asset }) => {
           setData,
           setPerformance,
           setIsLoading,
-          false
+          false,
+          setSnackbar
         );
         setMessage("3 Months performance: ");
         break;
@@ -78,7 +90,8 @@ export const Chart = ({ asset }) => {
           setData,
           setPerformance,
           setIsLoading,
-          true
+          true,
+          setSnackbar
         );
         setMessage("1 Year performance: ");
         break;
@@ -89,7 +102,8 @@ export const Chart = ({ asset }) => {
           setData,
           setPerformance,
           setIsLoading,
-          false
+          false,
+          setSnackbar
         );
         setMessage("5 Years performance: ");
         break;
@@ -99,7 +113,8 @@ export const Chart = ({ asset }) => {
           asset.symbol,
           setData,
           setPerformance,
-          setIsLoading
+          setIsLoading,
+          setSnackbar
         );
         setMessage("All time performance: ");
         break;
@@ -142,30 +157,35 @@ export const Chart = ({ asset }) => {
         </Box>
         <Box>
           <Button
+            variant={interval === "1M" ? "outlined" : "text"}
             onClick={() => setInterval(() => "1M")}
             sx={{ minWidth: "40px" }}
           >
             1M
           </Button>
           <Button
+            variant={interval === "3M" ? "outlined" : "text"}
             onClick={() => setInterval(() => "3M")}
             sx={{ minWidth: "40px" }}
           >
             3M
           </Button>
           <Button
+            variant={interval === "1Y" ? "outlined" : "text"}
             onClick={() => setInterval(() => "1Y")}
             sx={{ minWidth: "40px" }}
           >
             1Y
           </Button>
           <Button
+            variant={interval === "5Y" ? "outlined" : "text"}
             onClick={() => setInterval(() => "5Y")}
             sx={{ minWidth: "40px" }}
           >
             5Y
           </Button>
           <Button
+            variant={interval === "ALL" ? "outlined" : "text"}
             onClick={() => setInterval(() => "ALL")}
             sx={{ minWidth: "40px" }}
           >
@@ -181,7 +201,14 @@ export const Chart = ({ asset }) => {
       </Typography>
 
       <ResponsiveContainer width="99%" height={350}>
-        <AreaChart data={data}>
+        <AreaChart
+          data={data}
+          margin={{
+            right: 55,
+            left: 25,
+            bottom: 20,
+          }}
+        >
           <defs>
             <linearGradient id="color" x1="0" x2="0" y1="0" y2="1">
               <stop offset="0%" stopColor="#009688" stopOpacity={0.7}></stop>
@@ -190,7 +217,30 @@ export const Chart = ({ asset }) => {
           </defs>
 
           <Area dataKey="value" stroke="#009688" fill="url(#color)" />
-
+          <ReferenceLine
+            y={data && data.at(-1)?.value}
+            label={{
+              position: "right",
+              value:
+                getSymbolFromCurrency(asset.currency) +
+                data.at(-1)?.value.toFixed(1),
+              fill: "grey",
+              fontSize: 13,
+            }}
+            stroke="lightgrey"
+          />
+          <ReferenceLine
+            y={data && data.at(0)?.value}
+            label={{
+              position: "right",
+              value:
+                getSymbolFromCurrency(asset.currency) +
+                data.at(0)?.value.toFixed(1),
+              fill: "#6c9df5",
+              fontSize: 13,
+            }}
+            stroke="#acddff"
+          />
           <XAxis
             dataKey="date"
             axisLine={false}
@@ -222,6 +272,7 @@ export const Chart = ({ asset }) => {
           <CartesianGrid opacity={0.3} vertical={false} />
         </AreaChart>
       </ResponsiveContainer>
+      <ApiSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
     </Paper>
   );
 };
