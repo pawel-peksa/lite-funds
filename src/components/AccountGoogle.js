@@ -40,11 +40,11 @@ export const AccountGoogle = () => {
         Hello {user.displayName}! <br />
       </Typography>
       <Avatar
-        sx={{ margin: "0 auto" }}
+        sx={{ margin: "15px auto" }}
         alt={user.displayName}
         src={user.photoURL}
       />
-      <Typography sx={{ mt: 3 }} variant="body2">
+      <Typography sx={{ mt: 3 }} variant="body1" align="center">
         You've signed In with your Google Account. <br />
       </Typography>
 
