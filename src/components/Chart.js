@@ -23,13 +23,6 @@ import {
 import getSymbolFromCurrency from "currency-symbol-map";
 import { ApiSnackbar } from "./ApiSnackbar";
 
-const CustomLabel = () => {
-  return (
-    <div style={{ widht: 200, height: 200, border: "1px solid red" }}>
-      LABEL
-    </div>
-  );
-};
 const CustomTooltip = ({ active, payload, label, currency }) => {
   if (active) {
     let data = label;
