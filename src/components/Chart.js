@@ -7,6 +7,8 @@ import {
 } from "@mui/material";
 import { parseISO, format } from "date-fns";
 import { fetchDailyAdjusted } from "../api/fetchDailyAdjusted";
+import { fetchWeeklyAdjusted } from "../api/fetchWeeklyAdjusted";
+import { fetchMonthlyAdjusted } from "../api/fetchMonthlyAdjusted";
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -21,11 +23,14 @@ import getSymbolFromCurrency from "currency-symbol-map";
 
 const CustomTooltip = ({ active, payload, label, currency }) => {
   if (active) {
+    let data = label;
+    if (label !== 0 && label !== "auto") {
+      data = format(parseISO(label), "eeee, d MMM, yyyy");
+    }
+
     return (
       <Paper elevation={14} sx={{ p: 2 }}>
-        <Typography variant="body2">
-          {format(parseISO(label), "eeee, d MMM, yyyy")}
-        </Typography>
+        <Typography variant="body2">{data}</Typography>
         <Typography align="center" variant="body1" color="primary.main">
           {getSymbolFromCurrency(currency)}
           {payload[0].value.toFixed(2)}
@@ -37,13 +42,70 @@ const CustomTooltip = ({ active, payload, label, currency }) => {
 };
 
 export const Chart = ({ asset }) => {
+  const [interval, setInterval] = useState("3M");
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [performance, setPerformance] = useState();
+  const [message, setMessage] = useState("Performance: ");
 
   useEffect(() => {
-    fetchDailyAdjusted(asset.symbol, setData, setPerformance, setIsLoading);
-  }, [asset]);
+    switch (interval) {
+      case "1M": {
+        fetchDailyAdjusted(
+          asset.symbol,
+          setData,
+          setPerformance,
+          setIsLoading,
+          true
+        );
+        setMessage("1 Month performance: ");
+        break;
+      }
+      case "3M": {
+        fetchDailyAdjusted(
+          asset.symbol,
+          setData,
+          setPerformance,
+          setIsLoading,
+          false
+        );
+        setMessage("3 Months performance: ");
+        break;
+      }
+      case "1Y": {
+        fetchWeeklyAdjusted(
+          asset.symbol,
+          setData,
+          setPerformance,
+          setIsLoading,
+          true
+        );
+        setMessage("1 Year performance: ");
+        break;
+      }
+      case "5Y": {
+        fetchWeeklyAdjusted(
+          asset.symbol,
+          setData,
+          setPerformance,
+          setIsLoading,
+          false
+        );
+        setMessage("5 Years performance: ");
+        break;
+      }
+      default: {
+        fetchMonthlyAdjusted(
+          asset.symbol,
+          setData,
+          setPerformance,
+          setIsLoading
+        );
+        setMessage("All time performance: ");
+        break;
+      }
+    }
+  }, [asset, interval]);
   return (
     <Paper
       sx={{
@@ -79,17 +141,40 @@ export const Chart = ({ asset }) => {
           )}
         </Box>
         <Box>
-          <Button sx={{ minWidth: "40px" }}>1M</Button>
-          <Button sx={{ minWidth: "40px" }}>3M</Button>
-          <Button sx={{ minWidth: "40px" }}>1Y</Button>
-          <Button sx={{ minWidth: "40px" }}>5Y</Button>
+          <Button
+            onClick={() => setInterval(() => "1M")}
+            sx={{ minWidth: "40px" }}
+          >
+            1M
+          </Button>
+          <Button
+            onClick={() => setInterval(() => "3M")}
+            sx={{ minWidth: "40px" }}
+          >
+            3M
+          </Button>
+          <Button
+            onClick={() => setInterval(() => "1Y")}
+            sx={{ minWidth: "40px" }}
+          >
+            1Y
+          </Button>
+          <Button
+            onClick={() => setInterval(() => "5Y")}
+            sx={{ minWidth: "40px" }}
+          >
+            5Y
+          </Button>
+          <Button
+            onClick={() => setInterval(() => "ALL")}
+            sx={{ minWidth: "40px" }}
+          >
+            All
+          </Button>
         </Box>
       </Box>
-      <Typography
-        sx={{ ml: 9, pb: 1, display: "inline-block" }}
-        variant="body2"
-      >
-        Performance for selected period:{" "}
+      <Typography sx={{ pb: 1 }} variant="body1" align="center">
+        {message}
         <span style={{ color: performance < 0 ? "red" : "teal" }}>
           {performance}%
         </span>
