@@ -1,6 +1,11 @@
 import "./settings/firebaseConfig";
 import "./styles.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { PendingVerification } from "./pages/PendingVerification";
@@ -35,7 +40,7 @@ const App = () => {
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/sign-up" element={<SignUp />} />
             </Route>
-            <Route path="*" element={<p>Not found</p>} />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </ThemeProvider>
       </Router>
