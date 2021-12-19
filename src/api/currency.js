@@ -1,7 +1,4 @@
 export const currency = [
-  { code: "1ST", name: "FirstBlood", search: "1ST - FirstBlood" },
-  { code: "2GIVE", name: "GiveCoin", search: "2GIVE - GiveCoin" },
-  { code: "808", name: "808Coin", search: "808 - 808Coin" },
   { code: "AAVE", name: "Aave", search: "AAVE - Aave" },
   { code: "ABT", name: "ArcBlock", search: "ABT - ArcBlock" },
   { code: "ABY", name: "ArtByte", search: "ABY - ArtByte" },
