@@ -13,7 +13,7 @@ export const SearchCurrency = ({ text, setSymbol }) => {
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
-        setSymbol(newValue.code);
+        setSymbol(newValue?.code);
       }}
       options={currency}
       size="small"
