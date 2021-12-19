@@ -33,5 +33,9 @@ export const fetchDailyAdjusted = (
         );
         setPerformance(performance);
       }
-    });
+    })
+    .catch((error) => {
+      console.log("error w fetch daily adjusted", error);
+      setIsLoading(false);
+    }); //TODO uporządkować error handling dla każdego zapytania
 };
