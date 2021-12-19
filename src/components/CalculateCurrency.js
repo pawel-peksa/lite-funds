@@ -1,7 +1,32 @@
-import { Grid, Typography, TextField, Button } from "@mui/material";
+import { Grid, Typography, TextField } from "@mui/material";
 import { SearchCurrency } from "./SearchCurrency";
+import { useState } from "react";
+import { fetchExchangeRates } from "../api/fetchExchangeRates";
+import { ApiSnackbar } from "./ApiSnackbar";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
+  const [formValue, setFormValue] = useState(1);
+  const [calculatedValue, setCalculatedValue] = useState(1);
+  const [snackbar, setSnackbar] = useState(false);
+  const [loading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    if (e.target.value > 0) setFormValue(e.target.value);
+  };
+
+  const handleCalculate = () => {
+    fetchExchangeRates(
+      from,
+      to,
+      setIsLoading,
+      setSnackbar,
+      setCalculatedValue,
+      formValue
+    );
+  };
+
   return (
     <Grid
       container
@@ -36,12 +61,26 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
                 borderRadius: "4px 0 0 4px",
                 display: "inline-block",
                 zIndex: 10,
+                minWidth: 48,
               }}
               color="white"
             >
               {from}
             </Typography>
-            <TextField sx={{ ml: -1 }} size="small" fullWidth />
+
+            <TextField
+              sx={{ ml: -1 }}
+              value={formValue}
+              onChange={handleChange}
+              InputProps={{
+                inputProps: {
+                  style: { textAlign: "center" },
+                },
+              }}
+              type="number"
+              size="small"
+              fullWidth
+            />
           </Grid>
         </Grid>
         <Grid
@@ -63,12 +102,28 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
                 borderRadius: "4px 0 0 4px",
                 display: "inline-block",
                 zIndex: 10,
+                minWidth: 48, //TODO wyrzucić do nowego komponentu lub ujednolicić style
               }}
               color="white"
             >
               {to}
             </Typography>
-            <TextField sx={{ ml: -1 }} size="small" fullWidth />
+            <TextField
+              InputProps={{
+                inputProps: {
+                  style: {
+                    textAlign: "center",
+                    marginRight: "30px",
+                    cursor: "default",
+                  },
+                },
+              }}
+              // disabled
+              value={calculatedValue}
+              sx={{ ml: -1 }}
+              size="small"
+              fullWidth
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -79,16 +134,29 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         <Grid item md={6} xs={12}>
-          <Button fullWidth variant="contained">
+          <LoadingButton
+            disabled={!!from & !!to ? false : true}
+            fullWidth
+            onClick={handleCalculate}
+            loading={loading}
+            variant="contained"
+          >
             Calculate
-          </Button>
+          </LoadingButton>
         </Grid>
         <Grid item md={6} xs={12}>
-          <Button fullWidth variant="contained">
+          <LoadingButton
+            disabled={!!from & !!to ? false : true}
+            fullWidth
+            // onClick={handleCalculate}
+            // loading={loading}
+            variant="contained"
+          >
             Plot
-          </Button>
+          </LoadingButton>
         </Grid>
       </Grid>
+      <ApiSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
     </Grid>
   );
 };
