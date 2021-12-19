@@ -8,6 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import { Portfolio } from "./Portfolio";
 import { Account } from "./Account";
 import { Market } from "./Market";
+import { Crypto } from "./Crypto";
 import { useState } from "react";
 
 export const Dashboard = () => {
@@ -39,7 +40,9 @@ export const Dashboard = () => {
           }}
         >
           {show === "portfolio" && <Portfolio />}
-          {show === "market" && <Market />}
+          {show === "stocks" && <Market />}
+          {/* TODO change name of the Market compoenent and file to Stocks */}
+          {show === "crypto" && <Crypto />}
           {show === "account" && <Account />}
 
           <Copyright color="primary.main" />

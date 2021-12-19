@@ -16,6 +16,7 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import PriceChangeOutlinedIcon from "@mui/icons-material/PriceChangeOutlined";
 import { useSession } from "../auth/UserProvider";
 import { ifEmailProvider } from "../auth/ifEmailProvider";
 
@@ -29,6 +30,7 @@ export const SideNav = ({ setShow }) => {
     <TrendingUpIcon
       sx={{ borderBottom: 2, borderLeft: 2, borderColor: "primary.main" }}
     />,
+    <PriceChangeOutlinedIcon />,
   ];
   return (
     <Drawer
@@ -51,28 +53,33 @@ export const SideNav = ({ setShow }) => {
       <List>
         {/* <Divider component="li" /> */}
 
-        {["Portfolio", "Transaction", "History", "Wallets", "Market"].map(
-          (text, index) => (
-            <ListItemButton
-              onClick={() => setShow(text.toLowerCase())}
-              key={text}
-              sx={{
-                flexDirection: "column",
-              }}
+        {[
+          "Portfolio",
+          "Transaction",
+          "History",
+          "Wallets",
+          "Stocks",
+          "Crypto",
+        ].map((text, index) => (
+          <ListItemButton
+            onClick={() => setShow(text.toLowerCase())}
+            key={text}
+            sx={{
+              flexDirection: "column",
+            }}
+          >
+            <ListItemIcon
+              sx={{ justifyContent: "center", color: "primary.main" }}
             >
-              <ListItemIcon
-                sx={{ justifyContent: "center", color: "primary.main" }}
-              >
-                {icons[index]}
-              </ListItemIcon>
+              {icons[index]}
+            </ListItemIcon>
 
-              <ListItemText
-                primary={text}
-                primaryTypographyProps={{ fontSize: 13, fontWeight: "medium" }}
-              />
-            </ListItemButton>
-          )
-        )}
+            <ListItemText
+              primary={text}
+              primaryTypographyProps={{ fontSize: 13, fontWeight: "medium" }}
+            />
+          </ListItemButton>
+        ))}
         {/* <Divider component="li" /> */}
       </List>
       <List sx={{ mt: "auto", pb: 0 }}>

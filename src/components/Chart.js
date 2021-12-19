@@ -113,7 +113,9 @@ export const Chart = ({ asset }) => {
         break;
       }
     }
+    // TODO: refactor to use only one function to fetch data
   }, [asset, interval]);
+
   return (
     <Paper
       sx={{
@@ -138,7 +140,7 @@ export const Chart = ({ asset }) => {
           <Typography
             variant="h6"
             color={isLoading ? "secondary.light" : "primary.main"}
-            sx={{ ml: 8, pb: 1 }}
+            sx={{ ml: 12, pb: 1 }}
           >
             {asset.name
               ? `${asset.symbol} - ${asset.name} (${asset.currency})`
