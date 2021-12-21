@@ -1,4 +1,2914 @@
+export const base = [
+  {
+    code: "BTC",
+  },
+  {
+    code: "ETH",
+  },
+  {
+    code: "USDT",
+  },
+  {
+    code: "BNB",
+  },
+  {
+    code: "TUSD",
+  },
+  {
+    code: "PAX",
+  },
+  {
+    code: "USDC",
+  },
+  {
+    code: "XRP",
+  },
+  {
+    code: "USDS",
+  },
+  {
+    code: "TRX",
+  },
+  {
+    code: "BUSD",
+  },
+  {
+    code: "NGN",
+  },
+  {
+    code: "RUB",
+  },
+  {
+    code: "TRY",
+  },
+  {
+    code: "EUR",
+  },
+  {
+    code: "ZAR",
+  },
+  {
+    code: "BKRW",
+  },
+  {
+    code: "IDRT",
+  },
+  {
+    code: "GBP",
+  },
+  {
+    code: "UAH",
+  },
+  {
+    code: "BIDR",
+  },
+  {
+    code: "AUD",
+  },
+  {
+    code: "DAI",
+  },
+  {
+    code: "BRL",
+  },
+  {
+    code: "BVND",
+  },
+  {
+    code: "VAI",
+  },
+  {
+    code: "GYEN",
+  },
+  {
+    code: "USDP",
+  },
+  {
+    code: "DOGE",
+  },
+];
+
+export const quote = [
+  {
+    code: "ETH",
+  },
+  {
+    code: "LTC",
+  },
+  {
+    code: "BNB",
+  },
+  {
+    code: "NEO",
+  },
+  {
+    code: "QTUM",
+  },
+  {
+    code: "EOS",
+  },
+  {
+    code: "SNT",
+  },
+  {
+    code: "BNT",
+  },
+  {
+    code: "BCC",
+  },
+  {
+    code: "GAS",
+  },
+  {
+    code: "BTC",
+  },
+  {
+    code: "HSR",
+  },
+  {
+    code: "OAX",
+  },
+  {
+    code: "DNT",
+  },
+  {
+    code: "MCO",
+  },
+  {
+    code: "ICN",
+  },
+  {
+    code: "WTC",
+  },
+  {
+    code: "LRC",
+  },
+  {
+    code: "YOYO",
+  },
+  {
+    code: "OMG",
+  },
+  {
+    code: "ZRX",
+  },
+  {
+    code: "STRAT",
+  },
+  {
+    code: "SNGLS",
+  },
+  {
+    code: "BQX",
+  },
+  {
+    code: "KNC",
+  },
+  {
+    code: "FUN",
+  },
+  {
+    code: "SNM",
+  },
+  {
+    code: "IOTA",
+  },
+  {
+    code: "LINK",
+  },
+  {
+    code: "XVG",
+  },
+  {
+    code: "SALT",
+  },
+  {
+    code: "MDA",
+  },
+  {
+    code: "MTL",
+  },
+  {
+    code: "SUB",
+  },
+  {
+    code: "ETC",
+  },
+  {
+    code: "MTH",
+  },
+  {
+    code: "ENG",
+  },
+  {
+    code: "ZEC",
+  },
+  {
+    code: "AST",
+  },
+  {
+    code: "DASH",
+  },
+  {
+    code: "BTG",
+  },
+  {
+    code: "EVX",
+  },
+  {
+    code: "REQ",
+  },
+  {
+    code: "VIB",
+  },
+  {
+    code: "TRX",
+  },
+  {
+    code: "POWR",
+  },
+  {
+    code: "ARK",
+  },
+  {
+    code: "XRP",
+  },
+  {
+    code: "MOD",
+  },
+  {
+    code: "ENJ",
+  },
+  {
+    code: "STORJ",
+  },
+  {
+    code: "VEN",
+  },
+  {
+    code: "KMD",
+  },
+  {
+    code: "NULS",
+  },
+  {
+    code: "RCN",
+  },
+  {
+    code: "RDN",
+  },
+  {
+    code: "XMR",
+  },
+  {
+    code: "DLT",
+  },
+  {
+    code: "AMB",
+  },
+  {
+    code: "BAT",
+  },
+  {
+    code: "BCPT",
+  },
+  {
+    code: "ARN",
+  },
+  {
+    code: "GVT",
+  },
+  {
+    code: "CDT",
+  },
+  {
+    code: "GXS",
+  },
+  {
+    code: "POE",
+  },
+  {
+    code: "QSP",
+  },
+  {
+    code: "BTS",
+  },
+  {
+    code: "XZC",
+  },
+  {
+    code: "LSK",
+  },
+  {
+    code: "TNT",
+  },
+  {
+    code: "FUEL",
+  },
+  {
+    code: "MANA",
+  },
+  {
+    code: "BCD",
+  },
+  {
+    code: "DGD",
+  },
+  {
+    code: "ADX",
+  },
+  {
+    code: "ADA",
+  },
+  {
+    code: "PPT",
+  },
+  {
+    code: "CMT",
+  },
+  {
+    code: "XLM",
+  },
+  {
+    code: "CND",
+  },
+  {
+    code: "LEND",
+  },
+  {
+    code: "WABI",
+  },
+  {
+    code: "TNB",
+  },
+  {
+    code: "WAVES",
+  },
+  {
+    code: "GTO",
+  },
+  {
+    code: "ICX",
+  },
+  {
+    code: "OST",
+  },
+  {
+    code: "ELF",
+  },
+  {
+    code: "AION",
+  },
+  {
+    code: "NEBL",
+  },
+  {
+    code: "BRD",
+  },
+  {
+    code: "EDO",
+  },
+  {
+    code: "WINGS",
+  },
+  {
+    code: "NAV",
+  },
+  {
+    code: "LUN",
+  },
+  {
+    code: "TRIG",
+  },
+  {
+    code: "APPC",
+  },
+  {
+    code: "VIBE",
+  },
+  {
+    code: "RLC",
+  },
+  {
+    code: "INS",
+  },
+  {
+    code: "PIVX",
+  },
+  {
+    code: "IOST",
+  },
+  {
+    code: "CHAT",
+  },
+  {
+    code: "STEEM",
+  },
+  {
+    code: "NANO",
+  },
+  {
+    code: "VIA",
+  },
+  {
+    code: "BLZ",
+  },
+  {
+    code: "AE",
+  },
+  {
+    code: "RPX",
+  },
+  {
+    code: "NCASH",
+  },
+  {
+    code: "POA",
+  },
+  {
+    code: "ZIL",
+  },
+  {
+    code: "ONT",
+  },
+  {
+    code: "STORM",
+  },
+  {
+    code: "XEM",
+  },
+  {
+    code: "WAN",
+  },
+  {
+    code: "WPR",
+  },
+  {
+    code: "QLC",
+  },
+  {
+    code: "SYS",
+  },
+  {
+    code: "GRS",
+  },
+  {
+    code: "CLOAK",
+  },
+  {
+    code: "GNT",
+  },
+  {
+    code: "LOOM",
+  },
+  {
+    code: "BCN",
+  },
+  {
+    code: "REP",
+  },
+  {
+    code: "TUSD",
+  },
+  {
+    code: "ZEN",
+  },
+  {
+    code: "SKY",
+  },
+  {
+    code: "CVC",
+  },
+  {
+    code: "THETA",
+  },
+  {
+    code: "IOTX",
+  },
+  {
+    code: "QKC",
+  },
+  {
+    code: "AGI",
+  },
+  {
+    code: "NXS",
+  },
+  {
+    code: "DATA",
+  },
+  {
+    code: "SC",
+  },
+  {
+    code: "NPXS",
+  },
+  {
+    code: "KEY",
+  },
+  {
+    code: "NAS",
+  },
+  {
+    code: "MFT",
+  },
+  {
+    code: "DENT",
+  },
+  {
+    code: "ARDR",
+  },
+  {
+    code: "HOT",
+  },
+  {
+    code: "VET",
+  },
+  {
+    code: "DOCK",
+  },
+  {
+    code: "POLY",
+  },
+  {
+    code: "PHX",
+  },
+  {
+    code: "HC",
+  },
+  {
+    code: "GO",
+  },
+  {
+    code: "PAX",
+  },
+  {
+    code: "RVN",
+  },
+  {
+    code: "DCR",
+  },
+  {
+    code: "USDC",
+  },
+  {
+    code: "MITH",
+  },
+  {
+    code: "BCHABC",
+  },
+  {
+    code: "BCHSV",
+  },
+  {
+    code: "REN",
+  },
+  {
+    code: "BTT",
+  },
+  {
+    code: "USDS",
+  },
+  {
+    code: "ONG",
+  },
+  {
+    code: "FET",
+  },
+  {
+    code: "CELR",
+  },
+  {
+    code: "MATIC",
+  },
+  {
+    code: "ATOM",
+  },
+  {
+    code: "PHB",
+  },
+  {
+    code: "TFUEL",
+  },
+  {
+    code: "ONE",
+  },
+  {
+    code: "FTM",
+  },
+  {
+    code: "BTCB",
+  },
+  {
+    code: "ALGO",
+  },
+  {
+    code: "USDSB",
+  },
+  {
+    code: "ERD",
+  },
+  {
+    code: "DOGE",
+  },
+  {
+    code: "DUSK",
+  },
+  {
+    code: "BGBP",
+  },
+  {
+    code: "ANKR",
+  },
+  {
+    code: "WIN",
+  },
+  {
+    code: "COS",
+  },
+  {
+    code: "TUSDB",
+  },
+  {
+    code: "COCOS",
+  },
+  {
+    code: "TOMO",
+  },
+  {
+    code: "PERL",
+  },
+  {
+    code: "CHZ",
+  },
+  {
+    code: "BAND",
+  },
+  {
+    code: "BUSD",
+  },
+  {
+    code: "BEAM",
+  },
+  {
+    code: "XTZ",
+  },
+  {
+    code: "HBAR",
+  },
+  {
+    code: "NKN",
+  },
+  {
+    code: "STX",
+  },
+  {
+    code: "KAVA",
+  },
+  {
+    code: "ARPA",
+  },
+  {
+    code: "CTXC",
+  },
+  {
+    code: "BCH",
+  },
+  {
+    code: "TROY",
+  },
+  {
+    code: "VITE",
+  },
+  {
+    code: "FTT",
+  },
+  {
+    code: "USDT",
+  },
+  {
+    code: "EUR",
+  },
+  {
+    code: "OGN",
+  },
+  {
+    code: "DREP",
+  },
+  {
+    code: "BULL",
+  },
+  {
+    code: "BEAR",
+  },
+  {
+    code: "ETHBULL",
+  },
+  {
+    code: "ETHBEAR",
+  },
+  {
+    code: "TCT",
+  },
+  {
+    code: "WRX",
+  },
+  {
+    code: "LTO",
+  },
+  {
+    code: "EOSBULL",
+  },
+  {
+    code: "EOSBEAR",
+  },
+  {
+    code: "XRPBULL",
+  },
+  {
+    code: "XRPBEAR",
+  },
+  {
+    code: "MBL",
+  },
+  {
+    code: "COTI",
+  },
+  {
+    code: "BNBBULL",
+  },
+  {
+    code: "BNBBEAR",
+  },
+  {
+    code: "STPT",
+  },
+  {
+    code: "SOL",
+  },
+  {
+    code: "CTSI",
+  },
+  {
+    code: "HIVE",
+  },
+  {
+    code: "CHR",
+  },
+  {
+    code: "BTCUP",
+  },
+  {
+    code: "BTCDOWN",
+  },
+  {
+    code: "MDT",
+  },
+  {
+    code: "STMX",
+  },
+  {
+    code: "IQ",
+  },
+  {
+    code: "PNT",
+  },
+  {
+    code: "GBP",
+  },
+  {
+    code: "DGB",
+  },
+  {
+    code: "COMP",
+  },
+  {
+    code: "BKRW",
+  },
+  {
+    code: "SXP",
+  },
+  {
+    code: "SNX",
+  },
+  {
+    code: "ETHUP",
+  },
+  {
+    code: "ETHDOWN",
+  },
+  {
+    code: "ADAUP",
+  },
+  {
+    code: "ADADOWN",
+  },
+  {
+    code: "LINKUP",
+  },
+  {
+    code: "LINKDOWN",
+  },
+  {
+    code: "VTHO",
+  },
+  {
+    code: "IRIS",
+  },
+  {
+    code: "MKR",
+  },
+  {
+    code: "DAI",
+  },
+  {
+    code: "RUNE",
+  },
+  {
+    code: "AUD",
+  },
+  {
+    code: "FIO",
+  },
+  {
+    code: "BNBUP",
+  },
+  {
+    code: "BNBDOWN",
+  },
+  {
+    code: "XTZUP",
+  },
+  {
+    code: "XTZDOWN",
+  },
+  {
+    code: "AVA",
+  },
+  {
+    code: "BAL",
+  },
+  {
+    code: "YFI",
+  },
+  {
+    code: "JST",
+  },
+  {
+    code: "SRM",
+  },
+  {
+    code: "ANT",
+  },
+  {
+    code: "CRV",
+  },
+  {
+    code: "SAND",
+  },
+  {
+    code: "OCEAN",
+  },
+  {
+    code: "NMR",
+  },
+  {
+    code: "DOT",
+  },
+  {
+    code: "LUNA",
+  },
+  {
+    code: "IDEX",
+  },
+  {
+    code: "RSR",
+  },
+  {
+    code: "PAXG",
+  },
+  {
+    code: "WNXM",
+  },
+  {
+    code: "TRB",
+  },
+  {
+    code: "BZRX",
+  },
+  {
+    code: "WBTC",
+  },
+  {
+    code: "SUSHI",
+  },
+  {
+    code: "YFII",
+  },
+  {
+    code: "KSM",
+  },
+  {
+    code: "EGLD",
+  },
+  {
+    code: "DIA",
+  },
+  {
+    code: "UMA",
+  },
+  {
+    code: "EOSUP",
+  },
+  {
+    code: "EOSDOWN",
+  },
+  {
+    code: "TRXUP",
+  },
+  {
+    code: "TRXDOWN",
+  },
+  {
+    code: "XRPUP",
+  },
+  {
+    code: "XRPDOWN",
+  },
+  {
+    code: "DOTUP",
+  },
+  {
+    code: "DOTDOWN",
+  },
+  {
+    code: "BEL",
+  },
+  {
+    code: "WING",
+  },
+  {
+    code: "SWRV",
+  },
+  {
+    code: "LTCUP",
+  },
+  {
+    code: "LTCDOWN",
+  },
+  {
+    code: "CREAM",
+  },
+  {
+    code: "UNI",
+  },
+  {
+    code: "NBS",
+  },
+  {
+    code: "OXT",
+  },
+  {
+    code: "SUN",
+  },
+  {
+    code: "AVAX",
+  },
+  {
+    code: "HNT",
+  },
+  {
+    code: "BAKE",
+  },
+  {
+    code: "BURGER",
+  },
+  {
+    code: "FLM",
+  },
+  {
+    code: "SCRT",
+  },
+  {
+    code: "CAKE",
+  },
+  {
+    code: "SPARTA",
+  },
+  {
+    code: "UNIUP",
+  },
+  {
+    code: "UNIDOWN",
+  },
+  {
+    code: "ORN",
+  },
+  {
+    code: "UTK",
+  },
+  {
+    code: "XVS",
+  },
+  {
+    code: "ALPHA",
+  },
+  {
+    code: "VIDT",
+  },
+  {
+    code: "AAVE",
+  },
+  {
+    code: "NEAR",
+  },
+  {
+    code: "SXPUP",
+  },
+  {
+    code: "SXPDOWN",
+  },
+  {
+    code: "FIL",
+  },
+  {
+    code: "FILUP",
+  },
+  {
+    code: "FILDOWN",
+  },
+  {
+    code: "YFIUP",
+  },
+  {
+    code: "YFIDOWN",
+  },
+  {
+    code: "INJ",
+  },
+  {
+    code: "AERGO",
+  },
+  {
+    code: "EASY",
+  },
+  {
+    code: "AUDIO",
+  },
+  {
+    code: "CTK",
+  },
+  {
+    code: "BCHUP",
+  },
+  {
+    code: "BCHDOWN",
+  },
+  {
+    code: "BOT",
+  },
+  {
+    code: "AKRO",
+  },
+  {
+    code: "KP3R",
+  },
+  {
+    code: "AXS",
+  },
+  {
+    code: "HARD",
+  },
+  {
+    code: "RENBTC",
+  },
+  {
+    code: "SLP",
+  },
+  {
+    code: "CVP",
+  },
+  {
+    code: "STRAX",
+  },
+  {
+    code: "FOR",
+  },
+  {
+    code: "UNFI",
+  },
+  {
+    code: "FRONT",
+  },
+  {
+    code: "BCHA",
+  },
+  {
+    code: "ROSE",
+  },
+  {
+    code: "HEGIC",
+  },
+  {
+    code: "AAVEUP",
+  },
+  {
+    code: "AAVEDOWN",
+  },
+  {
+    code: "PROM",
+  },
+  {
+    code: "SKL",
+  },
+  {
+    code: "SUSD",
+  },
+  {
+    code: "COVER",
+  },
+  {
+    code: "GLM",
+  },
+  {
+    code: "GHST",
+  },
+  {
+    code: "SUSHIUP",
+  },
+  {
+    code: "SUSHIDOWN",
+  },
+  {
+    code: "XLMUP",
+  },
+  {
+    code: "XLMDOWN",
+  },
+  {
+    code: "DF",
+  },
+  {
+    code: "GRT",
+  },
+  {
+    code: "JUV",
+  },
+  {
+    code: "PSG",
+  },
+  {
+    code: "1INCH",
+  },
+  {
+    code: "REEF",
+  },
+  {
+    code: "OG",
+  },
+  {
+    code: "ATM",
+  },
+  {
+    code: "ASR",
+  },
+  {
+    code: "CELO",
+  },
+  {
+    code: "RIF",
+  },
+  {
+    code: "BTCST",
+  },
+  {
+    code: "TRU",
+  },
+  {
+    code: "DEXE",
+  },
+  {
+    code: "CKB",
+  },
+  {
+    code: "TWT",
+  },
+  {
+    code: "FIRO",
+  },
+  {
+    code: "BETH",
+  },
+  {
+    code: "PROS",
+  },
+  {
+    code: "LIT",
+  },
+  {
+    code: "SFP",
+  },
+  {
+    code: "FXS",
+  },
+  {
+    code: "DODO",
+  },
+  {
+    code: "UFT",
+  },
+  {
+    code: "ACM",
+  },
+  {
+    code: "AUCTION",
+  },
+  {
+    code: "PHA",
+  },
+  {
+    code: "TVK",
+  },
+  {
+    code: "BADGER",
+  },
+  {
+    code: "FIS",
+  },
+  {
+    code: "OM",
+  },
+  {
+    code: "POND",
+  },
+  {
+    code: "DEGO",
+  },
+  {
+    code: "ALICE",
+  },
+  {
+    code: "BIFI",
+  },
+  {
+    code: "LINA",
+  },
+  {
+    code: "PERP",
+  },
+  {
+    code: "RAMP",
+  },
+  {
+    code: "SUPER",
+  },
+  {
+    code: "CFX",
+  },
+  {
+    code: "EPS",
+  },
+  {
+    code: "AUTO",
+  },
+  {
+    code: "TKO",
+  },
+  {
+    code: "PUNDIX",
+  },
+  {
+    code: "TLM",
+  },
+  {
+    code: "1INCHUP",
+  },
+  {
+    code: "1INCHDOWN",
+  },
+  {
+    code: "MIR",
+  },
+  {
+    code: "BAR",
+  },
+  {
+    code: "FORTH",
+  },
+  {
+    code: "EZ",
+  },
+  {
+    code: "SHIB",
+  },
+  {
+    code: "ICP",
+  },
+  {
+    code: "AR",
+  },
+  {
+    code: "POLS",
+  },
+  {
+    code: "MDX",
+  },
+  {
+    code: "MASK",
+  },
+  {
+    code: "LPT",
+  },
+  {
+    code: "AGIX",
+  },
+  {
+    code: "NU",
+  },
+  {
+    code: "ATA",
+  },
+  {
+    code: "GTC",
+  },
+  {
+    code: "TORN",
+  },
+  {
+    code: "KEEP",
+  },
+  {
+    code: "ERN",
+  },
+  {
+    code: "KLAY",
+  },
+  {
+    code: "BOND",
+  },
+  {
+    code: "MLN",
+  },
+  {
+    code: "QUICK",
+  },
+  {
+    code: "C98",
+  },
+  {
+    code: "CLV",
+  },
+  {
+    code: "QNT",
+  },
+  {
+    code: "FLOW",
+  },
+  {
+    code: "XEC",
+  },
+  {
+    code: "MINA",
+  },
+  {
+    code: "RAY",
+  },
+  {
+    code: "FARM",
+  },
+  {
+    code: "ALPACA",
+  },
+  {
+    code: "MBOX",
+  },
+  {
+    code: "VGX",
+  },
+  {
+    code: "WAXP",
+  },
+  {
+    code: "TRIBE",
+  },
+  {
+    code: "GNO",
+  },
+  {
+    code: "DYDX",
+  },
+  {
+    code: "USDP",
+  },
+  {
+    code: "GALA",
+  },
+  {
+    code: "ILV",
+  },
+  {
+    code: "YGG",
+  },
+  {
+    code: "FIDA",
+  },
+  {
+    code: "AGLD",
+  },
+  {
+    code: "RAD",
+  },
+  {
+    code: "BETA",
+  },
+  {
+    code: "RARE",
+  },
+  {
+    code: "SSV",
+  },
+  {
+    code: "LAZIO",
+  },
+  {
+    code: "CHESS",
+  },
+  {
+    code: "DAR",
+  },
+  {
+    code: "BNX",
+  },
+  {
+    code: "RGT",
+  },
+  {
+    code: "MOVR",
+  },
+  {
+    code: "CITY",
+  },
+  {
+    code: "ENS",
+  },
+  {
+    code: "QI",
+  },
+  {
+    code: "PORTO",
+  },
+  {
+    code: "JASMY",
+  },
+  {
+    code: "AMP",
+  },
+  {
+    code: "PLA",
+  },
+  {
+    code: "PYR",
+  },
+  {
+    code: "RNDR",
+  },
+  {
+    code: "ALCX",
+  },
+  {
+    code: "SANTOS",
+  },
+  {
+    code: "MC",
+  },
+  {
+    code: "ANY",
+  },
+  {
+    code: "BICO",
+  },
+  {
+    code: "FLUX",
+  },
+  {
+    code: "VOXEL",
+  },
+  {
+    code: "HIGH",
+  },
+];
+
 export const currency = [
+  {
+    code: "ETH",
+  },
+  {
+    code: "LTC",
+  },
+  {
+    code: "BNB",
+  },
+  {
+    code: "NEO",
+  },
+  {
+    code: "QTUM",
+  },
+  {
+    code: "EOS",
+  },
+  {
+    code: "SNT",
+  },
+  {
+    code: "BNT",
+  },
+  {
+    code: "BCC",
+  },
+  {
+    code: "GAS",
+  },
+  {
+    code: "BTC",
+  },
+  {
+    code: "HSR",
+  },
+  {
+    code: "OAX",
+  },
+  {
+    code: "DNT",
+  },
+  {
+    code: "MCO",
+  },
+  {
+    code: "ICN",
+  },
+  {
+    code: "WTC",
+  },
+  {
+    code: "LRC",
+  },
+  {
+    code: "YOYO",
+  },
+  {
+    code: "OMG",
+  },
+  {
+    code: "ZRX",
+  },
+  {
+    code: "STRAT",
+  },
+  {
+    code: "SNGLS",
+  },
+  {
+    code: "BQX",
+  },
+  {
+    code: "KNC",
+  },
+  {
+    code: "FUN",
+  },
+  {
+    code: "SNM",
+  },
+  {
+    code: "IOTA",
+  },
+  {
+    code: "LINK",
+  },
+  {
+    code: "XVG",
+  },
+  {
+    code: "SALT",
+  },
+  {
+    code: "MDA",
+  },
+  {
+    code: "MTL",
+  },
+  {
+    code: "SUB",
+  },
+  {
+    code: "ETC",
+  },
+  {
+    code: "MTH",
+  },
+  {
+    code: "ENG",
+  },
+  {
+    code: "ZEC",
+  },
+  {
+    code: "AST",
+  },
+  {
+    code: "DASH",
+  },
+  {
+    code: "BTG",
+  },
+  {
+    code: "EVX",
+  },
+  {
+    code: "REQ",
+  },
+  {
+    code: "VIB",
+  },
+  {
+    code: "TRX",
+  },
+  {
+    code: "POWR",
+  },
+  {
+    code: "ARK",
+  },
+  {
+    code: "XRP",
+  },
+  {
+    code: "MOD",
+  },
+  {
+    code: "ENJ",
+  },
+  {
+    code: "STORJ",
+  },
+  {
+    code: "VEN",
+  },
+  {
+    code: "KMD",
+  },
+  {
+    code: "NULS",
+  },
+  {
+    code: "RCN",
+  },
+  {
+    code: "RDN",
+  },
+  {
+    code: "XMR",
+  },
+  {
+    code: "DLT",
+  },
+  {
+    code: "AMB",
+  },
+  {
+    code: "BAT",
+  },
+  {
+    code: "BCPT",
+  },
+  {
+    code: "ARN",
+  },
+  {
+    code: "GVT",
+  },
+  {
+    code: "CDT",
+  },
+  {
+    code: "GXS",
+  },
+  {
+    code: "POE",
+  },
+  {
+    code: "QSP",
+  },
+  {
+    code: "BTS",
+  },
+  {
+    code: "XZC",
+  },
+  {
+    code: "LSK",
+  },
+  {
+    code: "TNT",
+  },
+  {
+    code: "FUEL",
+  },
+  {
+    code: "MANA",
+  },
+  {
+    code: "BCD",
+  },
+  {
+    code: "DGD",
+  },
+  {
+    code: "ADX",
+  },
+  {
+    code: "ADA",
+  },
+  {
+    code: "PPT",
+  },
+  {
+    code: "CMT",
+  },
+  {
+    code: "XLM",
+  },
+  {
+    code: "CND",
+  },
+  {
+    code: "LEND",
+  },
+  {
+    code: "WABI",
+  },
+  {
+    code: "TNB",
+  },
+  {
+    code: "WAVES",
+  },
+  {
+    code: "GTO",
+  },
+  {
+    code: "ICX",
+  },
+  {
+    code: "OST",
+  },
+  {
+    code: "ELF",
+  },
+  {
+    code: "AION",
+  },
+  {
+    code: "NEBL",
+  },
+  {
+    code: "BRD",
+  },
+  {
+    code: "EDO",
+  },
+  {
+    code: "WINGS",
+  },
+  {
+    code: "NAV",
+  },
+  {
+    code: "LUN",
+  },
+  {
+    code: "TRIG",
+  },
+  {
+    code: "APPC",
+  },
+  {
+    code: "VIBE",
+  },
+  {
+    code: "RLC",
+  },
+  {
+    code: "INS",
+  },
+  {
+    code: "PIVX",
+  },
+  {
+    code: "IOST",
+  },
+  {
+    code: "CHAT",
+  },
+  {
+    code: "STEEM",
+  },
+  {
+    code: "NANO",
+  },
+  {
+    code: "VIA",
+  },
+  {
+    code: "BLZ",
+  },
+  {
+    code: "AE",
+  },
+  {
+    code: "RPX",
+  },
+  {
+    code: "NCASH",
+  },
+  {
+    code: "POA",
+  },
+  {
+    code: "ZIL",
+  },
+  {
+    code: "ONT",
+  },
+  {
+    code: "STORM",
+  },
+  {
+    code: "XEM",
+  },
+  {
+    code: "WAN",
+  },
+  {
+    code: "WPR",
+  },
+  {
+    code: "QLC",
+  },
+  {
+    code: "SYS",
+  },
+  {
+    code: "GRS",
+  },
+  {
+    code: "CLOAK",
+  },
+  {
+    code: "GNT",
+  },
+  {
+    code: "LOOM",
+  },
+  {
+    code: "BCN",
+  },
+  {
+    code: "REP",
+  },
+  {
+    code: "TUSD",
+  },
+  {
+    code: "ZEN",
+  },
+  {
+    code: "SKY",
+  },
+  {
+    code: "CVC",
+  },
+  {
+    code: "THETA",
+  },
+  {
+    code: "IOTX",
+  },
+  {
+    code: "QKC",
+  },
+  {
+    code: "AGI",
+  },
+  {
+    code: "NXS",
+  },
+  {
+    code: "DATA",
+  },
+  {
+    code: "SC",
+  },
+  {
+    code: "NPXS",
+  },
+  {
+    code: "KEY",
+  },
+  {
+    code: "NAS",
+  },
+  {
+    code: "MFT",
+  },
+  {
+    code: "DENT",
+  },
+  {
+    code: "ARDR",
+  },
+  {
+    code: "HOT",
+  },
+  {
+    code: "VET",
+  },
+  {
+    code: "DOCK",
+  },
+  {
+    code: "POLY",
+  },
+  {
+    code: "PHX",
+  },
+  {
+    code: "HC",
+  },
+  {
+    code: "GO",
+  },
+  {
+    code: "PAX",
+  },
+  {
+    code: "RVN",
+  },
+  {
+    code: "DCR",
+  },
+  {
+    code: "USDC",
+  },
+  {
+    code: "MITH",
+  },
+  {
+    code: "BCHABC",
+  },
+  {
+    code: "BCHSV",
+  },
+  {
+    code: "REN",
+  },
+  {
+    code: "BTT",
+  },
+  {
+    code: "USDS",
+  },
+  {
+    code: "ONG",
+  },
+  {
+    code: "FET",
+  },
+  {
+    code: "CELR",
+  },
+  {
+    code: "MATIC",
+  },
+  {
+    code: "ATOM",
+  },
+  {
+    code: "PHB",
+  },
+  {
+    code: "TFUEL",
+  },
+  {
+    code: "ONE",
+  },
+  {
+    code: "FTM",
+  },
+  {
+    code: "BTCB",
+  },
+  {
+    code: "ALGO",
+  },
+  {
+    code: "USDSB",
+  },
+  {
+    code: "ERD",
+  },
+  {
+    code: "DOGE",
+  },
+  {
+    code: "DUSK",
+  },
+  {
+    code: "BGBP",
+  },
+  {
+    code: "ANKR",
+  },
+  {
+    code: "WIN",
+  },
+  {
+    code: "COS",
+  },
+  {
+    code: "TUSDB",
+  },
+  {
+    code: "COCOS",
+  },
+  {
+    code: "TOMO",
+  },
+  {
+    code: "PERL",
+  },
+  {
+    code: "CHZ",
+  },
+  {
+    code: "BAND",
+  },
+  {
+    code: "BUSD",
+  },
+  {
+    code: "BEAM",
+  },
+  {
+    code: "XTZ",
+  },
+  {
+    code: "HBAR",
+  },
+  {
+    code: "NKN",
+  },
+  {
+    code: "STX",
+  },
+  {
+    code: "KAVA",
+  },
+  {
+    code: "ARPA",
+  },
+  {
+    code: "CTXC",
+  },
+  {
+    code: "BCH",
+  },
+  {
+    code: "TROY",
+  },
+  {
+    code: "VITE",
+  },
+  {
+    code: "FTT",
+  },
+  {
+    code: "USDT",
+  },
+  {
+    code: "EUR",
+  },
+  {
+    code: "OGN",
+  },
+  {
+    code: "DREP",
+  },
+  {
+    code: "BULL",
+  },
+  {
+    code: "BEAR",
+  },
+  {
+    code: "ETHBULL",
+  },
+  {
+    code: "ETHBEAR",
+  },
+  {
+    code: "TCT",
+  },
+  {
+    code: "WRX",
+  },
+  {
+    code: "LTO",
+  },
+  {
+    code: "EOSBULL",
+  },
+  {
+    code: "EOSBEAR",
+  },
+  {
+    code: "XRPBULL",
+  },
+  {
+    code: "XRPBEAR",
+  },
+  {
+    code: "MBL",
+  },
+  {
+    code: "COTI",
+  },
+  {
+    code: "BNBBULL",
+  },
+  {
+    code: "BNBBEAR",
+  },
+  {
+    code: "STPT",
+  },
+  {
+    code: "SOL",
+  },
+  {
+    code: "CTSI",
+  },
+  {
+    code: "HIVE",
+  },
+  {
+    code: "CHR",
+  },
+  {
+    code: "BTCUP",
+  },
+  {
+    code: "BTCDOWN",
+  },
+  {
+    code: "MDT",
+  },
+  {
+    code: "STMX",
+  },
+  {
+    code: "IQ",
+  },
+  {
+    code: "PNT",
+  },
+  {
+    code: "GBP",
+  },
+  {
+    code: "DGB",
+  },
+  {
+    code: "COMP",
+  },
+  {
+    code: "BKRW",
+  },
+  {
+    code: "SXP",
+  },
+  {
+    code: "SNX",
+  },
+  {
+    code: "ETHUP",
+  },
+  {
+    code: "ETHDOWN",
+  },
+  {
+    code: "ADAUP",
+  },
+  {
+    code: "ADADOWN",
+  },
+  {
+    code: "LINKUP",
+  },
+  {
+    code: "LINKDOWN",
+  },
+  {
+    code: "VTHO",
+  },
+  {
+    code: "IRIS",
+  },
+  {
+    code: "MKR",
+  },
+  {
+    code: "DAI",
+  },
+  {
+    code: "RUNE",
+  },
+  {
+    code: "AUD",
+  },
+  {
+    code: "FIO",
+  },
+  {
+    code: "BNBUP",
+  },
+  {
+    code: "BNBDOWN",
+  },
+  {
+    code: "XTZUP",
+  },
+  {
+    code: "XTZDOWN",
+  },
+  {
+    code: "AVA",
+  },
+  {
+    code: "BAL",
+  },
+  {
+    code: "YFI",
+  },
+  {
+    code: "JST",
+  },
+  {
+    code: "SRM",
+  },
+  {
+    code: "ANT",
+  },
+  {
+    code: "CRV",
+  },
+  {
+    code: "SAND",
+  },
+  {
+    code: "OCEAN",
+  },
+  {
+    code: "NMR",
+  },
+  {
+    code: "DOT",
+  },
+  {
+    code: "LUNA",
+  },
+  {
+    code: "IDEX",
+  },
+  {
+    code: "RSR",
+  },
+  {
+    code: "PAXG",
+  },
+  {
+    code: "WNXM",
+  },
+  {
+    code: "TRB",
+  },
+  {
+    code: "BZRX",
+  },
+  {
+    code: "WBTC",
+  },
+  {
+    code: "SUSHI",
+  },
+  {
+    code: "YFII",
+  },
+  {
+    code: "KSM",
+  },
+  {
+    code: "EGLD",
+  },
+  {
+    code: "DIA",
+  },
+  {
+    code: "UMA",
+  },
+  {
+    code: "EOSUP",
+  },
+  {
+    code: "EOSDOWN",
+  },
+  {
+    code: "TRXUP",
+  },
+  {
+    code: "TRXDOWN",
+  },
+  {
+    code: "XRPUP",
+  },
+  {
+    code: "XRPDOWN",
+  },
+  {
+    code: "DOTUP",
+  },
+  {
+    code: "DOTDOWN",
+  },
+  {
+    code: "BEL",
+  },
+  {
+    code: "WING",
+  },
+  {
+    code: "SWRV",
+  },
+  {
+    code: "LTCUP",
+  },
+  {
+    code: "LTCDOWN",
+  },
+  {
+    code: "CREAM",
+  },
+  {
+    code: "UNI",
+  },
+  {
+    code: "NBS",
+  },
+  {
+    code: "OXT",
+  },
+  {
+    code: "SUN",
+  },
+  {
+    code: "AVAX",
+  },
+  {
+    code: "HNT",
+  },
+  {
+    code: "BAKE",
+  },
+  {
+    code: "BURGER",
+  },
+  {
+    code: "FLM",
+  },
+  {
+    code: "SCRT",
+  },
+  {
+    code: "CAKE",
+  },
+  {
+    code: "SPARTA",
+  },
+  {
+    code: "UNIUP",
+  },
+  {
+    code: "UNIDOWN",
+  },
+  {
+    code: "ORN",
+  },
+  {
+    code: "UTK",
+  },
+  {
+    code: "XVS",
+  },
+  {
+    code: "ALPHA",
+  },
+  {
+    code: "VIDT",
+  },
+  {
+    code: "AAVE",
+  },
+  {
+    code: "NEAR",
+  },
+  {
+    code: "SXPUP",
+  },
+  {
+    code: "SXPDOWN",
+  },
+  {
+    code: "FIL",
+  },
+  {
+    code: "FILUP",
+  },
+  {
+    code: "FILDOWN",
+  },
+  {
+    code: "YFIUP",
+  },
+  {
+    code: "YFIDOWN",
+  },
+  {
+    code: "INJ",
+  },
+  {
+    code: "AERGO",
+  },
+  {
+    code: "EASY",
+  },
+  {
+    code: "AUDIO",
+  },
+  {
+    code: "CTK",
+  },
+  {
+    code: "BCHUP",
+  },
+  {
+    code: "BCHDOWN",
+  },
+  {
+    code: "BOT",
+  },
+  {
+    code: "AKRO",
+  },
+  {
+    code: "KP3R",
+  },
+  {
+    code: "AXS",
+  },
+  {
+    code: "HARD",
+  },
+  {
+    code: "RENBTC",
+  },
+  {
+    code: "SLP",
+  },
+  {
+    code: "CVP",
+  },
+  {
+    code: "STRAX",
+  },
+  {
+    code: "FOR",
+  },
+  {
+    code: "UNFI",
+  },
+  {
+    code: "FRONT",
+  },
+  {
+    code: "BCHA",
+  },
+  {
+    code: "ROSE",
+  },
+  {
+    code: "HEGIC",
+  },
+  {
+    code: "AAVEUP",
+  },
+  {
+    code: "AAVEDOWN",
+  },
+  {
+    code: "PROM",
+  },
+  {
+    code: "SKL",
+  },
+  {
+    code: "SUSD",
+  },
+  {
+    code: "COVER",
+  },
+  {
+    code: "GLM",
+  },
+  {
+    code: "GHST",
+  },
+  {
+    code: "SUSHIUP",
+  },
+  {
+    code: "SUSHIDOWN",
+  },
+  {
+    code: "XLMUP",
+  },
+  {
+    code: "XLMDOWN",
+  },
+  {
+    code: "DF",
+  },
+  {
+    code: "GRT",
+  },
+  {
+    code: "JUV",
+  },
+  {
+    code: "PSG",
+  },
+  {
+    code: "1INCH",
+  },
+  {
+    code: "REEF",
+  },
+  {
+    code: "OG",
+  },
+  {
+    code: "ATM",
+  },
+  {
+    code: "ASR",
+  },
+  {
+    code: "CELO",
+  },
+  {
+    code: "RIF",
+  },
+  {
+    code: "BTCST",
+  },
+  {
+    code: "TRU",
+  },
+  {
+    code: "DEXE",
+  },
+  {
+    code: "CKB",
+  },
+  {
+    code: "TWT",
+  },
+  {
+    code: "FIRO",
+  },
+  {
+    code: "BETH",
+  },
+  {
+    code: "PROS",
+  },
+  {
+    code: "LIT",
+  },
+  {
+    code: "SFP",
+  },
+  {
+    code: "FXS",
+  },
+  {
+    code: "DODO",
+  },
+  {
+    code: "UFT",
+  },
+  {
+    code: "ACM",
+  },
+  {
+    code: "AUCTION",
+  },
+  {
+    code: "PHA",
+  },
+  {
+    code: "TVK",
+  },
+  {
+    code: "BADGER",
+  },
+  {
+    code: "FIS",
+  },
+  {
+    code: "OM",
+  },
+  {
+    code: "POND",
+  },
+  {
+    code: "DEGO",
+  },
+  {
+    code: "ALICE",
+  },
+  {
+    code: "BIFI",
+  },
+  {
+    code: "LINA",
+  },
+  {
+    code: "PERP",
+  },
+  {
+    code: "RAMP",
+  },
+  {
+    code: "SUPER",
+  },
+  {
+    code: "CFX",
+  },
+  {
+    code: "EPS",
+  },
+  {
+    code: "AUTO",
+  },
+  {
+    code: "TKO",
+  },
+  {
+    code: "PUNDIX",
+  },
+  {
+    code: "TLM",
+  },
+  {
+    code: "1INCHUP",
+  },
+  {
+    code: "1INCHDOWN",
+  },
+  {
+    code: "MIR",
+  },
+  {
+    code: "BAR",
+  },
+  {
+    code: "FORTH",
+  },
+  {
+    code: "EZ",
+  },
+  {
+    code: "SHIB",
+  },
+  {
+    code: "ICP",
+  },
+  {
+    code: "AR",
+  },
+  {
+    code: "POLS",
+  },
+  {
+    code: "MDX",
+  },
+  {
+    code: "MASK",
+  },
+  {
+    code: "LPT",
+  },
+  {
+    code: "AGIX",
+  },
+  {
+    code: "NU",
+  },
+  {
+    code: "ATA",
+  },
+  {
+    code: "GTC",
+  },
+  {
+    code: "TORN",
+  },
+  {
+    code: "KEEP",
+  },
+  {
+    code: "ERN",
+  },
+  {
+    code: "KLAY",
+  },
+  {
+    code: "BOND",
+  },
+  {
+    code: "MLN",
+  },
+  {
+    code: "QUICK",
+  },
+  {
+    code: "C98",
+  },
+  {
+    code: "CLV",
+  },
+  {
+    code: "QNT",
+  },
+  {
+    code: "FLOW",
+  },
+  {
+    code: "XEC",
+  },
+  {
+    code: "MINA",
+  },
+  {
+    code: "RAY",
+  },
+  {
+    code: "FARM",
+  },
+  {
+    code: "ALPACA",
+  },
+  {
+    code: "MBOX",
+  },
+  {
+    code: "VGX",
+  },
+  {
+    code: "WAXP",
+  },
+  {
+    code: "TRIBE",
+  },
+  {
+    code: "GNO",
+  },
+  {
+    code: "DYDX",
+  },
+  {
+    code: "USDP",
+  },
+  {
+    code: "GALA",
+  },
+  {
+    code: "ILV",
+  },
+  {
+    code: "YGG",
+  },
+  {
+    code: "FIDA",
+  },
+  {
+    code: "AGLD",
+  },
+  {
+    code: "RAD",
+  },
+  {
+    code: "BETA",
+  },
+  {
+    code: "RARE",
+  },
+  {
+    code: "SSV",
+  },
+  {
+    code: "LAZIO",
+  },
+  {
+    code: "CHESS",
+  },
+  {
+    code: "DAR",
+  },
+  {
+    code: "BNX",
+  },
+  {
+    code: "RGT",
+  },
+  {
+    code: "MOVR",
+  },
+  {
+    code: "CITY",
+  },
+  {
+    code: "ENS",
+  },
+  {
+    code: "QI",
+  },
+  {
+    code: "PORTO",
+  },
+  {
+    code: "JASMY",
+  },
+  {
+    code: "AMP",
+  },
+  {
+    code: "PLA",
+  },
+  {
+    code: "PYR",
+  },
+  {
+    code: "RNDR",
+  },
+  {
+    code: "ALCX",
+  },
+  {
+    code: "SANTOS",
+  },
+  {
+    code: "MC",
+  },
+  {
+    code: "ANY",
+  },
+  {
+    code: "BICO",
+  },
+  {
+    code: "FLUX",
+  },
+  {
+    code: "VOXEL",
+  },
+  {
+    code: "HIGH",
+  },
+];
+
+export const alphaVantageCurrencies = [
   { code: "AAVE", name: "Aave", search: "AAVE - Aave" },
   { code: "ABT", name: "ArcBlock", search: "ABT - ArcBlock" },
   { code: "ABY", name: "ArtByte", search: "ABY - ArtByte" },

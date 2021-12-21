@@ -1,13 +1,14 @@
 import { Grid, Typography, TextField } from "@mui/material";
 import { SearchCurrency } from "./SearchCurrency";
 import { useState } from "react";
-import { fetchExchangeRates } from "../api/fetchExchangeRates";
 import { ApiSnackbar } from "./ApiSnackbar";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { calcCryptoPairRate } from "../api/cryptoApi";
+import { base, quote } from "../api/currency";
 
 export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
   const [formValue, setFormValue] = useState(1);
-  const [calculatedValue, setCalculatedValue] = useState(1);
+  const [calculatedValue, setCalculatedValue] = useState("...");
   const [snackbar, setSnackbar] = useState(false);
   const [loading, setIsLoading] = useState(false);
 
@@ -17,7 +18,7 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
   };
 
   const handleCalculate = () => {
-    fetchExchangeRates(
+    calcCryptoPairRate(
       from,
       to,
       setIsLoading,
@@ -51,7 +52,7 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
           }}
         >
           <Grid item>
-            <SearchCurrency text="From" setSymbol={setFrom} />
+            <SearchCurrency text="From" setSymbol={setFrom} list={quote} />
           </Grid>
           <Grid item sx={{ display: "flex" }}>
             <Typography
@@ -92,7 +93,7 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
           sx={{ flexDirection: "column" }}
         >
           <Grid item>
-            <SearchCurrency text="To" setSymbol={setTo} />
+            <SearchCurrency text="To" setSymbol={setTo} list={base} />
           </Grid>
           <Grid item sx={{ display: "flex" }}>
             <Typography
@@ -127,36 +128,23 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid
-        item
-        container
-        rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-      >
-        <Grid item md={6} xs={12}>
-          <LoadingButton
-            disabled={!!from & !!to ? false : true}
-            fullWidth
-            onClick={handleCalculate}
-            loading={loading}
-            variant="contained"
-          >
-            Calculate
-          </LoadingButton>
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <LoadingButton
-            disabled={!!from & !!to ? false : true}
-            fullWidth
-            // onClick={handleCalculate}
-            // loading={loading}
-            variant="contained"
-          >
-            Plot
-          </LoadingButton>
-        </Grid>
+
+      <Grid item xs={12}>
+        <LoadingButton
+          disabled={!!from & !!to ? false : true}
+          fullWidth
+          onClick={handleCalculate}
+          loading={loading}
+          variant="contained"
+        >
+          Calculate
+        </LoadingButton>
       </Grid>
-      <ApiSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
+      <ApiSnackbar
+        snackbar={snackbar}
+        setSnackbar={setSnackbar}
+        api="binance"
+      />
     </Grid>
   );
 };

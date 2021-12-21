@@ -1,9 +1,8 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { currency } from "../api/currency";
 import { useState } from "react";
 
-export const SearchCurrency = ({ text, setSymbol }) => {
+export const SearchCurrency = ({ text, setSymbol, list }) => {
   const [value, setValue] = useState(null);
 
   return (
@@ -15,9 +14,9 @@ export const SearchCurrency = ({ text, setSymbol }) => {
         setValue(newValue);
         setSymbol(newValue?.code);
       }}
-      options={currency}
+      options={list}
       size="small"
-      getOptionLabel={(option) => option.search}
+      getOptionLabel={(option) => option.code}
       renderInput={(params) => <TextField {...params} label={text} />}
     />
   );

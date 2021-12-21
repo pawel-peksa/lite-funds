@@ -1,11 +1,12 @@
 import { Grid, Container } from "@mui/material";
-// import { Chart } from "../components/Chart";
+import { ChartCrypto } from "../components/ChartCrypto";
 import { useState } from "react";
 import { SelectCrypto } from "../components/SelectCrypto";
 
 export const Crypto = () => {
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
+
   return (
     <Container maxWidth="xl">
       <Grid
@@ -17,7 +18,9 @@ export const Crypto = () => {
           <SelectCrypto setFrom={setFrom} from={from} setTo={setTo} to={to} />
         </Grid>
 
-        <Grid item>{/* <Chart asset={asset} /> */}</Grid>
+        <Grid item>
+          <ChartCrypto from={from} to={to} />
+        </Grid>
       </Grid>
     </Container>
   );

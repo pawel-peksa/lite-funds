@@ -5,27 +5,33 @@ import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
-export const ApiSnackbar = ({ snackbar, setSnackbar }) => {
+export const ApiSnackbar = ({ snackbar, setSnackbar, api }) => {
   const handleClose = () => {
     setSnackbar(false);
   };
+  let msg;
+  let showProgress;
+  if ((api = "binance")) {
+    msg =
+      "It looks like this pair is not currently supported by our data provider... Try different currency. ";
+  } else {
+    showProgress = true;
+    msg =
+      "To keep this site free of use, only 5 data calls per minute are allowed. Please wait a moment and try again.";
+  }
 
   return (
     <Snackbar
       open={snackbar}
       sx={{ p: 3 }}
       autoHideDuration={8000}
-      message="To keep this site free of use, only 5 data calls per minute are allowed.  Please wait a moment and try again."
-      // action={action}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       onClose={handleClose}
     >
       <Alert severity="info">
-        To keep this site free of use, only 5 data calls per minute are allowed.
-        <br />
-        Please wait a moment and try again.
+        {msg}
         <Box sx={{ width: "100%", mt: 2 }}>
-          <LinearProgress color="info" />
+          {showProgress && <LinearProgress color="info" />}
         </Box>
       </Alert>
     </Snackbar>
