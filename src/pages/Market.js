@@ -1,4 +1,4 @@
-import { Grid, Container } from "@mui/material";
+import { Grid, Container, Paper } from "@mui/material";
 import { DataTable } from "../components/DataTable";
 import { Chart } from "../components/Chart";
 import { useState } from "react";
@@ -17,7 +17,18 @@ export const Market = () => {
         sx={{ flexDirection: "column", width: "100%" }}
       >
         <Grid item>
-          <DataTable setAsset={setAsset} />
+          <Paper
+            sx={{
+              p: 2,
+              pt: 1,
+              pb: 1,
+              display: "flex",
+              flexDirection: "column",
+              height: 340,
+            }}
+          >
+            <DataTable setAsset={setAsset} />
+          </Paper>
         </Grid>
 
         <Grid item>

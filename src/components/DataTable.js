@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { TextField, Paper, Typography, Box } from "@mui/material";
+import { TextField, Typography, Box } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
 import { searchEndpoint } from "../api/searchEndpoint";
@@ -75,16 +75,7 @@ export const DataTable = ({ setAsset }) => {
   }
 
   return (
-    <Paper
-      sx={{
-        p: 2,
-        pt: 1,
-        pb: 1,
-        display: "flex",
-        flexDirection: "column",
-        height: 340,
-      }}
-    >
+    <>
       <Box
         onSubmit={(e) => {
           e.preventDefault();
@@ -143,6 +134,6 @@ export const DataTable = ({ setAsset }) => {
           border: "none",
         }}
       />
-    </Paper>
+    </>
   );
 };

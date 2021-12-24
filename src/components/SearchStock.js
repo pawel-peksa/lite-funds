@@ -1,0 +1,124 @@
+import {
+  TextField,
+  List,
+  Box,
+  ListItem,
+  ListItemButton,
+  Typography,
+  ListItemText,
+} from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { useState } from "react";
+import { searchEndpoint } from "../api/searchEndpoint";
+import SearchIcon from "@mui/icons-material/Search";
+
+const MyList = ({ results, setSelected }) => {
+  const handleSelect = (e, symbol) => {
+    setSelected(symbol);
+  };
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        maxHeight: 150,
+        maxWidth: 450,
+        alignSelf: "center",
+        overflow: "auto",
+      }}
+    >
+      <List
+        height={150}
+        width={360}
+        dense
+        sx={{ border: "1px solid teal", padding: 0 }}
+      >
+        {!!results &&
+          results.map((result) => {
+            return (
+              <ListItem
+                key={result["1. symbol"]}
+                disablePadding
+                component="div"
+              >
+                <ListItemButton
+                  divider
+                  selected
+                  onClick={(e) => handleSelect(e, result["1. symbol"])}
+                >
+                  <ListItemText
+                    primary={`[${result["1. symbol"]}] ${result["2. name"]} - ${result["4. region"]} - ${result["8. currency"]}`}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+      </List>
+    </Box>
+  );
+};
+
+export const SearchStock = () => {
+  const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState();
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+  const handleClick = () => {
+    searchEndpoint(search, setResults, setIsLoading);
+  };
+
+  return (
+    <>
+      <Box
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleClick();
+        }}
+        component="form"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end",
+          mb: 2,
+        }}
+      >
+        <TextField
+          sx={{ ml: 2 }}
+          variant="standard"
+          autoComplete="off"
+          id="standard-basic"
+          label="Asset name..."
+          onChange={handleChange}
+        />
+        <LoadingButton
+          disableElevation
+          size="small"
+          sx={{ ml: 2 }}
+          onClick={handleClick}
+          endIcon={<SearchIcon />}
+          loading={isLoading}
+          loadingPosition="end"
+          variant="outlined"
+        >
+          Search
+        </LoadingButton>
+      </Box>
+      <MyList results={results} setSelected={setSelected} />
+      {selected && (
+        <Typography
+          align="center"
+          color="primary.main"
+          sx={{ fontSize: 18, mt: 3 }}
+        >
+          [{selected}]{" "}
+          {results.find((obj) => obj["1. symbol"] === selected)["2. name"]} -{" "}
+          {results.find((obj) => obj["1. symbol"] === selected)["4. region"]} (
+          {results.find((obj) => obj["1. symbol"] === selected)["8. currency"]})
+        </Typography>
+      )}
+    </>
+  );
+};

@@ -9,14 +9,17 @@ import { Portfolio } from "./Portfolio";
 import { Account } from "./Account";
 import { Market } from "./Market";
 import { Crypto } from "./Crypto";
+import { Transaction } from "./Transaction";
 import { useState } from "react";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 export const Dashboard = () => {
   const [show, setShow] = useState("portfolio");
   const theme = useTheme();
   const sideNavigation = useMediaQuery(theme.breakpoints.up("sm"));
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       {!sideNavigation && <MobileTitle />}
       <Box
         component="main"
@@ -44,6 +47,7 @@ export const Dashboard = () => {
           {/* TODO change name of the Market compoenent and file to Stocks */}
           {show === "crypto" && <Crypto />}
           {show === "account" && <Account />}
+          {show === "transaction" && <Transaction />}
 
           <Copyright color="primary.main" />
         </Container>
@@ -53,6 +57,6 @@ export const Dashboard = () => {
       ) : (
         <BottomNav setShow={setShow} />
       )}
-    </>
+    </LocalizationProvider>
   );
 };
