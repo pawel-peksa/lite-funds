@@ -76,34 +76,27 @@ export const ChartCrypto = ({ from, to }) => {
   };
 
   return (
-    <Paper
-      sx={{
-        p: 2,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Grid container sx={{ mb: 2 }}>
-        <Grid
-          item
-          lg={4}
+    <>
+      <LoadingButton
+        disabled={!!from & !!to ? false : true}
+        onClick={handlePlot}
+        fullWidth
+        loading={loading}
+        variant="contained"
+        sx={{ mb: 2 }}
+      >
+        Plot
+      </LoadingButton>
+      {showPlot && (
+        <Paper
           sx={{
+            p: 2,
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
           }}
         >
-          <LoadingButton
-            disabled={!!from & !!to ? false : true}
-            onClick={handlePlot}
-            loading={loading}
-            variant="outlined"
-          >
-            Plot
-          </LoadingButton>
-        </Grid>
-        {showPlot && (
-          <>
-            <Grid item lg={4}>
+          <Grid container sx={{ mb: 2, justifyContent: "space-between" }}>
+            <Grid item sx={{ ml: 4 }} lg={4}>
               <Typography variant="h6" align="center" color="primary.main">
                 {from}/{to}
               </Typography>
@@ -153,88 +146,88 @@ export const ChartCrypto = ({ from, to }) => {
                 All
               </Button>
             </Grid>
-          </>
-        )}
-      </Grid>
+          </Grid>
+          <ResponsiveContainer width="99%" height={350}>
+            <AreaChart
+              data={data}
+              margin={{
+                right: 55,
+                left: 25,
+                bottom: 20,
+              }}
+            >
+              <defs>
+                <linearGradient id="color" x1="0" x2="0" y1="0" y2="1">
+                  <stop
+                    offset="0%"
+                    stopColor="#009688"
+                    stopOpacity={0.7}
+                  ></stop>
+                  <stop
+                    offset="95%"
+                    stopColor="#009688"
+                    stopOpacity={0.05}
+                  ></stop>
+                </linearGradient>
+              </defs>
 
-      {showPlot && (
-        <ResponsiveContainer width="99%" height={350}>
-          <AreaChart
-            data={data}
-            margin={{
-              right: 55,
-              left: 25,
-              bottom: 20,
-            }}
-          >
-            <defs>
-              <linearGradient id="color" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="#009688" stopOpacity={0.7}></stop>
-                <stop
-                  offset="95%"
-                  stopColor="#009688"
-                  stopOpacity={0.05}
-                ></stop>
-              </linearGradient>
-            </defs>
-
-            <Area dataKey="value" stroke="#009688" fill="url(#color)" />
-            <ReferenceLine
-              y={data && data.at(-1)?.value}
-              label={{
-                position: "right",
-                value: data.at(-1)?.value.toFixed(1),
-                fill: "grey",
-                fontSize: 13,
-              }}
-              stroke="lightgrey"
-            />
-            <ReferenceLine
-              y={data && data.at(0)?.value}
-              label={{
-                position: "right",
-                value: data.at(0)?.value.toFixed(1),
-                fill: "#6495ed",
-                fontSize: 13,
-              }}
-              stroke="#acddff"
-            />
-            <XAxis
-              dataKey="date"
-              axisLine={false}
-              tickLine={false}
-              reversed={true}
-              angle={-30}
-              dx={5}
-              dy={5}
-              tickFormatter={(str) => {
-                // before print check for correct data type
-                if (str !== 0 && str !== "auto") {
-                  return format(parseISO(str), "dd MMM");
-                }
-                return str;
-              }}
-            />
-            <YAxis
-              width={70}
-              dataKey="value"
-              domain={["auto", "auto"]}
-              axisLine={false}
-              tickLine={false}
-              tickCount={8}
-              tickFormatter={(number) => `${number.toFixed(2)}`}
-            />
-            <Tooltip content={<CustomTooltip />} />
-            <CartesianGrid opacity={0.3} vertical={false} />
-          </AreaChart>
-        </ResponsiveContainer>
+              <Area dataKey="value" stroke="#009688" fill="url(#color)" />
+              <ReferenceLine
+                y={data && data.at(-1)?.value}
+                label={{
+                  position: "right",
+                  value: data.at(-1)?.value.toFixed(1),
+                  fill: "grey",
+                  fontSize: 13,
+                }}
+                stroke="lightgrey"
+              />
+              <ReferenceLine
+                y={data && data.at(0)?.value}
+                label={{
+                  position: "right",
+                  value: data.at(0)?.value.toFixed(1),
+                  fill: "#6495ed",
+                  fontSize: 13,
+                }}
+                stroke="#acddff"
+              />
+              <XAxis
+                dataKey="date"
+                axisLine={false}
+                tickLine={false}
+                reversed={true}
+                angle={-30}
+                dx={5}
+                dy={5}
+                tickFormatter={(str) => {
+                  // before print check for correct data type
+                  if (str !== 0 && str !== "auto") {
+                    return format(parseISO(str), "dd MMM");
+                  }
+                  return str;
+                }}
+              />
+              <YAxis
+                width={70}
+                dataKey="value"
+                domain={["auto", "auto"]}
+                axisLine={false}
+                tickLine={false}
+                tickCount={8}
+                tickFormatter={(number) => `${number.toFixed(2)}`}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <CartesianGrid opacity={0.3} vertical={false} />
+            </AreaChart>
+          </ResponsiveContainer>
+          <ApiSnackbar
+            snackbar={snackbar}
+            setSnackbar={setSnackbar}
+            api="binance"
+          />
+        </Paper>
       )}
-
-      <ApiSnackbar
-        snackbar={snackbar}
-        setSnackbar={setSnackbar}
-        api="binance"
-      />
-    </Paper>
+    </>
   );
 };

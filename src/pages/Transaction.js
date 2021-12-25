@@ -1,33 +1,52 @@
-import {
-  Grid,
-  Paper,
-  Typography,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-  Switch,
-  Box,
-  Stack,
-  TextField,
-} from "@mui/material";
-import DateTimePicker from "@mui/lab/DateTimePicker";
+import { Grid, Paper, Typography, Button, Box } from "@mui/material";
 import { useState } from "react";
-import { SearchStock } from "../components/SearchStock";
+import { TransactionStep1 } from "../components/TransactionStep1";
+import { TransactionStep2 } from "../components/TransactionStep2";
+import { TransactionStep3 } from "../components/TransactionStep3";
 
 export const Transaction = () => {
-  const [value, setValue] = useState("female");
+  const [asset, setAsset] = useState("");
   const [checked, setChecked] = useState(true);
-  const [today, setToday] = useState(new Date());
+  const [step, setStep] = useState(1);
+  const [selected, setSelected] = useState("");
+  const [date, setDate] = useState(new Date());
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setAsset(event.target.value);
   };
 
   const handleSwitch = (event) => {
     setChecked(event.target.checked);
   };
+
+  const handleNext = () => {
+    console.log("buy?", checked);
+    console.log("asset:", asset);
+    setStep((step) => step + 1);
+  };
+
+  const handleBack = () => {
+    console.log("buy?", checked);
+    console.log("asset:", asset);
+    setStep((step) => step - 1);
+  };
+
+  let body;
+  if (step === 1)
+    body = (
+      <TransactionStep1
+        handleChange={handleChange}
+        handleSwitch={handleSwitch}
+        value={asset}
+        checked={checked}
+      />
+    );
+  else if (step === 2)
+    body = <TransactionStep2 selected={selected} setSelected={setSelected} />;
+  else if (step === 3)
+    body = (
+      <TransactionStep3 date={date} setDate={setDate} selected={selected} />
+    );
 
   return (
     <Grid container sx={{ justifyContent: "center" }}>
@@ -48,139 +67,30 @@ export const Transaction = () => {
           >
             Add transaction
           </Typography>
-
-          <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-            <FormLabel component="legend">1. Transaction</FormLabel>
-            <Stack
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              justifyContent="center"
+          {body}
+          <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+            <Button
+              disabled={step === 1 ? true : false}
+              variant="contained"
+              disableElevation
+              onClick={handleBack}
             >
-              <Typography
-                variant="body1"
-                color={!checked ? "primary.main" : ""}
-              >
-                Sell
-              </Typography>
-              <Switch
-                checked={checked}
-                color="default"
-                onChange={handleSwitch}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography variant="body1" color={checked ? "primary.main" : ""}>
-                Buy
-              </Typography>
-            </Stack>
-          </FormControl>
-
-          <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-            <FormLabel component="legend">2. Asset</FormLabel>
-            <RadioGroup
-              row
-              aria-label="asset type"
-              name="asset-type"
-              value={value}
-              onChange={handleChange}
-              sx={{ display: "flex", justifyContent: "center" }}
+              Back
+            </Button>
+            <Button
+              disabled={
+                (step === 1 && asset.length < 1) ||
+                (step === 2 && selected.length < 1)
+                  ? true
+                  : false
+              }
+              disableElevation
+              variant="contained"
+              onClick={handleNext}
             >
-              <FormControlLabel
-                value="stocks"
-                control={<Radio />}
-                label="Stocks"
-              />
-              <FormControlLabel
-                value="cryptocurrency"
-                control={<Radio />}
-                label="Cryptocurrency"
-              />
-              <FormControlLabel
-                value="bonds"
-                control={<Radio />}
-                label="Bonds"
-                disabled
-              />
-              <FormControlLabel
-                value="gold"
-                control={<Radio />}
-                label="Gold"
-                disabled
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-            <FormLabel component="legend">3. Name</FormLabel>
-            <SearchStock />
-          </FormControl>
-
-          <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-            <FormLabel component="legend">4. Date</FormLabel>
-            <DateTimePicker
-              renderInput={(params) => (
-                <TextField sx={{ mt: 2, alignSelf: "center" }} {...params} />
-              )}
-              ampm={false}
-              label="Transaction time"
-              value={today}
-              onChange={(newValue) => {
-                setToday(newValue);
-              }}
-              maxDateTime={new Date()}
-            />
-          </FormControl>
-
-          <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-            <FormLabel component="legend">5. Price and quantity</FormLabel>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <TextField
-                sx={{
-                  mt: 2,
-                  alignSelf: "center",
-                  maxWidth: 120,
-                }}
-                type="number"
-                min={0}
-                label="Price"
-                variant="outlined"
-                InputProps={{
-                  inputProps: {
-                    min: 0,
-                  },
-                }}
-              />
-              <TextField
-                sx={{
-                  mt: 2,
-                  alignSelf: "center",
-                  maxWidth: 80,
-                  display: "inline-block",
-                }}
-                type="number"
-                min={0}
-                label="Qty"
-                variant="outlined"
-                InputProps={{
-                  inputProps: {
-                    min: 0,
-                  },
-                }}
-              />
-              <TextField
-                sx={{ mt: 2, alignSelf: "center", maxWidth: 110 }}
-                type="number"
-                min={0}
-                label="Comission"
-                variant="outlined"
-                InputProps={{
-                  inputProps: {
-                    min: 0,
-                  },
-                }}
-              />
-            </Box>
-          </FormControl>
+              Next
+            </Button>
+          </Box>
         </Paper>
       </Grid>
     </Grid>

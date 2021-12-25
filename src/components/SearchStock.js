@@ -26,12 +26,7 @@ const MyList = ({ results, setSelected }) => {
         overflow: "auto",
       }}
     >
-      <List
-        height={150}
-        width={360}
-        dense
-        sx={{ border: "1px solid teal", padding: 0 }}
-      >
+      <List height={150} width={360} dense sx={{ padding: 0 }}>
         {!!results &&
           results.map((result) => {
             return (
@@ -42,7 +37,6 @@ const MyList = ({ results, setSelected }) => {
               >
                 <ListItemButton
                   divider
-                  selected
                   onClick={(e) => handleSelect(e, result["1. symbol"])}
                 >
                   <ListItemText
@@ -57,11 +51,10 @@ const MyList = ({ results, setSelected }) => {
   );
 };
 
-export const SearchStock = () => {
+export const SearchStock = ({ selected, setSelected }) => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState();
 
   const handleChange = (e) => {
     setSearch(e.target.value);

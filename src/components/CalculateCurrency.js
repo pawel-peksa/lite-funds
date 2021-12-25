@@ -135,7 +135,7 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
           fullWidth
           onClick={handleCalculate}
           loading={loading}
-          variant="contained"
+          variant="outlined"
         >
           Calculate
         </LoadingButton>
