@@ -1,11 +1,23 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { SearchStock } from "../components/SearchStock";
 
-export const TransactionStep2 = ({ selected, setSelected }) => {
+export const TransactionStep2 = ({
+  selected,
+  setSelected,
+  results,
+  setResults,
+  setCurrency,
+}) => {
   return (
     <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
       <FormLabel component="legend">3. Name</FormLabel>
-      <SearchStock selected={selected} setSelected={setSelected} />
+      <SearchStock
+        selected={selected}
+        setSelected={setSelected}
+        results={results}
+        setResults={setResults}
+        setCurrency={setCurrency}
+      />
     </FormControl>
   );
 };

@@ -1,9 +1,25 @@
-import { FormControl, FormLabel, Box, TextField } from "@mui/material";
+import {
+  FormControl,
+  FormLabel,
+  Box,
+  TextField,
+  Typography,
+} from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
-import { useEffect } from "react";
 
-export const TransactionStep3 = ({ date, setDate, selected }) => {
-  useEffect(() => {}, [date, selected]);
+export const TransactionStep3 = ({
+  date,
+  setDate,
+  price,
+  setPrice,
+  qty,
+  setQty,
+  commission,
+  setCommission,
+  comment,
+  setComment,
+  currency,
+}) => {
   return (
     <>
       <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
@@ -31,12 +47,15 @@ export const TransactionStep3 = ({ date, setDate, selected }) => {
               maxWidth: 120,
             }}
             type="number"
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
             min={0}
             label="Price"
             variant="outlined"
             InputProps={{
               inputProps: {
-                min: 0,
+                min: 0.01,
+                step: 0.01,
               },
             }}
           />
@@ -44,32 +63,62 @@ export const TransactionStep3 = ({ date, setDate, selected }) => {
             sx={{
               mt: 2,
               alignSelf: "center",
-              maxWidth: 80,
+              maxWidth: 120,
               display: "inline-block",
             }}
             type="number"
-            min={0}
-            label="Qty"
+            value={qty}
+            onChange={(e) => setQty(Number(e.target.value))}
+            label="Quantity"
             variant="outlined"
             InputProps={{
               inputProps: {
                 min: 0,
+                step: 0.1,
               },
             }}
           />
           <TextField
             sx={{ mt: 2, alignSelf: "center", maxWidth: 110 }}
             type="number"
-            min={0}
-            label="Comission"
+            label="Commission"
+            value={commission}
+            onChange={(e) => setCommission(Number(e.target.value))}
             variant="outlined"
             InputProps={{
               inputProps: {
                 min: 0,
+                step: 0.1,
               },
             }}
           />
         </Box>
+        {price > 0 && qty > 0 && (
+          <Typography
+            align="center"
+            color="primary.main"
+            sx={{ fontSize: 18, mt: 3 }}
+          >
+            {`Total: ${(price * qty + commission).toFixed(2)} ${currency}`}
+          </Typography>
+        )}
+      </FormControl>
+      <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
+        <FormLabel component="legend">6. Comments</FormLabel>
+        <TextField
+          multiline
+          rows="3"
+          fullWidth
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          sx={{
+            mt: 2,
+            pr: 2,
+          }}
+          type="text"
+          label="Add notes..."
+          variant="outlined"
+        />
       </FormControl>
     </>
   );

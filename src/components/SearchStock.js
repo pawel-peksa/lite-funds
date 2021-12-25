@@ -12,9 +12,10 @@ import { useState } from "react";
 import { searchEndpoint } from "../api/searchEndpoint";
 import SearchIcon from "@mui/icons-material/Search";
 
-const MyList = ({ results, setSelected }) => {
-  const handleSelect = (e, symbol) => {
+const MyList = ({ results, setSelected, setCurrency }) => {
+  const handleSelect = (e, symbol, currency) => {
     setSelected(symbol);
+    setCurrency(currency);
   };
   return (
     <Box
@@ -37,7 +38,9 @@ const MyList = ({ results, setSelected }) => {
               >
                 <ListItemButton
                   divider
-                  onClick={(e) => handleSelect(e, result["1. symbol"])}
+                  onClick={(e) =>
+                    handleSelect(e, result["1. symbol"], result["8. currency"])
+                  }
                 >
                   <ListItemText
                     primary={`[${result["1. symbol"]}] ${result["2. name"]} - ${result["4. region"]} - ${result["8. currency"]}`}
@@ -51,8 +54,13 @@ const MyList = ({ results, setSelected }) => {
   );
 };
 
-export const SearchStock = ({ selected, setSelected }) => {
-  const [results, setResults] = useState([]);
+export const SearchStock = ({
+  selected,
+  setSelected,
+  results,
+  setResults,
+  setCurrency,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -99,7 +107,11 @@ export const SearchStock = ({ selected, setSelected }) => {
           Search
         </LoadingButton>
       </Box>
-      <MyList results={results} setSelected={setSelected} />
+      <MyList
+        results={results}
+        setSelected={setSelected}
+        setCurrency={setCurrency}
+      />
       {selected && (
         <Typography
           align="center"
