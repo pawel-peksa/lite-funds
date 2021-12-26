@@ -8,7 +8,7 @@ export const Transaction = () => {
   const [asset, setAsset] = useState("");
   const [checked, setChecked] = useState(true);
   const [step, setStep] = useState(1);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(undefined);
   const [date, setDate] = useState(new Date());
   const [results, setResults] = useState([]);
   const [price, setPrice] = useState(0);
@@ -60,6 +60,7 @@ export const Transaction = () => {
         results={results}
         setResults={setResults}
         setCurrency={setCurrency}
+        asset={asset}
       />
     );
   else if (step === 3)
@@ -150,8 +151,7 @@ export const Transaction = () => {
             ) : (
               <Button
                 disabled={
-                  (step === 1 && asset.length < 1) ||
-                  (step === 2 && selected.length < 1)
+                  (step === 1 && asset.length < 1) || (step === 2 && !selected)
                     ? true
                     : false
                 }

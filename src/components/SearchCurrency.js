@@ -8,7 +8,7 @@ export const SearchCurrency = ({ text, setSymbol, list }) => {
   return (
     <Autocomplete
       fullWidth
-      disablePortal
+      // disablePortal
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
