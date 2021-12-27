@@ -10,14 +10,20 @@ import { Account } from "./Account";
 import { Market } from "./Market";
 import { Crypto } from "./Crypto";
 import { Transaction } from "./Transaction";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { getUserFromRedirect } from "../auth/getUserFromRedirect";
 
 export const Dashboard = () => {
   const [show, setShow] = useState("portfolio");
   const theme = useTheme();
   const sideNavigation = useMediaQuery(theme.breakpoints.up("sm"));
+
+  useEffect(() => {
+    getUserFromRedirect();
+  }, []);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       {!sideNavigation && <MobileTitle />}
