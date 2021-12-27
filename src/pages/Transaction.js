@@ -132,7 +132,7 @@ export const Transaction = () => {
             }}
           >
             <Button
-              disabled={step === 1 ? true : false}
+              sx={{ visibility: step === 1 ? "hidden" : "" }}
               variant="contained"
               disableElevation
               onClick={handleBack}
