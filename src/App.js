@@ -1,4 +1,5 @@
 import "./settings/firebaseConfig";
+import CssBaseline from "@mui/material/CssBaseline";
 import "./styles.css";
 import {
   BrowserRouter as Router,
@@ -10,7 +11,6 @@ import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { PendingVerification } from "./pages/PendingVerification";
 import { Dashboard } from "./pages/Dashboard";
-import CssBaseline from "@mui/material/CssBaseline";
 import { customTheme } from "./settings/customTheme";
 import { ThemeProvider } from "@mui/material/styles";
 import { SignInSignUpContainer } from "./components/SignInSignUpContainer";
