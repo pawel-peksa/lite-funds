@@ -5,6 +5,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 
+import { addUserToDB } from "../db/addUserToDB";
 // Create a form that allows new users to register with your app using their email address and a password. When a user completes the form, validate the email address and password provided by the user, then pass them to the createUserWithEmailAndPassword method:
 export const createUser = async (
   { email, password },
@@ -30,6 +31,8 @@ export const createUser = async (
       email,
       password
     );
+    //Add user to DB
+    await addUserToDB(userCredential.user);
     //Send mail to confirm email address
     await sendEmailVerification(userCredential.user);
 
