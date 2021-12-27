@@ -1,4 +1,7 @@
 import { initializeApp } from "firebase/app";
+//TODO add export auth
+//TODO add export db
+
 require("dotenv").config();
 
 const firebaseConfig = {
