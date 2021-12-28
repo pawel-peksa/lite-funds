@@ -9,6 +9,7 @@ import { Portfolio } from "./Portfolio";
 import { Account } from "./Account";
 import { Market } from "./Market";
 import { Crypto } from "./Crypto";
+import { History } from "./History";
 import { Transaction } from "./Transaction";
 import { useState, useEffect } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -54,6 +55,7 @@ export const Dashboard = () => {
           {show === "crypto" && <Crypto />}
           {show === "account" && <Account />}
           {show === "transaction" && <Transaction />}
+          {show === "history" && <History />}
 
           <Copyright color="primary.main" />
         </Container>
