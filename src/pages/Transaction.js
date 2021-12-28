@@ -3,6 +3,8 @@ import { useState } from "react";
 import { TransactionStep1 } from "../components/TransactionStep1";
 import { TransactionStep2 } from "../components/TransactionStep2";
 import { TransactionStep3 } from "../components/TransactionStep3";
+import { addTransaction } from "../db/addTransaction";
+import { useSession } from "../auth/UserProvider";
 
 export const Transaction = () => {
   const [asset, setAsset] = useState("");
@@ -15,7 +17,8 @@ export const Transaction = () => {
   const [qty, setQty] = useState(0);
   const [commission, setCommission] = useState(0);
   const [comment, setComment] = useState("");
-  const [currency, setCurrency] = useState("");
+  const [currency, setCurrency] = useState("EUR");
+  const { user } = useSession();
 
   const handleChange = (event) => {
     setAsset(event.target.value);
@@ -39,7 +42,18 @@ export const Transaction = () => {
   };
 
   const handleAdd = () => {
-    console.log("add");
+    addTransaction(
+      user,
+      checked,
+      asset,
+      selected,
+      currency,
+      date,
+      price,
+      qty,
+      commission,
+      comment
+    );
   };
 
   let body;
