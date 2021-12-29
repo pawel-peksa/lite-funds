@@ -4,11 +4,8 @@ import { Chart } from "../components/Chart";
 import { useState } from "react";
 
 export const Market = () => {
-  const [asset, setAsset] = useState({
-    name: "Apple Inc",
-    symbol: "AAPL",
-    currency: "USD",
-  });
+  const [asset, setAsset] = useState({});
+  const [showPlot, setShowPlot] = useState(false);
   return (
     <Container maxWidth="xl">
       <Grid
@@ -27,13 +24,15 @@ export const Market = () => {
               height: 340,
             }}
           >
-            <DataTable setAsset={setAsset} />
+            <DataTable
+              asset={asset}
+              setAsset={setAsset}
+              setShowPlot={setShowPlot}
+            />
           </Paper>
         </Grid>
 
-        <Grid item>
-          <Chart asset={asset} />
-        </Grid>
+        <Grid item>{showPlot && <Chart asset={asset} />}</Grid>
       </Grid>
     </Container>
   );

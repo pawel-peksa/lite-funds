@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { TextField, Typography, Box } from "@mui/material";
+import { TextField, Typography, Box, Button } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
 import { searchEndpoint } from "../api/searchEndpoint";
@@ -38,7 +38,7 @@ const columns = [
   },
 ];
 
-export const DataTable = ({ setAsset }) => {
+export const DataTable = ({ setAsset, setShowPlot, asset }) => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -118,6 +118,15 @@ export const DataTable = ({ setAsset }) => {
         >
           Search
         </LoadingButton>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ ml: 2 }}
+          disabled={typeof asset.symbol === "undefined" ? true : false}
+          onClick={() => setShowPlot(true)}
+        >
+          Plot
+        </Button>
       </Box>
       <DataGrid
         disableColumnMenu={true}
