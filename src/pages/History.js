@@ -6,20 +6,26 @@ import { getUserTransactions } from "../db/getUserTransactions";
 
 const columns = [
   {
-    field: "id",
-    headerName: "Symbol",
-    minWidth: 90,
+    field: "date",
+    headerName: "Date",
+    minWidth: 80,
     flex: 0.1,
   },
   {
-    field: "type",
-    headerName: "Type",
+    field: "id",
+    headerName: "Symbol",
+    minWidth: 70,
+    flex: 0.1,
+  },
+  {
+    field: "product",
+    headerName: "Product",
     minWidth: 120,
     flex: 0.5,
   },
   {
     field: "buy",
-    headerName: "Buy/Sell",
+    headerName: "Action",
     minWidth: 90,
     flex: 0.1,
   },
@@ -28,12 +34,6 @@ const columns = [
     headerName: "Price",
     minWidth: 70,
     flex: 0.15,
-  },
-  {
-    field: "currency",
-    headerName: "Currency",
-    minWidth: 90,
-    flex: 0.1,
   },
   {
     field: "qty",
@@ -48,9 +48,9 @@ const columns = [
     flex: 0.1,
   },
   {
-    field: "date",
-    headerName: "Date",
-    minWidth: 150,
+    field: "total",
+    headerName: "Total",
+    minWidth: 90,
     flex: 0.1,
   },
 ];
