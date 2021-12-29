@@ -62,12 +62,12 @@ const MyTable = ({ results, setSymbol, setCurrency, setProduct }) => {
     <DataGrid
       disableColumnMenu={true}
       hideFooterSelectedRowCount={true}
+      rowsPerPageOptions={[5]}
+      pageSize={5}
       density="compact"
       onRowClick={onRowClick}
       rows={rows}
       columns={columns}
-      rowsPerPageOptions={[4]}
-      pageSize={4}
       sx={{
         backgroundColor: "white",
         border: "none",
