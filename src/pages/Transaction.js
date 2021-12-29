@@ -71,6 +71,15 @@ export const Transaction = () => {
       setIsLoading
     );
     setOpen(true);
+    setSymbol(undefined);
+    setPrice(0);
+    setCommission(0);
+    setQty(0);
+    setDate(new Date());
+    setComment("");
+    setCurrency("EUR");
+    setAsset("");
+    setResults([]);
   };
 
   let body;
