@@ -1,5 +1,12 @@
-import { getFirestore, collection, query, getDocs } from "firebase/firestore";
-import fromUnixTime from "date-fns/fromUnixTime";
+import {
+  getFirestore,
+  collection,
+  query,
+  onSnapshot,
+} from "firebase/firestore";
+import { format } from "date-fns";
+import getSymbolFromCurrency from "currency-symbol-map";
+
 const db = getFirestore();
 
 export const getUserTransactions = async (user, setRows, setIsLoading) => {
@@ -7,23 +14,34 @@ export const getUserTransactions = async (user, setRows, setIsLoading) => {
 
   const q = query(transactionsRef);
 
-  const querySnapshot = await getDocs(q);
-
-  let rows = [];
-  querySnapshot.forEach((doc) => {
-    let transaction = doc.data();
-    let row = {
-      id: transaction.symbol,
-      type: transaction.type,
-      buy: transaction.buy === true ? "buy" : "sell",
-      price: transaction.price,
-      currency: transaction.currency,
-      qty: transaction.qty,
-      commission: transaction.commission,
-      date: fromUnixTime(transaction.date),
-    };
-    rows.push(row);
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    let rows = [];
+    querySnapshot.forEach((doc) => {
+      let transaction = doc.data();
+      let row = {
+        id: doc.id,
+        symbol: transaction.symbol,
+        product: transaction.product,
+        buy: transaction.buy === true ? "buy" : "sell",
+        price:
+          transaction.price.toFixed(2) +
+          getSymbolFromCurrency(transaction.currency),
+        qty: transaction.qty,
+        commission:
+          transaction.commission.toFixed(2) +
+          getSymbolFromCurrency(transaction.currency),
+        total:
+          (
+            transaction.price * transaction.qty +
+            transaction.commission
+          ).toFixed(2) + getSymbolFromCurrency(transaction.currency),
+        date: format(transaction.date.toDate(), "dd-MM-yyyy"),
+      };
+      rows.push(row);
+    });
+    setRows(rows);
+    setIsLoading(false);
   });
-  setRows(rows);
-  setIsLoading(false);
+
+  return unsubscribe;
 };
