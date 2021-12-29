@@ -1,6 +1,6 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { SearchStock } from "./SearchStock";
-import { SearchCurrency } from "./SearchCurrency";
+import { SearchCurrencyTransaction } from "./SearchCurrencyTransaction";
 import { quote } from "../api/currency";
 
 export const TransactionStep2 = ({
@@ -28,7 +28,7 @@ export const TransactionStep2 = ({
           setProduct={setProduct}
         />
       ) : (
-        <SearchCurrency
+        <SearchCurrencyTransaction
           text="Search Cryptocurrency Symbol"
           setSymbol={setSymbol}
           list={quote}

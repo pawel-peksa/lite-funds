@@ -113,9 +113,7 @@ export const quote = [
   {
     code: "BNT",
   },
-  {
-    code: "GAS",
-  },
+
   {
     code: "BTC",
   },
@@ -1519,9 +1517,6 @@ export const currency = [
   },
   {
     code: "BNT",
-  },
-  {
-    code: "GAS",
   },
   {
     code: "BTC",
@@ -3123,7 +3118,6 @@ export const alphaVantageCurrencies = [
   { code: "FUN", name: "FunFair", search: "FUN - FunFair" },
   { code: "GAM", name: "Gambit", search: "GAM - Gambit" },
   { code: "GAME", name: "GameCredits", search: "GAME - GameCredits" },
-  { code: "GAS", name: "Gas", search: "GAS - Gas" },
   { code: "GBG", name: "Golos Gold", search: "GBG - Golos Gold" },
   { code: "GBX", name: "GoByte", search: "GBX - GoByte" },
   { code: "GBYTE", name: "Byteball", search: "GBYTE - Byteball" },

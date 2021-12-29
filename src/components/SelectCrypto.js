@@ -1,7 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import { CalculateCurrency } from "./CalculateCurrency";
 
-export const SelectCrypto = ({ setFrom, from, setTo, to }) => {
+export const SelectCrypto = ({ setFrom, from, setTo, to, setShowPlot }) => {
   return (
     <Paper
       sx={{
@@ -14,7 +14,13 @@ export const SelectCrypto = ({ setFrom, from, setTo, to }) => {
       <Typography variant="h5" component="div" color="primary.main">
         Select currency pair:
       </Typography>
-      <CalculateCurrency setFrom={setFrom} from={from} setTo={setTo} to={to} />
+      <CalculateCurrency
+        setFrom={setFrom}
+        from={from}
+        setTo={setTo}
+        to={to}
+        setShowPlot={setShowPlot}
+      />
     </Paper>
   );
 };

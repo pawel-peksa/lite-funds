@@ -1,12 +1,17 @@
 import { Grid, Typography, TextField } from "@mui/material";
 import { SearchCurrency } from "./SearchCurrency";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ApiSnackbar } from "./ApiSnackbar";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { calcCryptoPairRate } from "../api/cryptoApi";
 import { base, quote } from "../api/currency";
-
-export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
+export const CalculateCurrency = ({
+  setFrom,
+  from,
+  setTo,
+  to,
+  setShowPlot,
+}) => {
   const [formValue, setFormValue] = useState(1);
   const [calculatedValue, setCalculatedValue] = useState("...");
   const [snackbar, setSnackbar] = useState(false);
@@ -16,6 +21,12 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
     e.preventDefault();
     if (e.target.value > 0) setFormValue(e.target.value);
   };
+
+  useEffect(() => {
+    if (typeof from === "undefined" || typeof to === "undefined") {
+      setCalculatedValue("...");
+    }
+  }, [from, to, setCalculatedValue]);
 
   const handleCalculate = () => {
     calcCryptoPairRate(
@@ -28,10 +39,13 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
     );
   };
 
+  const handlePlot = () => {
+    setShowPlot(true);
+  };
   return (
     <Grid
       container
-      maxWidth="sm"
+      maxWidth="md"
       sx={{ justifyContent: "center", mt: 3 }}
       rowSpacing={1}
     >
@@ -119,11 +133,10 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
                   },
                 },
               }}
-              // disabled
               value={calculatedValue}
               sx={{ ml: -1 }}
-              size="small"
               fullWidth
+              size="small"
             />
           </Grid>
         </Grid>
@@ -138,6 +151,18 @@ export const CalculateCurrency = ({ setFrom, from, setTo, to }) => {
           variant="outlined"
         >
           Calculate
+        </LoadingButton>
+      </Grid>
+      <Grid item xs={12}>
+        <LoadingButton
+          disabled={!!from & !!to ? false : true}
+          onClick={handlePlot}
+          fullWidth
+          loading={loading}
+          variant="contained"
+          sx={{ mb: 2 }}
+        >
+          Plot
         </LoadingButton>
       </Grid>
       <ApiSnackbar
