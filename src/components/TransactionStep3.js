@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
-import { format } from "date-fns";
 
 export const TransactionStep3 = ({
   date,
