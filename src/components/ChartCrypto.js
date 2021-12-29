@@ -39,7 +39,6 @@ const CustomTooltip = ({ active, payload, label, currency }) => {
 export const ChartCrypto = ({ from, to, showPlot, setShowPlot }) => {
   const [interval, setInterval] = useState("3M");
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [performance, setPerformance] = useState();
   const [message, setMessage] = useState("");
   const [snackbar, setSnackbar] = useState(false);
@@ -51,7 +50,6 @@ export const ChartCrypto = ({ from, to, showPlot, setShowPlot }) => {
       getCryptoHistory(
         from + to,
         interval,
-        setLoading,
         setData,
         setPerformance,
         setSnackbar,

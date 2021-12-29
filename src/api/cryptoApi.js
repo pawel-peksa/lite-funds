@@ -28,7 +28,6 @@ export const calcCryptoPairRate = async (
 export const getCryptoHistory = async (
   pair,
   interval,
-  setLoading,
   setData,
   setPerformance,
   setSnackbar,
@@ -63,7 +62,6 @@ export const getCryptoHistory = async (
     }
   }
   setSnackbar(false);
-  setLoading(true);
   try {
     const candlestickData = await client.candles({
       symbol: pair,
@@ -80,10 +78,8 @@ export const getCryptoHistory = async (
 
     let performance = calculatePerformance(data.at(-1).value, data[0].value);
     setPerformance(performance);
-    setLoading(false);
   } catch (error) {
     console.log(error);
-    setLoading(false);
     setSnackbar(true);
   }
 };

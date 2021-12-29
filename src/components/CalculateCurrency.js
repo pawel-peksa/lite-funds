@@ -1,4 +1,4 @@
-import { Grid, Typography, TextField } from "@mui/material";
+import { Grid, Typography, TextField, Button } from "@mui/material";
 import { SearchCurrency } from "./SearchCurrency";
 import { useState, useEffect } from "react";
 import { ApiSnackbar } from "./ApiSnackbar";
@@ -154,16 +154,15 @@ export const CalculateCurrency = ({
         </LoadingButton>
       </Grid>
       <Grid item xs={12}>
-        <LoadingButton
+        <Button
           disabled={!!from & !!to ? false : true}
           onClick={handlePlot}
           fullWidth
-          loading={loading}
           variant="contained"
           sx={{ mb: 2 }}
         >
           Plot
-        </LoadingButton>
+        </Button>
       </Grid>
       <ApiSnackbar
         snackbar={snackbar}
