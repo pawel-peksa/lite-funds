@@ -6,9 +6,7 @@ import {
   Button,
 } from "@mui/material";
 import { parseISO, format } from "date-fns";
-import { fetchDailyAdjusted } from "../api/fetchDailyAdjusted";
-import { fetchWeeklyAdjusted } from "../api/fetchWeeklyAdjusted";
-import { fetchMonthlyAdjusted } from "../api/fetchMonthlyAdjusted";
+import { fetchStock } from "../api/fetchStock";
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -48,72 +46,19 @@ export const Chart = ({ asset }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [performance, setPerformance] = useState();
-  const [message, setMessage] = useState("Performance: ");
+  const [message, setMessage] = useState("");
   const [snackbar, setSnackbar] = useState(false);
 
   useEffect(() => {
-    switch (interval) {
-      case "1M": {
-        fetchDailyAdjusted(
-          asset.symbol,
-          setData,
-          setPerformance,
-          setIsLoading,
-          true,
-          setSnackbar
-        );
-        setMessage("1 Month performance: ");
-        break;
-      }
-      case "3M": {
-        fetchDailyAdjusted(
-          asset.symbol,
-          setData,
-          setPerformance,
-          setIsLoading,
-          false,
-          setSnackbar
-        );
-        setMessage("3 Months performance: ");
-        break;
-      }
-      case "1Y": {
-        fetchWeeklyAdjusted(
-          asset.symbol,
-          setData,
-          setPerformance,
-          setIsLoading,
-          true,
-          setSnackbar
-        );
-        setMessage("1 Year performance: ");
-        break;
-      }
-      case "5Y": {
-        fetchWeeklyAdjusted(
-          asset.symbol,
-          setData,
-          setPerformance,
-          setIsLoading,
-          false,
-          setSnackbar
-        );
-        setMessage("5 Years performance: ");
-        break;
-      }
-      default: {
-        fetchMonthlyAdjusted(
-          asset.symbol,
-          setData,
-          setPerformance,
-          setIsLoading,
-          setSnackbar
-        );
-        setMessage("All time performance: ");
-        break;
-      }
-    }
-    // TODO: refactor to use only one function to fetch data
+    fetchStock(
+      asset.symbol,
+      setData,
+      setPerformance,
+      setIsLoading,
+      interval,
+      setSnackbar,
+      setMessage
+    );
   }, [asset, interval]);
 
   return (
