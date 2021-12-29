@@ -1,4 +1,15 @@
-import { Grid, Paper, Typography, Button, Box, Divider } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Button,
+  Box,
+  Divider,
+  Alert,
+  AlertTitle,
+  Snackbar,
+} from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
 import { TransactionStep1 } from "../components/TransactionStep1";
 import { TransactionStep2 } from "../components/TransactionStep2";
@@ -10,7 +21,7 @@ export const Transaction = () => {
   const [asset, setAsset] = useState("");
   const [checked, setChecked] = useState(true);
   const [step, setStep] = useState(1);
-  const [selected, setSelected] = useState(undefined);
+  const [symbol, setSymbol] = useState(undefined);
   const [date, setDate] = useState(new Date());
   const [results, setResults] = useState([]);
   const [price, setPrice] = useState(0);
@@ -18,7 +29,15 @@ export const Transaction = () => {
   const [commission, setCommission] = useState(0);
   const [comment, setComment] = useState("");
   const [currency, setCurrency] = useState("EUR");
+  const [product, setProduct] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { user } = useSession();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    setStep(1);
+  };
 
   const handleChange = (event) => {
     setAsset(event.target.value);
@@ -29,31 +48,29 @@ export const Transaction = () => {
   };
 
   const handleNext = () => {
-    console.log("buy?", checked);
-    console.log("asset:", asset);
-    console.log("selected:", selected);
     setStep((step) => step + 1);
   };
 
   const handleBack = () => {
-    console.log("buy?", checked);
-    console.log("asset:", asset);
     setStep((step) => step - 1);
   };
 
-  const handleAdd = () => {
-    addTransaction(
+  const handleAdd = async () => {
+    await addTransaction(
       user,
       checked,
       asset,
-      selected,
+      symbol,
       currency,
       date,
       price,
       qty,
       commission,
-      comment
+      comment,
+      product,
+      setIsLoading
     );
+    setOpen(true);
   };
 
   let body;
@@ -69,12 +86,14 @@ export const Transaction = () => {
   else if (step === 2)
     body = (
       <TransactionStep2
-        selected={selected}
-        setSelected={setSelected}
+        symbol={symbol}
+        setSymbol={setSymbol}
         results={results}
         setResults={setResults}
         setCurrency={setCurrency}
         asset={asset}
+        setProduct={setProduct}
+        product={product}
       />
     );
   else if (step === 3)
@@ -96,7 +115,7 @@ export const Transaction = () => {
 
   return (
     <Grid container sx={{ justifyContent: "center" }}>
-      <Grid item xs={12} md={7}>
+      <Grid item xs={12} md={9}>
         <Paper
           sx={{
             p: 2,
@@ -127,7 +146,7 @@ export const Transaction = () => {
                 {" > "} {asset}
                 {step > 2 && (
                   <>
-                    {" > "} {selected}
+                    {" > "} {symbol}
                   </>
                 )}
               </Typography>
@@ -154,18 +173,19 @@ export const Transaction = () => {
               Back
             </Button>
             {step === 3 ? (
-              <Button
+              <LoadingButton
                 disabled={price > 0 && qty > 0 ? false : true}
                 variant="contained"
                 disableElevation
                 onClick={handleAdd}
+                loading={isLoading}
               >
                 Add Transaction
-              </Button>
+              </LoadingButton>
             ) : (
               <Button
                 disabled={
-                  (step === 1 && asset.length < 1) || (step === 2 && !selected)
+                  (step === 1 && asset.length < 1) || (step === 2 && !symbol)
                     ? true
                     : false
                 }
@@ -177,6 +197,24 @@ export const Transaction = () => {
               </Button>
             )}
           </Box>
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            sx={{ width: 500, height: 100, ml: 4 }}
+            // TransitionComponent={<Slide direction="up" />}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              variant="filled"
+              sx={{ width: "100%" }}
+            >
+              <AlertTitle>Success!</AlertTitle>
+              Transaction has been added
+            </Alert>
+          </Snackbar>
         </Paper>
       </Grid>
     </Grid>

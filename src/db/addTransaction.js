@@ -11,8 +11,11 @@ export const addTransaction = async (
   price,
   qty,
   commission,
-  comments
+  comments,
+  product,
+  setIsLoading
 ) => {
+  setIsLoading(true);
   const transactionsRef = collection(db, "users", user.uid, "transactions");
 
   await addDoc(transactionsRef, {
@@ -25,5 +28,7 @@ export const addTransaction = async (
     qty,
     commission,
     comments,
+    product,
   });
+  setIsLoading(false);
 };

@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
+import { format } from "date-fns";
 
 export const TransactionStep3 = ({
   date,
@@ -25,6 +26,7 @@ export const TransactionStep3 = ({
       <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
         <FormLabel component="legend">4. Date</FormLabel>
         <DatePicker
+          inputFormat="dd/MM/yyyy"
           renderInput={(params) => (
             <TextField sx={{ mt: 2, alignSelf: "center" }} {...params} />
           )}

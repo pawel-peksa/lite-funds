@@ -1,65 +1,88 @@
-import {
-  TextField,
-  List,
-  Box,
-  ListItem,
-  ListItemButton,
-  Typography,
-  ListItemText,
-} from "@mui/material";
+import { TextField, Box, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
 import { searchEndpoint } from "../api/searchEndpoint";
 import SearchIcon from "@mui/icons-material/Search";
 
-const MyList = ({ results, setSelected, setCurrency }) => {
-  const handleSelect = (e, symbol, currency) => {
-    setSelected(symbol);
-    setCurrency(currency);
+const MyTable = ({ results, setSymbol, setCurrency, setProduct }) => {
+  const columns = [
+    {
+      field: "id",
+      headerName: "Symbol",
+      minWidth: 50,
+      flex: 0.1,
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      minWidth: 130,
+      flex: 0.5,
+    },
+    {
+      field: "type",
+      headerName: "Type",
+      minWidth: 50,
+      flex: 0.1,
+    },
+    {
+      field: "region",
+      headerName: "Region",
+      minWidth: 70,
+      flex: 0.15,
+    },
+    {
+      field: "currency",
+      headerName: "Currency",
+      minWidth: 50,
+      flex: 0.1,
+    },
+  ];
+
+  let rows;
+  if (typeof results === "undefined") {
+    rows = [];
+  } else {
+    rows = results.map((result) => {
+      return {
+        id: result["1. symbol"],
+        name: result["2. name"],
+        type: result["3. type"],
+        region: result["4. region"],
+        currency: result["8. currency"],
+      };
+    });
+  }
+  const onRowClick = (row) => {
+    setSymbol(row.row.id);
+    setCurrency(row.row.currency);
+    setProduct(row.row.name);
   };
   return (
-    <Box
+    <DataGrid
+      disableColumnMenu={true}
+      hideFooterSelectedRowCount={true}
+      density="compact"
+      onRowClick={onRowClick}
+      rows={rows}
+      columns={columns}
+      rowsPerPageOptions={[4]}
+      pageSize={4}
       sx={{
-        width: "100%",
-        maxHeight: 150,
-        maxWidth: 450,
-        alignSelf: "center",
-        overflow: "auto",
+        backgroundColor: "white",
+        border: "none",
       }}
-    >
-      <List height={150} width={360} dense sx={{ padding: 0 }}>
-        {!!results &&
-          results.map((result) => {
-            return (
-              <ListItem
-                key={result["1. symbol"]}
-                disablePadding
-                component="div"
-              >
-                <ListItemButton
-                  divider
-                  onClick={(e) =>
-                    handleSelect(e, result["1. symbol"], result["8. currency"])
-                  }
-                >
-                  <ListItemText
-                    primary={`[${result["1. symbol"]}] ${result["2. name"]} - ${result["4. region"]} - ${result["8. currency"]}`}
-                  />
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
-      </List>
-    </Box>
+    />
   );
 };
 
 export const SearchStock = ({
-  selected,
-  setSelected,
+  symbol,
+  setSymbol,
   results,
   setResults,
   setCurrency,
+  setProduct,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -107,23 +130,27 @@ export const SearchStock = ({
           Search
         </LoadingButton>
       </Box>
-      <MyList
-        results={results}
-        setSelected={setSelected}
-        setCurrency={setCurrency}
-      />
-      {selected && (
-        <Typography
-          align="center"
-          color="primary.main"
-          sx={{ fontSize: 18, mt: 3 }}
-        >
-          [{selected}]{" "}
-          {results.find((obj) => obj["1. symbol"] === selected)["2. name"]} -{" "}
-          {results.find((obj) => obj["1. symbol"] === selected)["4. region"]} (
-          {results.find((obj) => obj["1. symbol"] === selected)["8. currency"]})
-        </Typography>
-      )}
+      <Box sx={{ height: 300 }}>
+        <MyTable
+          results={results}
+          setSymbol={setSymbol}
+          setCurrency={setCurrency}
+          setProduct={setProduct}
+        />
+      </Box>
+      {results?.length > 0 &&
+        results.find((obj) => obj["1. symbol"] === symbol) && (
+          <Typography
+            align="center"
+            color="primary.main"
+            sx={{ fontSize: 18, mt: 3 }}
+          >
+            [{symbol}]{" "}
+            {results.find((obj) => obj["1. symbol"] === symbol)["2. name"]} -{" "}
+            {results.find((obj) => obj["1. symbol"] === symbol)["4. region"]} (
+            {results.find((obj) => obj["1. symbol"] === symbol)["8. currency"]})
+          </Typography>
+        )}
     </>
   );
 };

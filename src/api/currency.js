@@ -114,9 +114,6 @@ export const quote = [
     code: "BNT",
   },
   {
-    code: "BCC",
-  },
-  {
     code: "GAS",
   },
   {
@@ -1522,9 +1519,6 @@ export const currency = [
   },
   {
     code: "BNT",
-  },
-  {
-    code: "BCC",
   },
   {
     code: "GAS",
@@ -2956,7 +2950,6 @@ export const alphaVantageCurrencies = [
   { code: "BAY", name: "BitBay", search: "BAY - BitBay" },
   { code: "BBR", name: "Boolberry", search: "BBR - Boolberry" },
   { code: "BCAP", name: "BCAP", search: "BCAP - BCAP" },
-  { code: "BCC", name: "BitConnect", search: "BCC - BitConnect" },
   { code: "BCD", name: "Bitcoin-Diamond", search: "BCD - Bitcoin-Diamond" },
   { code: "BCH", name: "Bitcoin-Cash", search: "BCH - Bitcoin-Cash" },
   { code: "BCN", name: "Bytecoin", search: "BCN - Bytecoin" },

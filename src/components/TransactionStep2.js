@@ -4,12 +4,14 @@ import { SearchCurrency } from "./SearchCurrency";
 import { quote } from "../api/currency";
 
 export const TransactionStep2 = ({
-  selected,
-  setSelected,
+  symbol,
+  setSymbol,
   results,
   setResults,
   setCurrency,
   asset,
+  setProduct,
+  product,
 }) => {
   return (
     <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
@@ -18,17 +20,20 @@ export const TransactionStep2 = ({
       </FormLabel>
       {asset === "stocks" ? (
         <SearchStock
-          selected={selected}
-          setSelected={setSelected}
+          symbol={symbol}
+          setSymbol={setSymbol}
           results={results}
           setResults={setResults}
           setCurrency={setCurrency}
+          setProduct={setProduct}
         />
       ) : (
         <SearchCurrency
-          text="Pick Cryptocurrency Symbol"
-          setSymbol={setSelected}
+          text="Search Cryptocurrency Symbol"
+          setSymbol={setSymbol}
           list={quote}
+          setProduct={setProduct}
+          product={product}
         />
       )}
     </FormControl>
