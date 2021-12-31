@@ -63,11 +63,8 @@ export const fetchStock = (
   fetch(apiCall)
     .then((data) => data.json())
     .then((data) => {
-      checkNote(data, setSnackbar);
+      checkNote(data, setSnackbar, setIsLoading);
       let series = data[tag];
-      console.log("interval", interval);
-      console.log(data);
-      console.log(apiCall);
       if (series) {
         let entries = Object.entries(series);
         entries = entries.slice(0, cut);

@@ -212,7 +212,7 @@ export const Chart = ({ asset }) => {
           <CartesianGrid opacity={0.3} vertical={false} />
         </AreaChart>
       </ResponsiveContainer>
-      <ApiSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
+      <ApiSnackbar snackbar={snackbar} setSnackbar={setSnackbar} api="alpha" />
     </Paper>
   );
 };
