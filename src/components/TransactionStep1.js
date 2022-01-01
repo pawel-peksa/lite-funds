@@ -52,7 +52,7 @@ export const TransactionStep1 = ({
         >
           <FormControlLabel value="stocks" control={<Radio />} label="Stocks" />
           <FormControlLabel
-            value="cryptocurrency"
+            value="crypto"
             control={<Radio />}
             label="Cryptocurrency"
           />

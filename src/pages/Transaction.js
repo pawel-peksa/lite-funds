@@ -17,6 +17,8 @@ import { TransactionStep3 } from "../components/TransactionStep3";
 import { addTransaction } from "../db/addTransaction";
 import { useSession } from "../auth/UserProvider";
 
+// TODO user cannot sell assets he does not have! Maybe sell is not needed for this project????
+
 export const Transaction = () => {
   const [asset, setAsset] = useState("");
   const [checked, setChecked] = useState(true);

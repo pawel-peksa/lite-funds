@@ -1,6 +1,19 @@
+import { getAssets } from "../db/getAssets";
 import { Grid, Paper, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useSession } from "../auth/UserProvider";
+import { TableOfAssets } from "../components/TableOfAssets";
 
 export const Portfolio = () => {
+  const { user } = useSession();
+  const [assets, setAssets] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getAssets(user, setAssets, setIsLoading);
+  }, [user]);
+
   return (
     <Grid
       container
@@ -75,7 +88,7 @@ export const Portfolio = () => {
       </Grid>
 
       {/* Table of assets */}
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={6}>
         <Paper
           sx={{
             p: 2,
@@ -84,20 +97,11 @@ export const Portfolio = () => {
             height: 350,
           }}
         >
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            Table of assets
-          </Typography>
+          <TableOfAssets isLoading={isLoading} assets={assets} />
         </Paper>
       </Grid>
       {/* Value over Time Chart */}
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={6}>
         <Paper
           sx={{
             p: 2,
