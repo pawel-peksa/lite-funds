@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/lite-funds/static/css/main.646a8e4a.chunk.css",
+    "main.js": "/lite-funds/static/js/main.4ad042cd.chunk.js",
+    "main.js.map": "/lite-funds/static/js/main.4ad042cd.chunk.js.map",
+    "runtime-main.js": "/lite-funds/static/js/runtime-main.4c879b01.js",
+    "runtime-main.js.map": "/lite-funds/static/js/runtime-main.4c879b01.js.map",
+    "static/js/2.fac64def.chunk.js": "/lite-funds/static/js/2.fac64def.chunk.js",
+    "static/js/2.fac64def.chunk.js.map": "/lite-funds/static/js/2.fac64def.chunk.js.map",
+    "index.html": "/lite-funds/index.html",
+    "static/css/main.646a8e4a.chunk.css.map": "/lite-funds/static/css/main.646a8e4a.chunk.css.map",
+    "static/js/2.fac64def.chunk.js.LICENSE.txt": "/lite-funds/static/js/2.fac64def.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4c879b01.js",
+    "static/js/2.fac64def.chunk.js",
+    "static/css/main.646a8e4a.chunk.css",
+    "static/js/main.4ad042cd.chunk.js"
+  ]
+}
