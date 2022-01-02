@@ -108,9 +108,6 @@ export const quote = [
     code: "EOS",
   },
   {
-    code: "SNT",
-  },
-  {
     code: "BNT",
   },
 
@@ -161,9 +158,6 @@ export const quote = [
   },
   {
     code: "FUN",
-  },
-  {
-    code: "SNM",
   },
   {
     code: "IOTA",
@@ -978,9 +972,7 @@ export const quote = [
   {
     code: "BURGER",
   },
-  {
-    code: "FLM",
-  },
+
   {
     code: "SCRT",
   },
@@ -1511,9 +1503,6 @@ export const currency = [
   },
   {
     code: "EOS",
-  },
-  {
-    code: "SNT",
   },
   {
     code: "BNT",
@@ -3405,13 +3394,7 @@ export const alphaVantageCurrencies = [
   { code: "SMT", name: "SmartMesh", search: "SMT - SmartMesh" },
   { code: "SNC", name: "SunContract", search: "SNC - SunContract" },
   { code: "SNGLS", name: "SingularDTV", search: "SNGLS - SingularDTV" },
-  { code: "SNM", name: "SONM", search: "SNM - SONM" },
   { code: "SNRG", name: "Synergy", search: "SNRG - Synergy" },
-  {
-    code: "SNT",
-    name: "Status-Network-Token",
-    search: "SNT - Status-Network-Token",
-  },
   { code: "SOC", name: "All-Sports", search: "SOC - All-Sports" },
   { code: "SOL", name: "Solana", search: "SOL - Solana" },
   { code: "SOUL", name: "Phantasma", search: "SOUL - Phantasma" },
