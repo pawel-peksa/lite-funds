@@ -3,16 +3,27 @@ import { Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "../auth/UserProvider";
 import { TableOfAssets } from "../components/TableOfAssets";
+import { Status } from "../components/Status";
+import { calculateBalance } from "../functions/calculateBalance";
+import { calculateProfitLoss } from "../functions/calculateProfitLoss";
+import { PieChartWallet } from "../components/PieChartWallet";
 
 export const Portfolio = () => {
   const { user } = useSession();
   const [assets, setAssets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [balance, setBalance] = useState(0);
+  const [profitLoss, setProfitLoss] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
     getAssets(user, setAssets, setIsLoading);
   }, [user]);
+
+  useEffect(() => {
+    setBalance(calculateBalance(assets));
+    setProfitLoss(calculateProfitLoss(assets));
+  }, [assets]);
 
   return (
     <Grid
@@ -30,16 +41,7 @@ export const Portfolio = () => {
             height: 240,
           }}
         >
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            Status
-          </Typography>
+          <Status balance={balance} profitLoss={profitLoss} />
         </Paper>
       </Grid>
       {/* Pie Chart / allocation */}
@@ -52,16 +54,7 @@ export const Portfolio = () => {
             height: 240,
           }}
         >
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            Allocation on Pie Chart / Bar Chart
-          </Typography>
+          <PieChartWallet assets={assets} />
         </Paper>
       </Grid>
       {/* Free Slot */}

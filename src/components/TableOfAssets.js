@@ -10,8 +10,8 @@ export const TableOfAssets = ({ assets, isLoading }) => {
     {
       field: "type",
       headerName: "Type",
-      minWidth: 80,
-      flex: 0.1,
+      minWidth: 60,
+      flex: 0.05,
     },
     {
       field: "name",
@@ -28,8 +28,8 @@ export const TableOfAssets = ({ assets, isLoading }) => {
     {
       field: "price",
       headerName: "Price",
-      minWidth: 90,
-      flex: 0.2,
+      minWidth: 80,
+      flex: 0.1,
     },
     {
       field: "irr",
@@ -41,6 +41,18 @@ export const TableOfAssets = ({ assets, isLoading }) => {
       field: "value",
       headerName: "Value",
       minWidth: 70,
+      flex: 0.15,
+    },
+    {
+      field: "pl",
+      headerName: "P/L",
+      minWidth: 60,
+      flex: 0.15,
+    },
+    {
+      field: "plp",
+      headerName: "P/L %",
+      minWidth: 60,
       flex: 0.15,
     },
   ];
