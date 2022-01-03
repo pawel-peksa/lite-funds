@@ -2,13 +2,16 @@ import { getCryptoValue } from "../api/cryptoApi2";
 import { cryptoList } from "../api/cryptoList";
 
 export const createAssets = async (arr, setAssets, setIsLoading) => {
-  let uniqueSymbols = [
-    ...new Set(arr.map((transaction) => transaction.symbol)),
-  ];
-
   let assets = [];
 
-  for (const symbol of uniqueSymbols) {
+  //gather crypto
+  let symbolsCrypto = arr.filter(
+    (transaction) => transaction.type === "crypto"
+  );
+  let uniqueSymbolsCrypto = [
+    ...new Set(symbolsCrypto.map((transaction) => transaction.symbol)),
+  ];
+  for (const symbol of uniqueSymbolsCrypto) {
     let currency = cryptoList.find((crypto) => {
       return crypto.symbol === symbol.toLowerCase();
     });
@@ -22,6 +25,8 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
     let sum = transactions
       .map((transaction) => transaction.qty)
       .reduce((a, b) => a + b);
+
+    //gather stocks
 
     //CALCULATE P/L
     let buys = transactions
