@@ -1,6 +1,5 @@
-import { TextField, Autocomplete, Typography } from "@mui/material";
+import { TextField, Autocomplete } from "@mui/material";
 import { useState } from "react";
-import { cryptoSymbol } from "crypto-symbol";
 
 export const SearchCurrencyTransaction = ({
   text,
@@ -8,9 +7,10 @@ export const SearchCurrencyTransaction = ({
   list,
   setProduct,
   product,
+  code,
+  name,
 }) => {
   const [value, setValue] = useState(null);
-  const { nameLookup } = cryptoSymbol({});
 
   return (
     <>
@@ -19,16 +19,14 @@ export const SearchCurrencyTransaction = ({
         sx={{ margin: "0 auto", width: 280 }}
         onChange={(event, newValue) => {
           setValue(newValue);
-          setSymbol(newValue?.code);
-          if (newValue) {
-            setProduct(nameLookup(newValue.code));
-          }
+          setSymbol((newValue?.[code]).toUpperCase());
+          setProduct(newValue?.[name]);
         }}
         options={list}
-        getOptionLabel={(option) => option.code}
+        getOptionLabel={(option) => option[name]}
         renderInput={(params) => <TextField {...params} label={text} />}
       />
-      {value && (
+      {/* {value && (
         <Typography
           align="center"
           color="primary.main"
@@ -36,7 +34,7 @@ export const SearchCurrencyTransaction = ({
         >
           [{value.code}] - {product}
         </Typography>
-      )}
+      )} */}
     </>
   );
 };

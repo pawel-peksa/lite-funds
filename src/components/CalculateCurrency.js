@@ -3,8 +3,10 @@ import { SearchCurrency } from "./SearchCurrency";
 import { useState, useEffect } from "react";
 import { ApiSnackbar } from "./ApiSnackbar";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { calcCryptoPairRate } from "../api/cryptoApi";
-import { base, quote } from "../api/currency";
+import { calcCryptoPairRate } from "../api/cryptoApi2";
+import { currencyList } from "../api/currencyList";
+import { cryptoList } from "../api/cryptoList";
+
 export const CalculateCurrency = ({
   setFrom,
   from,
@@ -16,6 +18,8 @@ export const CalculateCurrency = ({
   const [calculatedValue, setCalculatedValue] = useState("...");
   const [snackbar, setSnackbar] = useState(false);
   const [loading, setIsLoading] = useState(false);
+  const [fromSymbol, setFromSymbol] = useState("");
+  const [toSymbol, setToSymbol] = useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -66,13 +70,22 @@ export const CalculateCurrency = ({
           }}
         >
           <Grid item>
-            <SearchCurrency text="From" setSymbol={setFrom} list={quote} />
+            <SearchCurrency
+              text="From"
+              setSymbol={setFrom}
+              setCode={setFromSymbol}
+              list={cryptoList}
+              code="id"
+              name="name"
+            />
           </Grid>
           <Grid item sx={{ display: "flex" }}>
             <Typography
               sx={{
                 bgcolor: "primary.main",
                 p: 1,
+                pr: 2,
+                pl: 2,
                 borderRadius: "4px 0 0 4px",
                 display: "inline-block",
                 zIndex: 10,
@@ -80,7 +93,7 @@ export const CalculateCurrency = ({
               }}
               color="white"
             >
-              {from}
+              {fromSymbol}
             </Typography>
 
             <TextField
@@ -107,13 +120,22 @@ export const CalculateCurrency = ({
           sx={{ flexDirection: "column" }}
         >
           <Grid item>
-            <SearchCurrency text="To" setSymbol={setTo} list={base} />
+            <SearchCurrency
+              text="To"
+              setSymbol={setTo}
+              setCode={setToSymbol}
+              list={currencyList}
+              code="id"
+              name="id"
+            />
           </Grid>
           <Grid item sx={{ display: "flex" }}>
             <Typography
               sx={{
                 bgcolor: "primary.main",
                 p: 1,
+                pr: 2,
+                pl: 2,
                 borderRadius: "4px 0 0 4px",
                 display: "inline-block",
                 zIndex: 10,
@@ -121,7 +143,7 @@ export const CalculateCurrency = ({
               }}
               color="white"
             >
-              {to}
+              {toSymbol}
             </Typography>
             <TextField
               InputProps={{

@@ -4,7 +4,7 @@ import { calculatePerformance } from "../functions/calculatePerformance";
 
 const client = Binance();
 
-export const getCryptoValue = (symbol, amount) =>
+export const getCryptoValue = (symbol) =>
   client.avgPrice({ symbol: symbol + "EUR" });
 
 export const calcCryptoPairRate = async (

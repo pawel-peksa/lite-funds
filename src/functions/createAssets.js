@@ -1,6 +1,5 @@
-import { getCryptoValue } from "../api/cryptoApi";
-import xirr from "xirr";
-import getSymbolFromCurrency from "currency-symbol-map";
+import { getCryptoValue } from "../api/cryptoApi2";
+import { cryptoList } from "../api/cryptoList";
 
 export const createAssets = async (arr, setAssets, setIsLoading) => {
   let uniqueSymbols = [
@@ -10,8 +9,11 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
   let assets = [];
 
   for (const symbol of uniqueSymbols) {
-    let cryptoValueCall = await getCryptoValue(symbol);
-    let price = Number(cryptoValueCall.price);
+    let currency = cryptoList.find((crypto) => {
+      return crypto.symbol === symbol.toLowerCase();
+    });
+    let id = currency.id;
+    let price = await getCryptoValue(id, "eur");
     let transactions = arr.filter(
       (transaction) => transaction.symbol === symbol
     );
@@ -26,8 +28,8 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
       .map((transaction) => transaction.price * transaction.qty)
       .reduce((a, b) => a + b);
     sum = sum.toFixed(4);
-    let pl = (sum * price - buys).toFixed(1) + getSymbolFromCurrency("EUR");
-    let plp = (((sum * price) / buys - 1) * 100).toFixed(1) + "%";
+    let pl = Number((sum * price - buys).toFixed(1));
+    let plp = Number(((sum * price) / buys - 1).toFixed(3));
 
     //CALCULATE IRR
     let xirrData = transactions.map((transaction) => {
@@ -41,7 +43,13 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
       when: new Date(),
     };
     xirrData.push(simulateSell);
-    let irr = (xirr(xirrData) * 100).toFixed(2) + "%";
+    let irr = 1;
+    // try {
+    //   irr = (xirr(xirrData) * 100).toFixed(2) + "%";
+    // } catch (error) {
+    //   irr = -0.9;
+    //   console.log(error);
+    // }
 
     //CREATE BUY SELL ARRAY FOR GLOBAL PORTOFLIO CALCS
     let buySell = [buys, price * sum];
@@ -53,8 +61,8 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
       type,
       sum,
       buySell,
-      price: price.toFixed(2) + getSymbolFromCurrency("EUR"),
-      value: (price * sum).toFixed(2) + getSymbolFromCurrency("EUR"),
+      price: Number(price.toFixed(2)),
+      value: Number((price * sum).toFixed(2)),
       xirrData,
       pl,
       plp,
@@ -62,7 +70,6 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
       transactions,
     });
   }
-  console.log(assets);
   setAssets(assets);
   setIsLoading(false);
 };

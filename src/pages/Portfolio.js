@@ -1,5 +1,5 @@
 import { getAssets } from "../db/getAssets";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "../auth/UserProvider";
 import { TableOfAssets } from "../components/TableOfAssets";
@@ -7,11 +7,12 @@ import { Status } from "../components/Status";
 import { calculateBalance } from "../functions/calculateBalance";
 import { calculateProfitLoss } from "../functions/calculateProfitLoss";
 import { PieChartWallet } from "../components/PieChartWallet";
+import { getCryptoHistory } from "../api/cryptoApi2";
 
 export const Portfolio = () => {
   const { user } = useSession();
   const [assets, setAssets] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [balance, setBalance] = useState(0);
   const [profitLoss, setProfitLoss] = useState(0);
 
@@ -25,6 +26,9 @@ export const Portfolio = () => {
     setProfitLoss(calculateProfitLoss(assets));
   }, [assets]);
 
+  const handleBtnClick = () => {
+    getCryptoHistory("bitcoin", "eur", "1M");
+  };
   return (
     <Grid
       container
@@ -75,7 +79,7 @@ export const Portfolio = () => {
               height: "100%",
             }}
           >
-            Don't know yet...
+            <Button onClick={handleBtnClick}>Check APi</Button>
           </Typography>
         </Paper>
       </Grid>
@@ -87,7 +91,7 @@ export const Portfolio = () => {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 350,
+            height: 400,
           }}
         >
           <TableOfAssets isLoading={isLoading} assets={assets} />

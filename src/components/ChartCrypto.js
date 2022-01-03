@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { ApiSnackbar } from "./ApiSnackbar";
-import { getCryptoHistory } from "../api/cryptoApi";
+import { getCryptoHistory } from "../api/cryptoApi2";
 
 const CustomTooltip = ({ active, payload, label, currency }) => {
   if (active) {
@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label, currency }) => {
         <Typography variant="body2">{data}</Typography>
         <Typography align="center" variant="body1" color="primary.main">
           {getSymbolFromCurrency(currency)}
-          {payload && payload[0].value.toFixed(2)}
+          {payload && payload[0]?.value.toFixed(2)}
         </Typography>
       </Paper>
     );
@@ -47,7 +47,8 @@ export const ChartCrypto = ({ from, to, showPlot, setShowPlot }) => {
       setShowPlot(false);
     } else if (!!from && !!to) {
       getCryptoHistory(
-        from + to,
+        from,
+        to,
         interval,
         setData,
         setPerformance,

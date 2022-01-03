@@ -1,7 +1,7 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { SearchStock } from "./SearchStock";
 import { SearchCurrencyTransaction } from "./SearchCurrencyTransaction";
-import { quote } from "../api/currency";
+import { cryptoList } from "../api/cryptoList";
 
 export const TransactionStep2 = ({
   symbol,
@@ -29,9 +29,11 @@ export const TransactionStep2 = ({
         />
       ) : (
         <SearchCurrencyTransaction
-          text="Search Cryptocurrency Symbol"
+          text="Search Cryptocurrency"
           setSymbol={setSymbol}
-          list={quote}
+          list={cryptoList}
+          code="symbol"
+          name="name"
           setProduct={setProduct}
           product={product}
         />

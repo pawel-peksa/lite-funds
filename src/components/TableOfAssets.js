@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import getSymbolFromCurrency from "currency-symbol-map";
 
 export const TableOfAssets = ({ assets, isLoading }) => {
   const columns = [
@@ -30,30 +31,46 @@ export const TableOfAssets = ({ assets, isLoading }) => {
       headerName: "Price",
       minWidth: 80,
       flex: 0.1,
+      valueFormatter: (params) => {
+        const valueFormatted = Number(params.value).toLocaleString();
+        return `${valueFormatted}${getSymbolFromCurrency("EUR")}`;
+      },
     },
-    {
-      field: "irr",
-      headerName: "IRR",
-      minWidth: 70,
-      flex: 0.15,
-    },
+    // {
+    //   field: "irr",
+    //   headerName: "IRR",
+    //   minWidth: 70,
+    //   flex: 0.15,
+    // },
     {
       field: "value",
       headerName: "Value",
       minWidth: 70,
       flex: 0.15,
+      valueFormatter: (params) => {
+        const valueFormatted = Number(params.value).toLocaleString();
+        return `${valueFormatted}${getSymbolFromCurrency("EUR")}`;
+      },
     },
     {
       field: "pl",
       headerName: "P/L",
       minWidth: 60,
       flex: 0.15,
+      valueFormatter: (params) => {
+        const valueFormatted = Number(params.value).toLocaleString();
+        return `${valueFormatted}${getSymbolFromCurrency("EUR")}`;
+      },
     },
     {
       field: "plp",
       headerName: "P/L %",
       minWidth: 60,
       flex: 0.15,
+      valueFormatter: (params) => {
+        const valueFormatted = Number(params.value * 100).toLocaleString();
+        return `${valueFormatted}%`;
+      },
     },
   ];
 
@@ -75,7 +92,7 @@ export const TableOfAssets = ({ assets, isLoading }) => {
         autoPageSize={true}
         disableSelectionOnClick
         hideFooterSelectedRowCount={true}
-        hideFooterPagination={true}
+        // hideFooterPagination={true}
         density="compact"
         onRowClick={() => console.log("row click")}
         loading={isLoading}
