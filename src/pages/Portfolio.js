@@ -8,6 +8,7 @@ import { calculateBalance } from "../functions/calculateBalance";
 import { calculateProfitLoss } from "../functions/calculateProfitLoss";
 import { PieChartWallet } from "../components/PieChartWallet";
 import { getCryptoHistory } from "../api/cryptoApi2";
+import { yFinance } from "../api/yFinance";
 
 export const Portfolio = () => {
   const { user } = useSession();
@@ -27,7 +28,7 @@ export const Portfolio = () => {
   }, [assets]);
 
   const handleBtnClick = () => {
-    getCryptoHistory("bitcoin", "eur", "1M");
+    yFinance();
   };
   return (
     <Grid
@@ -58,7 +59,7 @@ export const Portfolio = () => {
             height: 240,
           }}
         >
-          <PieChartWallet assets={assets} />
+          {/* <PieChartWallet assets={assets} /> */}
         </Paper>
       </Grid>
       {/* Free Slot */}
