@@ -26,8 +26,8 @@ const CustomTooltip = ({ active, payload, label, currency }) => {
       <Paper elevation={14} sx={{ p: 2 }}>
         <Typography variant="body2">{data}</Typography>
         <Typography align="center" variant="body1" color="primary.main">
-          {getSymbolFromCurrency(currency)}
           {payload && payload[0]?.value.toFixed(2)}
+          {getSymbolFromCurrency(currency)}
         </Typography>
       </Paper>
     );
@@ -67,17 +67,10 @@ export const ChartCrypto = ({ from, to, showPlot, setShowPlot }) => {
           flexDirection: "column",
         }}
       >
-        <Grid container sx={{ mb: 2, justifyContent: "space-between" }}>
-          <Grid item sx={{ ml: 4 }} lg={4}>
-            <Typography variant="h6" align="center" color="primary.main">
-              {from}/{to}
-            </Typography>
-
-            <Typography sx={{ pb: 1 }} variant="body1" align="center">
-              {message}
-              <span style={{ color: performance < 0 ? "red" : "teal" }}>
-                {performance} {!!performance && "%"}
-              </span>
+        <Grid container sx={{ mb: 1, justifyContent: "space-between" }}>
+          <Grid item sx={{ ml: 1 }} lg={4}>
+            <Typography variant="h6" color="primary.main">
+              {from?.toUpperCase()}/{to?.toUpperCase()}
             </Typography>
           </Grid>
           <Grid
@@ -119,11 +112,17 @@ export const ChartCrypto = ({ from, to, showPlot, setShowPlot }) => {
             </Button>
           </Grid>
         </Grid>
+        <Typography sx={{ pb: 1 }} variant="body1" align="right">
+          {message}
+          <span style={{ color: performance < 0 ? "red" : "teal" }}>
+            {performance} {!!performance && "%"}
+          </span>
+        </Typography>
         <ResponsiveContainer width="99%" height={350}>
           <AreaChart
             data={data}
             margin={{
-              right: 55,
+              right: 65,
               left: 25,
               bottom: 20,
             }}
@@ -185,7 +184,7 @@ export const ChartCrypto = ({ from, to, showPlot, setShowPlot }) => {
               tickCount={8}
               tickFormatter={(number) => `${number.toFixed(2)}`}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip currency={to} />} />
             <CartesianGrid opacity={0.3} vertical={false} />
           </AreaChart>
         </ResponsiveContainer>

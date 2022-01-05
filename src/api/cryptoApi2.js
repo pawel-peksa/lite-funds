@@ -54,22 +54,22 @@ export const getCryptoHistory = async (
   switch (interval) {
     case "1M": {
       limit = "31";
-      setMessage("1 Month performance: ");
+      setMessage("1M change: ");
       break;
     }
     case "3M": {
       limit = "92";
-      setMessage("3 Months performance: ");
+      setMessage("3M change: ");
       break;
     }
     case "1Y": {
       limit = "365";
-      setMessage("1 Year performance: ");
+      setMessage("1Y change: ");
       break;
     }
     default: {
       limit = "max";
-      setMessage("All time performance: ");
+      setMessage("All time change: ");
       break;
     }
   }

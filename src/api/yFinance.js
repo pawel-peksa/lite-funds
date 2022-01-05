@@ -16,8 +16,6 @@ export const yFinanceFetchStock = async (
   let today = new Date();
   let queryOptions = { period1: "2021-02-01", interval: "1d" };
 
-  console.log("today", format(today, "yyyy-MM-dd"));
-
   switch (interval) {
     case "1M": {
       queryOptions = { period1: subDays(today, 30), interval: "1d" };
@@ -47,7 +45,6 @@ export const yFinanceFetchStock = async (
   }
 
   const result = await yahooFinance.historical(stockSymbol, queryOptions);
-  console.log(result);
   let toPlot = result.map((obj) => {
     return {
       date: format(obj.date, "yyyy-MM-dd"),
