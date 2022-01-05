@@ -5,9 +5,10 @@ import {
   Box,
   Button,
 } from "@mui/material";
+import NumberFormat from "react-number-format";
 import { parseISO, format } from "date-fns";
-import { fetchStock } from "../api/fetchStock";
-import { yFinanceFetchStock } from "../api/yFinance";
+// import { fetchStock } from "../api/fetchStock";
+import { yFinanceFetchStock, yFinanceQuote } from "../api/yFinance";
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -34,6 +35,7 @@ const CustomTooltip = ({ active, payload, label, currency }) => {
         <Typography variant="body2">{data}</Typography>
         <Typography align="center" variant="body1" color="primary.main">
           {payload && payload[0].value.toFixed(2)}
+          {payload && getSymbolFromCurrency(currency)}
         </Typography>
       </Paper>
     );
@@ -48,6 +50,9 @@ export const Chart = ({ asset }) => {
   const [performance, setPerformance] = useState();
   const [message, setMessage] = useState("");
   const [snackbar, setSnackbar] = useState(false);
+  const [currentValue, setCurrentValue] = useState();
+  const [currentVolume, setCurrentVolume] = useState();
+  const [currency, setCurrency] = useState();
 
   useEffect(() => {
     //ALPHA VANTAGE API
@@ -69,6 +74,7 @@ export const Chart = ({ asset }) => {
       undefined,
       setMessage
     );
+    yFinanceQuote(asset.symbol, setCurrentValue, setCurrentVolume, setCurrency);
   }, [asset, interval]);
 
   return (
@@ -95,16 +101,30 @@ export const Chart = ({ asset }) => {
           <Typography
             variant="h6"
             color={isLoading ? "secondary.light" : "primary.main"}
-            sx={{ ml: 12, pb: 1 }}
+            sx={{ pb: 1 }}
           >
             {asset.name
               ? `${asset.symbol} - ${asset.name} (${asset.currency})`
               : "Select asset to plot"}
           </Typography>
-          {isLoading && (
-            <CircularProgress sx={{ ml: 2 }} thickness={3} size={30} />
-          )}
         </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h6"
+            color={isLoading ? "secondary.light" : "primary.main"}
+            sx={{ pb: 1 }}
+          >
+            {asset.name
+              ? `${currentValue}${getSymbolFromCurrency(currency)}`
+              : ""}
+          </Typography>
+        </Box>
+
         <Box>
           <Button
             variant={interval === "1M" ? "outlined" : "text"}
@@ -143,12 +163,58 @@ export const Chart = ({ asset }) => {
           </Button>
         </Box>
       </Box>
-      <Typography sx={{ pb: 1 }} variant="body1" align="center">
-        {message}
-        <span style={{ color: performance < 0 ? "red" : "teal" }}>
-          {performance}%
-        </span>
-      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        {" "}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Typography sx={{ pb: 3, mt: 1 }} variant="body1">
+            Volume:{" "}
+            <span style={{ color: "teal" }}>
+              <NumberFormat
+                thousandSeparator={true}
+                value={currentVolume}
+                displayType={"text"}
+              />
+              {getSymbolFromCurrency(currency)}
+            </span>
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress
+            sx={{ ml: 2, visibility: isLoading ? "" : "hidden" }}
+            thickness={3}
+            size={30}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Typography sx={{ pb: 3, mt: 1 }} variant="body1">
+            {message}
+            <span style={{ color: performance < 0 ? "red" : "teal" }}>
+              {performance}%
+            </span>
+          </Typography>
+        </Box>
+      </Box>
 
       <ResponsiveContainer width="99%" height={350}>
         <AreaChart
@@ -172,8 +238,7 @@ export const Chart = ({ asset }) => {
             label={{
               position: "right",
               value:
-                getSymbolFromCurrency(asset.currency) +
-                data.at(-1)?.value.toFixed(1),
+                getSymbolFromCurrency(currency) + data.at(-1)?.value.toFixed(1),
               fill: "grey",
               fontSize: 13,
             }}
@@ -184,8 +249,7 @@ export const Chart = ({ asset }) => {
             label={{
               position: "right",
               value:
-                getSymbolFromCurrency(asset.currency) +
-                data.at(0)?.value.toFixed(1),
+                getSymbolFromCurrency(currency) + data.at(0)?.value.toFixed(1),
               fill: "#6495ed",
               fontSize: 13,
             }}
@@ -215,10 +279,10 @@ export const Chart = ({ asset }) => {
             tickLine={false}
             tickCount={8}
             tickFormatter={(number) =>
-              `${getSymbolFromCurrency(asset.currency)}${number.toFixed(2)}`
+              `${getSymbolFromCurrency(currency)}${number.toFixed(2)}`
             }
           />
-          <Tooltip content={<CustomTooltip currency={asset.currency} />} />
+          <Tooltip content={<CustomTooltip currency={currency} />} />
           <CartesianGrid opacity={0.3} vertical={false} />
         </AreaChart>
       </ResponsiveContainer>

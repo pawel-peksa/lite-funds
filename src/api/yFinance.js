@@ -21,27 +21,27 @@ export const yFinanceFetchStock = async (
   switch (interval) {
     case "1M": {
       queryOptions = { period1: subDays(today, 30), interval: "1d" };
-      setMessage("1 Month performance: ");
+      setMessage("1M change: ");
       break;
     }
     case "3M": {
       queryOptions = { period1: subDays(today, 90), interval: "1d" };
-      setMessage("3 Months performance: ");
+      setMessage("3M change: ");
       break;
     }
     case "1Y": {
       queryOptions = { period1: subDays(today, 365), interval: "1wk" };
-      setMessage("1 Year performance: ");
+      setMessage("1Y change: ");
       break;
     }
     case "5Y": {
       queryOptions = { period1: subDays(today, 1826), interval: "1mo" };
-      setMessage("5 Years performance: ");
+      setMessage("5Y change: ");
       break;
     }
     default: {
       queryOptions = { period1: subDays(today, 20000), interval: "1mo" };
-      setMessage("All time performance: ");
+      setMessage("All time change: ");
       break;
     }
   }
@@ -59,6 +59,18 @@ export const yFinanceFetchStock = async (
   let performance = calculatePerformance(toPlot.at(-1).value, toPlot[0].value);
   setPerformance(performance);
   setIsLoading(false);
+};
+
+export const yFinanceQuote = async (
+  symbol,
+  setCurrentValue,
+  setCurrentVolume,
+  setCurrency
+) => {
+  const result = await yahooFinance.quote(symbol);
+  setCurrency(result.currency);
+  setCurrentValue(result.regularMarketPrice);
+  setCurrentVolume(result.regularMarketVolume);
 };
 
 export const yFinanceSearchEndpoint = async (
