@@ -3,10 +3,22 @@ import { DataGrid } from "@mui/x-data-grid";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
 // import { searchEndpoint } from "../api/searchEndpoint"; ALPHA VANTAGE API
-import { yFinanceSearchEndpoint } from "../api/yFinance";
+import { yFinanceSearchEndpoint, yFinanceQuote } from "../api/yFinance";
 import SearchIcon from "@mui/icons-material/Search";
+import getSymbolFromCurrency from "currency-symbol-map";
+import NumberFormat from "react-number-format";
+import Skeleton from "@mui/material/Skeleton";
 
-const MyTable = ({ results, setSymbol, setCurrency, setProduct }) => {
+const MyTable = ({
+  results,
+  setSymbol,
+  setCurrency,
+  setProduct,
+  setCurrentValue,
+  setCurrentVolume,
+  setShowCurrency,
+  setFetchingStockInfo,
+}) => {
   const columns = [
     {
       field: "id",
@@ -71,6 +83,13 @@ const MyTable = ({ results, setSymbol, setCurrency, setProduct }) => {
     setSymbol(row.row.id);
     setCurrency(row.row.currency);
     setProduct(row.row.name);
+    yFinanceQuote(
+      row.row.id,
+      setCurrentValue,
+      setCurrentVolume,
+      setShowCurrency,
+      setFetchingStockInfo
+    );
   };
   return (
     <DataGrid
@@ -99,7 +118,11 @@ export const SearchStock = ({
   setProduct,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [fetchingStockInfo, setFetchingStockInfo] = useState(false);
   const [search, setSearch] = useState("");
+  const [currentValue, setCurrentValue] = useState();
+  const [currentVolume, setCurrentVolume] = useState();
+  const [showCurrency, setShowCurrency] = useState();
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -151,6 +174,10 @@ export const SearchStock = ({
           setSymbol={setSymbol}
           setCurrency={setCurrency}
           setProduct={setProduct}
+          setCurrentValue={setCurrentValue}
+          setCurrentVolume={setCurrentVolume}
+          setShowCurrency={setShowCurrency}
+          setFetchingStockInfo={setFetchingStockInfo}
         />
       </Box>
       {/* ALPHA VANTAGE API */}
@@ -168,15 +195,43 @@ export const SearchStock = ({
           </Typography>
         )} */}
       {/* YAHOO FINANCE */}
-      {results?.length > 0 && results.find((obj) => obj.symbol === symbol) && (
-        <Typography
-          align="center"
-          color="primary.main"
-          sx={{ fontSize: 18, mt: 3 }}
-        >
-          [{symbol}] {results.find((obj) => obj.symbol === symbol).longname} -{" "}
-          {results.find((obj) => obj.symbol === symbol).exchange}
-        </Typography>
+      {symbol && results.find((obj) => obj.symbol === symbol) && (
+        <>
+          <Typography
+            align="center"
+            color="primary.main"
+            sx={{ fontSize: 18, mt: 2 }}
+          >
+            {symbol} - {results.find((obj) => obj.symbol === symbol).longname} (
+            {results.find((obj) => obj.symbol === symbol).exchange})
+          </Typography>
+          {fetchingStockInfo ? (
+            <Skeleton variant="text" />
+          ) : (
+            <Typography align="center" variant="body1">
+              Price:{" "}
+              <span style={{ color: "teal" }}>
+                {currentValue}
+                {getSymbolFromCurrency(showCurrency)}
+              </span>{" "}
+            </Typography>
+          )}
+          {fetchingStockInfo ? (
+            <Skeleton variant="text" />
+          ) : (
+            <Typography align="center" variant="body2">
+              Volume:{" "}
+              <span style={{ color: "teal" }}>
+                <NumberFormat
+                  thousandSeparator={true}
+                  value={currentVolume}
+                  displayType={"text"}
+                />
+                {getSymbolFromCurrency(showCurrency)}
+              </span>
+            </Typography>
+          )}
+        </>
       )}
     </>
   );
