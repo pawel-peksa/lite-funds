@@ -11,6 +11,7 @@ export const searchEndpoint = (keyword, setResults, setIsLoading) => {
       checkNote(data);
       let results = data["bestMatches"];
       setResults(results);
+      console.log(results);
       setIsLoading(false);
     })
     .catch((error) => {

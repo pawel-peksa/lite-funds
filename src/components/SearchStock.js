@@ -2,7 +2,8 @@ import { TextField, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
-import { searchEndpoint } from "../api/searchEndpoint";
+// import { searchEndpoint } from "../api/searchEndpoint"; ALPHA VANTAGE API
+import { yFinanceSearchEndpoint } from "../api/yFinance";
 import SearchIcon from "@mui/icons-material/Search";
 
 const MyTable = ({ results, setSymbol, setCurrency, setProduct }) => {
@@ -26,14 +27,14 @@ const MyTable = ({ results, setSymbol, setCurrency, setProduct }) => {
       flex: 0.1,
     },
     {
-      field: "region",
+      field: "currency",
       headerName: "Region",
       minWidth: 70,
       flex: 0.15,
     },
     {
-      field: "currency",
-      headerName: "Currency",
+      field: "region",
+      headerName: "Exchange",
       minWidth: 50,
       flex: 0.1,
     },
@@ -43,14 +44,27 @@ const MyTable = ({ results, setSymbol, setCurrency, setProduct }) => {
   if (typeof results === "undefined") {
     rows = [];
   } else {
-    rows = results.map((result) => {
+    // IMPLEMENTATION FOR SEARCH ENDPOINT USING YAHOO_FINANCE_2
+    let filtered = results.filter(
+      (result) => result.quoteType === "EQUITY" || result.quoteType === "ETF"
+    );
+    rows = filtered.map((result) => {
       return {
-        id: result["1. symbol"],
-        name: result["2. name"],
-        type: result["3. type"],
-        region: result["4. region"],
-        currency: result["8. currency"],
+        id: result.symbol,
+        name: result.shortname,
+        type: result.typeDisp,
+        region: result.exchange,
+        currency: result.exchDisp,
       };
+      // IMPLEMENTATION FOR SEARCH ENDPOINT USING ALPHA VANTAGE API
+      // rows = results.map((result) => {
+      //   return {
+      //     id: result["1. symbol"],
+      //     name: result["2. name"],
+      //     type: result["3. type"],
+      //     region: result["4. region"],
+      //     currency: result["8. currency"],
+      //   };
     });
   }
   const onRowClick = (row) => {
@@ -91,7 +105,8 @@ export const SearchStock = ({
     setSearch(e.target.value);
   };
   const handleClick = () => {
-    searchEndpoint(search, setResults, setIsLoading);
+    // searchEndpoint(search, setResults, setIsLoading);
+    yFinanceSearchEndpoint(search, setResults, setIsLoading);
   };
 
   return (
@@ -138,7 +153,8 @@ export const SearchStock = ({
           setProduct={setProduct}
         />
       </Box>
-      {results?.length > 0 &&
+      {/* ALPHA VANTAGE API */}
+      {/* {results?.length > 0 &&
         results.find((obj) => obj["1. symbol"] === symbol) && (
           <Typography
             align="center"
@@ -150,7 +166,18 @@ export const SearchStock = ({
             {results.find((obj) => obj["1. symbol"] === symbol)["4. region"]} (
             {results.find((obj) => obj["1. symbol"] === symbol)["8. currency"]})
           </Typography>
-        )}
+        )} */}
+      {/* YAHOO FINANCE */}
+      {results?.length > 0 && results.find((obj) => obj.symbol === symbol) && (
+        <Typography
+          align="center"
+          color="primary.main"
+          sx={{ fontSize: 18, mt: 3 }}
+        >
+          [{symbol}] {results.find((obj) => obj.symbol === symbol).longname} -{" "}
+          {results.find((obj) => obj.symbol === symbol).exchange}
+        </Typography>
+      )}
     </>
   );
 };

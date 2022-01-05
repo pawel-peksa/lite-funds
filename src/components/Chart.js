@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { parseISO, format } from "date-fns";
 import { fetchStock } from "../api/fetchStock";
+import { yFinanceFetchStock } from "../api/yFinance";
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -32,7 +33,6 @@ const CustomTooltip = ({ active, payload, label, currency }) => {
       <Paper elevation={14} sx={{ p: 2 }}>
         <Typography variant="body2">{data}</Typography>
         <Typography align="center" variant="body1" color="primary.main">
-          {getSymbolFromCurrency(currency)}
           {payload && payload[0].value.toFixed(2)}
         </Typography>
       </Paper>
@@ -50,13 +50,23 @@ export const Chart = ({ asset }) => {
   const [snackbar, setSnackbar] = useState(false);
 
   useEffect(() => {
-    fetchStock(
+    //ALPHA VANTAGE API
+    // fetchStock(
+    //   asset.symbol,
+    //   setData,
+    //   setPerformance,
+    //   setIsLoading,
+    //   interval,
+    //   setSnackbar,
+    //   setMessage
+    // );
+    yFinanceFetchStock(
       asset.symbol,
       setData,
       setPerformance,
       setIsLoading,
       interval,
-      setSnackbar,
+      undefined,
       setMessage
     );
   }, [asset, interval]);

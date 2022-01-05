@@ -8,7 +8,7 @@ import { calculateBalance } from "../functions/calculateBalance";
 import { calculateProfitLoss } from "../functions/calculateProfitLoss";
 import { PieChartWallet } from "../components/PieChartWallet";
 import { getCryptoHistory } from "../api/cryptoApi2";
-import { yFinance } from "../api/yFinance";
+import { yFinanceFetchStock } from "../api/yFinance";
 
 export const Portfolio = () => {
   const { user } = useSession();
@@ -28,7 +28,8 @@ export const Portfolio = () => {
   }, [assets]);
 
   const handleBtnClick = () => {
-    yFinance();
+    // yFinance();
+    yFinanceFetchStock("IBM", undefined, undefined, undefined, "chuj");
   };
   return (
     <Grid

@@ -11,9 +11,12 @@ export const getCryptoValue = async (symbol, currency) => {
     vs_currencies: currency,
   });
   let resp = data.data;
-
-  let cur = currency.toLowerCase();
-  let price = resp[symbol][cur];
+  let cur;
+  let price;
+  if (currency) {
+    cur = currency.toLowerCase();
+    price = resp[symbol][cur];
+  }
   return price;
 };
 

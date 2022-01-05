@@ -73,6 +73,7 @@ export const fetchStock = (
           value: Number(Object.values(value)[valuePosition]),
         }));
         setData(toPlot);
+        // console.log(toPlot);
         let performance = calculatePerformance(
           toPlot.at(-1).value,
           toPlot[0].value
