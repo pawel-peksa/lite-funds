@@ -1,4 +1,4 @@
-import { TextField, Box, Typography } from "@mui/material";
+import { TextField, Box, Typography, Divider } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
@@ -81,14 +81,14 @@ const MyTable = ({
   }
   const onRowClick = (row) => {
     setSymbol(row.row.id);
-    setCurrency(row.row.currency);
     setProduct(row.row.name);
     yFinanceQuote(
       row.row.id,
       setCurrentValue,
       setCurrentVolume,
       setShowCurrency,
-      setFetchingStockInfo
+      setFetchingStockInfo,
+      setCurrency
     );
   };
   return (
@@ -152,7 +152,7 @@ export const SearchStock = ({
           variant="standard"
           autoComplete="off"
           id="standard-basic"
-          label="Asset name..."
+          label="Name, symbol, ISIN..."
           onChange={handleChange}
         />
         <LoadingButton
@@ -197,11 +197,7 @@ export const SearchStock = ({
       {/* YAHOO FINANCE */}
       {symbol && results.find((obj) => obj.symbol === symbol) && (
         <>
-          <Typography
-            align="center"
-            color="primary.main"
-            sx={{ fontSize: 18, mt: 2 }}
-          >
+          <Typography align="center" color="primary.main" sx={{ fontSize: 18 }}>
             {symbol} - {results.find((obj) => obj.symbol === symbol).longname} (
             {results.find((obj) => obj.symbol === symbol).exchange})
           </Typography>
@@ -219,17 +215,20 @@ export const SearchStock = ({
           {fetchingStockInfo ? (
             <Skeleton variant="text" />
           ) : (
-            <Typography align="center" variant="body2">
-              Volume:{" "}
-              <span style={{ color: "teal" }}>
-                <NumberFormat
-                  thousandSeparator={true}
-                  value={currentVolume}
-                  displayType={"text"}
-                />
-                {getSymbolFromCurrency(showCurrency)}
-              </span>
-            </Typography>
+            <>
+              <Typography align="center" variant="body2" sx={{ mb: 2 }}>
+                Volume:{" "}
+                <span style={{ color: "teal" }}>
+                  <NumberFormat
+                    thousandSeparator={true}
+                    value={currentVolume}
+                    displayType={"text"}
+                  />
+                  {getSymbolFromCurrency(showCurrency)}
+                </span>
+              </Typography>
+              <Divider />
+            </>
           )}
         </>
       )}

@@ -3,7 +3,6 @@ const db = getFirestore();
 
 export const addTransaction = async (
   user,
-  buy,
   type,
   symbol,
   currency,
@@ -19,7 +18,6 @@ export const addTransaction = async (
   const transactionsRef = collection(db, "users", user.uid, "transactions");
 
   await addDoc(transactionsRef, {
-    buy,
     type,
     symbol,
     currency,

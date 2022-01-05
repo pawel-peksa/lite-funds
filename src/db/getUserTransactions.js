@@ -22,7 +22,7 @@ export const getUserTransactions = async (user, setRows, setIsLoading) => {
         id: doc.id,
         symbol: transaction.symbol,
         product: transaction.product,
-        buy: transaction.buy === true ? "buy" : "sell",
+        type: transaction.type,
         price:
           transaction.price.toFixed(2) +
           getSymbolFromCurrency(transaction.currency),
@@ -36,6 +36,7 @@ export const getUserTransactions = async (user, setRows, setIsLoading) => {
             transaction.commission
           ).toFixed(2) + getSymbolFromCurrency(transaction.currency),
         date: format(transaction.date.toDate(), "dd-MM-yyyy"),
+        comment: transaction.comments,
       };
       rows.push(row);
     });

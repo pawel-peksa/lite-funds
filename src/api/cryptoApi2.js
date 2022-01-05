@@ -5,7 +5,8 @@ import { calculatePerformance } from "../functions/calculatePerformance";
 // Initiate the CoinGecko API Client
 const CoinGeckoClient = new CoinGecko();
 
-export const getCryptoValue = async (symbol, currency) => {
+export const getCryptoValue = async (symbol, currency, setPrice) => {
+  if (typeof symbol === "undefined") return;
   let data = await CoinGeckoClient.simple.price({
     ids: symbol,
     vs_currencies: currency,
@@ -13,9 +14,12 @@ export const getCryptoValue = async (symbol, currency) => {
   let resp = data.data;
   let cur;
   let price;
-  if (currency) {
+  if (currency && symbol) {
     cur = currency.toLowerCase();
     price = resp[symbol][cur];
+  }
+  if (typeof setPrice === "function") {
+    setPrice(price);
   }
   return price;
 };

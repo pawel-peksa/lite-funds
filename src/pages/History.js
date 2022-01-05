@@ -10,6 +10,11 @@ export const History = () => {
   const { user } = useSession();
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [clickedInfo, setClickedInfo] = useState({
+    symbol: "",
+    date: "",
+    comment: "",
+  });
 
   useEffect(() => {
     const unsubscribe = getUserTransactions(user, setRows, setIsLoading);
@@ -17,6 +22,15 @@ export const History = () => {
     return unsubscribe;
   }, [user]);
 
+  const onRowClick = (row) => {
+    setClickedInfo(() => {
+      return {
+        symbol: row.row.symbol,
+        date: row.row.date,
+        comment: row.row.comment,
+      };
+    });
+  };
   const columns = [
     {
       field: "id",
@@ -41,8 +55,8 @@ export const History = () => {
       flex: 0.5,
     },
     {
-      field: "buy",
-      headerName: "Action",
+      field: "type",
+      headerName: "Type",
       minWidth: 90,
       flex: 0.1,
     },
@@ -102,16 +116,23 @@ export const History = () => {
         >
           Transaction History:
         </Typography>
-
+        <Typography
+          variant="body2"
+          component="p"
+          align="right"
+          color="secondary.main"
+          gutterBottom
+        >
+          Click on row to see transaction comments (if added)
+        </Typography>
         <DataGrid
           disableColumnMenu={true}
           autoHeight={true}
           autoPageSize={true}
-          disableSelectionOnClick
           hideFooterSelectedRowCount={true}
           // hideFooterPagination={true}
           // density="compact"
-          onRowClick={() => console.log("row click")}
+          onRowClick={onRowClick}
           loading={isLoading}
           rows={rows}
           columns={columns}
@@ -121,6 +142,13 @@ export const History = () => {
             border: "none",
           }}
         />
+        {clickedInfo.symbol.length > 0 && (
+          <Typography variant="body2">
+            {typeof clickedInfo.comment === "undefined"
+              ? "No comments added"
+              : clickedInfo.comment}
+          </Typography>
+        )}
       </Paper>
     </Container>
   );

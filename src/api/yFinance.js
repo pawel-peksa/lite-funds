@@ -62,13 +62,15 @@ export const yFinanceQuote = async (
   symbol,
   setCurrentValue,
   setCurrentVolume,
-  setCurrency,
-  setFetchingStockInfo
+  setShowCurrency,
+  setFetchingStockInfo,
+  setCurrency
 ) => {
   if (setFetchingStockInfo) {
     setFetchingStockInfo(true);
   }
   const result = await yahooFinance.quote(symbol);
+  setShowCurrency(result.currency);
   setCurrency(result.currency);
   setCurrentValue(result.regularMarketPrice);
   setCurrentVolume(result.regularMarketVolume);
@@ -86,7 +88,6 @@ export const yFinanceSearchEndpoint = async (
   setIsLoading(true);
   const result = await yahooFinance.search(search /* queryOptions */);
 
-  console.log(result.quotes);
   setResults(result.quotes);
   setIsLoading(false);
 };

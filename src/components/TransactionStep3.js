@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
+import getSymbolFromCurrency from "currency-symbol-map";
 
 export const TransactionStep3 = ({
   date,
@@ -19,11 +20,12 @@ export const TransactionStep3 = ({
   comment,
   setComment,
   currency,
+  asset,
 }) => {
   return (
     <>
       <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-        <FormLabel component="legend">4. Date</FormLabel>
+        <FormLabel component="legend">3. Date</FormLabel>
         <DatePicker
           inputFormat="dd/MM/yyyy"
           renderInput={(params) => (
@@ -39,7 +41,7 @@ export const TransactionStep3 = ({
       </FormControl>
 
       <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-        <FormLabel component="legend">5. Price and quantity</FormLabel>
+        <FormLabel component="legend">4. Price and quantity</FormLabel>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <TextField
             sx={{
@@ -75,7 +77,7 @@ export const TransactionStep3 = ({
             InputProps={{
               inputProps: {
                 min: 0,
-                step: 0.1,
+                step: asset === "stocks" ? 1 : 0.1,
               },
             }}
           />
@@ -100,12 +102,14 @@ export const TransactionStep3 = ({
             color="primary.main"
             sx={{ fontSize: 18, mt: 3 }}
           >
-            {`Total: ${(price * qty + commission).toFixed(2)} ${currency}`}
+            {`Total: ${(price * qty + commission).toFixed(
+              2
+            )}${getSymbolFromCurrency(currency)}`}
           </Typography>
         )}
       </FormControl>
       <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
-        <FormLabel component="legend">6. Comments</FormLabel>
+        <FormLabel component="legend">5. Comments</FormLabel>
         <TextField
           multiline
           rows="3"

@@ -2,7 +2,6 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
   Box,
   Divider,
   Alert,
@@ -21,8 +20,6 @@ import { useSession } from "../auth/UserProvider";
 
 export const Transaction = () => {
   const [asset, setAsset] = useState("");
-  const [checked, setChecked] = useState(true);
-  const [step, setStep] = useState(1);
   const [symbol, setSymbol] = useState(undefined);
   const [date, setDate] = useState(new Date());
   const [results, setResults] = useState([]);
@@ -38,29 +35,19 @@ export const Transaction = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setStep(1);
   };
 
   const handleChange = (event) => {
     setAsset(event.target.value);
-  };
-
-  const handleSwitch = (event) => {
-    setChecked(event.target.checked);
-  };
-
-  const handleNext = () => {
-    setStep((step) => step + 1);
-  };
-
-  const handleBack = () => {
-    setStep((step) => step - 1);
+    setSymbol(undefined);
+    setResults([]);
+    setPrice(0);
+    setQty(0);
   };
 
   const handleAdd = async () => {
     await addTransaction(
       user,
-      checked,
       asset,
       symbol,
       currency,
@@ -84,45 +71,39 @@ export const Transaction = () => {
     setResults([]);
   };
 
-  let body;
-  if (step === 1)
-    body = (
-      <TransactionStep1
-        handleChange={handleChange}
-        handleSwitch={handleSwitch}
-        value={asset}
-        checked={checked}
-      />
-    );
-  else if (step === 2)
-    body = (
-      <TransactionStep2
-        symbol={symbol}
-        setSymbol={setSymbol}
-        results={results}
-        setResults={setResults}
-        setCurrency={setCurrency}
-        asset={asset}
-        setProduct={setProduct}
-        product={product}
-      />
-    );
-  else if (step === 3)
-    body = (
-      <TransactionStep3
-        date={date}
-        setDate={setDate}
-        price={price}
-        setPrice={setPrice}
-        qty={qty}
-        setQty={setQty}
-        commission={commission}
-        setCommission={setCommission}
-        comment={comment}
-        setComment={setComment}
-        currency={currency}
-      />
-    );
+  let body = (
+    <>
+      <TransactionStep1 handleChange={handleChange} value={asset} />
+      {asset && (
+        <TransactionStep2
+          symbol={symbol}
+          setSymbol={setSymbol}
+          results={results}
+          setResults={setResults}
+          setCurrency={setCurrency}
+          asset={asset}
+          setProduct={setProduct}
+          product={product}
+        />
+      )}
+      {symbol && (
+        <TransactionStep3
+          date={date}
+          setDate={setDate}
+          price={price}
+          setPrice={setPrice}
+          qty={qty}
+          setQty={setQty}
+          commission={commission}
+          setCommission={setCommission}
+          comment={comment}
+          setComment={setComment}
+          currency={currency}
+          asset={asset}
+        />
+      )}
+    </>
+  );
 
   return (
     <Grid container sx={{ justifyContent: "center" }}>
@@ -132,7 +113,7 @@ export const Transaction = () => {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            minHeight: 350,
+            minHeight: 250,
           }}
         >
           <Typography
@@ -144,26 +125,7 @@ export const Transaction = () => {
           >
             Add transaction
           </Typography>
-
-          {step > 1 && (
-            <>
-              <Typography
-                color="primary.main"
-                variant="body2"
-                element="h3"
-                sx={{ ml: 2, mb: 1 }}
-              >
-                {checked ? "Buy" : "Sell"}
-                {" > "} {asset}
-                {step > 2 && (
-                  <>
-                    {" > "} {symbol}
-                  </>
-                )}
-              </Typography>
-            </>
-          )}
-          <Divider />
+          <Divider sx={{ mb: 2 }} />
           {body}
           <Box sx={{ flexGrow: 2 }} />
           <Box
@@ -175,37 +137,17 @@ export const Transaction = () => {
               pr: 2,
             }}
           >
-            <Button
-              sx={{ visibility: step === 1 ? "hidden" : "" }}
-              variant="contained"
-              disableElevation
-              onClick={handleBack}
-            >
-              Back
-            </Button>
-            {step === 3 ? (
+            {asset && symbol && date && qty > 0 && price > 0 && (
               <LoadingButton
                 disabled={price > 0 && qty > 0 ? false : true}
                 variant="contained"
                 disableElevation
                 onClick={handleAdd}
                 loading={isLoading}
+                fullWidth
               >
                 Add Transaction
               </LoadingButton>
-            ) : (
-              <Button
-                disabled={
-                  (step === 1 && asset.length < 1) || (step === 2 && !symbol)
-                    ? true
-                    : false
-                }
-                disableElevation
-                variant="contained"
-                onClick={handleNext}
-              >
-                Next
-              </Button>
             )}
           </Box>
           <Snackbar

@@ -16,7 +16,7 @@ export const TransactionStep2 = ({
   return (
     <FormControl component="fieldset" sx={{ mt: 2, ml: 2 }}>
       <FormLabel component="legend" sx={{ pb: 3 }}>
-        3. Name
+        2. Search
       </FormLabel>
       {asset === "stocks" ? (
         <SearchStock
