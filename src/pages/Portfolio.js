@@ -38,13 +38,13 @@ export const Portfolio = () => {
       columnSpacing={{ sm: 1, md: 2, lg: 3 }}
     >
       {/* Status */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={6} md={3}>
         <Paper
           sx={{
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 240,
+            height: 220,
           }}
         >
           <Status balance={balance} profitLoss={profitLoss} />
@@ -57,7 +57,7 @@ export const Portfolio = () => {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 240,
+            height: 220,
           }}
         >
           {/* <PieChartWallet assets={assets} /> */}
@@ -85,20 +85,6 @@ export const Portfolio = () => {
           </Typography>
         </Paper>
       </Grid>
-
-      {/* Table of assets */}
-      <Grid item xs={12} md={6}>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            height: 400,
-          }}
-        >
-          <TableOfAssets isLoading={isLoading} assets={assets} />
-        </Paper>
-      </Grid>
       {/* Value over Time Chart */}
       <Grid item xs={12} md={6}>
         <Paper
@@ -119,6 +105,19 @@ export const Portfolio = () => {
           >
             Value over Time Chart
           </Typography>
+        </Paper>
+      </Grid>
+      {/* Table of assets */}
+      <Grid item xs={12} md={12}>
+        <Paper
+          sx={{
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            height: 580,
+          }}
+        >
+          <TableOfAssets isLoading={isLoading} assets={assets} />
         </Paper>
       </Grid>
     </Grid>
