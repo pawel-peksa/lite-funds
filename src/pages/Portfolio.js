@@ -7,7 +7,6 @@ import { Status } from "../components/Status";
 import { calculateBalance } from "../functions/calculateBalance";
 import { calculateProfitLoss } from "../functions/calculateProfitLoss";
 import { PieChartWallet } from "../components/PieChartWallet";
-import { getCryptoHistory } from "../api/cryptoApi2";
 import { yFinanceFetchStock } from "../api/yFinance";
 
 export const Portfolio = () => {
@@ -60,7 +59,7 @@ export const Portfolio = () => {
             height: 220,
           }}
         >
-          {/* <PieChartWallet assets={assets} /> */}
+          <PieChartWallet assets={assets} />
         </Paper>
       </Grid>
       {/* Free Slot */}
