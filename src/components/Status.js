@@ -21,7 +21,7 @@ export const Status = ({ balance, profitLoss }) => {
         component="h2"
         color="primary.main"
         align="center"
-        sx={{ fontSize: 30, mt: 3 }}
+        sx={{ fontSize: 30, mt: 5 }}
       >
         <NumberFormat
           thousandSeparator={true}
@@ -31,7 +31,7 @@ export const Status = ({ balance, profitLoss }) => {
         />
       </Typography>
       <Typography
-        sx={{ fontSize: 16, mt: -1 }}
+        sx={{ fontSize: 16 }}
         variant="h5"
         component="p"
         color="secondary.main"
@@ -45,7 +45,7 @@ export const Status = ({ balance, profitLoss }) => {
         component="h3"
         color="primary.main"
         align="center"
-        sx={{ fontSize: 22, mt: 3 }}
+        sx={{ fontSize: 22, mt: 3.5 }}
       >
         <span style={{ color: showProfitLoss > 0 ? "teal" : "red" }}>
           {showProfitLoss > 0 ? "+" : "-"}
@@ -54,7 +54,7 @@ export const Status = ({ balance, profitLoss }) => {
         </span>
       </Typography>
       <Typography
-        sx={{ fontSize: 16 }}
+        sx={{ fontSize: 16, mt: 0.5 }}
         variant="h5"
         component="p"
         color="secondary.main"

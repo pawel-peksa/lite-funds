@@ -108,8 +108,8 @@ export const PieChartWallet = ({ assets }) => {
 
   return (
     <>
-      <ResponsiveContainer width="100%" height="75%">
-        <PieChart width={400} height={200}>
+      <ResponsiveContainer width="100%" height="72%">
+        <PieChart width={400} height={400}>
           <Pie
             activeIndex={activeIndex}
             activeShape={renderActiveShape}
