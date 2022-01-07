@@ -1,5 +1,5 @@
 import { getAssets } from "../db/getAssets";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "../auth/UserProvider";
 import { useTheme } from "@mui/material/styles";
@@ -10,6 +10,7 @@ import { calculateProfitLoss } from "../functions/calculateProfitLoss";
 import { PieChartWallet } from "../components/PieChartWallet";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { BarChartWallet } from "../components/BarChartWallet";
+import { ValueOverTime } from "../components/ValueOverTime";
 
 export const Portfolio = () => {
   const { user } = useSession();
@@ -74,16 +75,7 @@ export const Portfolio = () => {
                 height: 392,
               }}
             >
-              <Typography
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100%",
-                }}
-              >
-                Value over Time Chart
-              </Typography>
+              <ValueOverTime />
             </Paper>
           </Grid>
         </Grid>

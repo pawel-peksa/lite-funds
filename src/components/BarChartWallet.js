@@ -103,7 +103,7 @@ export const BarChartWallet = ({ assets }) => {
           color={dataKey === "pl" ? "primary" : "secondary"}
           onClick={() => setDataKey("pl")}
         >
-          performance
+          profit / loss
         </Button>
       </Box>
     </>
