@@ -13,7 +13,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import getSymbolFromCurrency from "currency-symbol-map";
 
 const CustomTooltip = ({ active, payload, dataKey }) => {
-  if (active) {
+  if (active && payload) {
     return (
       <Paper elevation={14} sx={{ p: 2, minWidth: 120 }}>
         <Typography variant="body2" color="secondary.main" align="center">
@@ -29,9 +29,9 @@ const CustomTooltip = ({ active, payload, dataKey }) => {
         >
           {dataKey === "value"
             ? payload[0].value + getSymbolFromCurrency("eur")
-            : `${payload[0].payload.pl}${getSymbolFromCurrency(
-                "eur"
-              )} (${payload[0].payload.plp.toFixed(2)}%)`}
+            : `${payload[0].payload.pl}${getSymbolFromCurrency("eur")} (${(
+                payload[0].payload.plp * 100
+              ).toFixed(1)}%)`}
         </Typography>
       </Paper>
     );
@@ -43,7 +43,7 @@ const CustomBar = (props) => {
   const { dataKey, fill, pl } = props;
   let color = fill;
   if (dataKey === "pl" && pl < 0) {
-    color = "red";
+    color = "darkred";
   }
 
   return <Rectangle {...props} fill={color} />;
@@ -85,7 +85,10 @@ export const BarChartWallet = ({ assets }) => {
           <Bar
             shape={<CustomBar dataKey={dataKey} />}
             dataKey={dataKey}
-            fill="#607d8b"
+            // fill="#91d4dd"
+            fill="#61bf9a"
+            // fill="#4a8da7"
+            // fill="#607d8b"
           />
         </BarChart>
       </ResponsiveContainer>
