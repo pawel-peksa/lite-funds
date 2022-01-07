@@ -16,7 +16,7 @@ export const getCryptoValue = async (symbol, currency, setPrice) => {
   let price;
   if (currency && symbol) {
     cur = currency.toLowerCase();
-    price = resp[symbol][cur];
+    price = resp?.[symbol]?.[cur];
   }
   if (typeof setPrice === "function") {
     setPrice(price);
