@@ -41,6 +41,7 @@ export const History = () => {
       headerName: "Date",
       minWidth: 80,
       flex: 0.1,
+      //TODO fix sorting by date
     },
     {
       field: "symbol",

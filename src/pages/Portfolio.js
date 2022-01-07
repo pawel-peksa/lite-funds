@@ -1,5 +1,5 @@
 import { getAssets } from "../db/getAssets";
-import { Grid, Paper, Typography, Button } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "../auth/UserProvider";
 import { useTheme } from "@mui/material/styles";
@@ -8,8 +8,8 @@ import { Status } from "../components/Status";
 import { calculateBalance } from "../functions/calculateBalance";
 import { calculateProfitLoss } from "../functions/calculateProfitLoss";
 import { PieChartWallet } from "../components/PieChartWallet";
-import { yFinanceFetchStock } from "../api/yFinance";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { BarChartWallet } from "../components/BarChartWallet";
 
 export const Portfolio = () => {
   const { user } = useSession();
@@ -29,14 +29,6 @@ export const Portfolio = () => {
     setBalance(calculateBalance(assets));
     setProfitLoss(calculateProfitLoss(assets));
   }, [assets]);
-
-  const handleBtnClick = () => {
-    // yFinance();
-    yFinanceFetchStock("IBM", undefined, undefined, undefined, "chuj");
-  };
-
-  // rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }}
-  // columnSpacing={{ sm: 1, md: 2, lg: 3 }}
 
   return (
     <Grid container spacing={{ xs: 1 }}>
@@ -104,16 +96,7 @@ export const Portfolio = () => {
               height: 650,
             }}
           >
-            <Typography
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-              }}
-            >
-              <Button onClick={handleBtnClick}>Check APi</Button>
-            </Typography>
+            <BarChartWallet assets={assets} />
           </Paper>
         </Grid>
       </Grid>

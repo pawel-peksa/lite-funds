@@ -81,8 +81,6 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
   let uniqueSymbolsStocks = [
     ...new Set(symbolsStocks.map((transaction) => transaction.symbol)),
   ];
-  console.log(uniqueSymbolsStocks);
-
   for (const symbol of uniqueSymbolsStocks) {
     let price = await getStockValue(symbol);
     let transactions = arr.filter(
