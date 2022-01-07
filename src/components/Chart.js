@@ -74,7 +74,14 @@ export const Chart = ({ asset }) => {
       undefined,
       setMessage
     );
-    yFinanceQuote(asset.symbol, setCurrentValue, setCurrentVolume, setCurrency);
+    yFinanceQuote(
+      asset.symbol,
+      setCurrentValue,
+      setCurrentVolume,
+      undefined,
+      undefined,
+      setCurrency
+    );
   }, [asset, interval]);
 
   return (

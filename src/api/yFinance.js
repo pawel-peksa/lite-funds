@@ -70,10 +70,12 @@ export const yFinanceQuote = async (
     setFetchingStockInfo(true);
   }
   const result = await yahooFinance.quote(symbol);
-  setShowCurrency(result.currency);
-  setCurrency(result.currency);
-  setCurrentValue(result.regularMarketPrice);
-  setCurrentVolume(result.regularMarketVolume);
+  if (typeof setShowCurrency === "function") setShowCurrency(result.currency);
+  if (typeof setCurrency === "function") setCurrency(result.currency);
+  if (typeof setCurrentValue === "function")
+    setCurrentValue(result.regularMarketPrice);
+  if (typeof setCurrentVolume === "function")
+    setCurrentVolume(result.regularMarketVolume);
   if (setFetchingStockInfo) {
     setFetchingStockInfo(false);
   }
