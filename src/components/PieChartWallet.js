@@ -78,16 +78,14 @@ const renderActiveShape = (props) => {
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-export const PieChartWallet = ({ assets }) => {
+export const PieChartWallet = ({ stocks, crypto }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  let stocksBalance = assets
-    .filter((asset) => asset.type === "stocks")
+  let stocksBalance = stocks
     .map((stock) => stock.value)
     .reduce((a, b) => a + b, 0);
 
-  let cryptoBalance = assets
-    .filter((asset) => asset.type === "crypto")
+  let cryptoBalance = crypto
     .map((crypto) => crypto.value)
     .reduce((a, b) => a + b, 0);
 

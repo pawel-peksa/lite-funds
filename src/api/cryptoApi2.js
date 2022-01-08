@@ -52,33 +52,34 @@ export const getCryptoHistory = async (
   setData,
   setPerformance,
   setSnackbar,
-  setMessage
+  setMessage,
+  append = false
 ) => {
   let limit;
   switch (interval) {
     case "1M": {
       limit = "31";
-      setMessage("1M change: ");
+      if (typeof setMessage === "function") setMessage("1M change: ");
       break;
     }
     case "3M": {
       limit = "92";
-      setMessage("3M change: ");
+      if (typeof setMessage === "function") setMessage("3M change: ");
       break;
     }
     case "1Y": {
       limit = "365";
-      setMessage("1Y change: ");
+      if (typeof setMessage === "function") setMessage("1Y change: ");
       break;
     }
     default: {
       limit = "max";
-      setMessage("All time change: ");
+      if (typeof setMessage === "function") setMessage("All time change: ");
       break;
     }
   }
 
-  setSnackbar(false);
+  if (typeof setSnackbar === "function") setSnackbar(false);
   try {
     let data = await CoinGeckoClient.coins.fetchMarketChart(from, {
       days: limit,
@@ -91,15 +92,19 @@ export const getCryptoHistory = async (
         value: pair[1],
       };
     });
-    setData(plotData.reverse());
 
     let performance = calculatePerformance(
       plotData.at(-1).value,
       plotData[0].value
     );
-    setPerformance(performance);
+    if (typeof setPerformance === "function") setPerformance(performance);
+    if (append) {
+      return plotData.reverse();
+    } else {
+      setData(plotData.reverse());
+    }
   } catch (error) {
     console.log(error);
-    setSnackbar(true);
+    if (typeof setSnackbar === "function") setSnackbar(true);
   }
 };

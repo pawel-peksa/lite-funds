@@ -10,7 +10,7 @@ import { calculateProfitLoss } from "../functions/calculateProfitLoss";
 import { PieChartWallet } from "../components/PieChartWallet";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { BarChartWallet } from "../components/BarChartWallet";
-import { ValueOverTime } from "../components/ValueOverTime";
+import { ChartOverTime } from "../components/ChartOverTime";
 
 export const Portfolio = () => {
   const { user } = useSession();
@@ -20,6 +20,8 @@ export const Portfolio = () => {
   const [profitLoss, setProfitLoss] = useState(0);
   const theme = useTheme();
   const padding = useMediaQuery(theme.breakpoints.up("md"));
+  const [stocks, setStocks] = useState([]);
+  const [crypto, setCrypto] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -28,7 +30,12 @@ export const Portfolio = () => {
 
   useEffect(() => {
     setBalance(calculateBalance(assets));
+    console.log(assets);
     setProfitLoss(calculateProfitLoss(assets));
+    let filteredStocks = assets.filter((asset) => asset.type === "stocks");
+    let filteredCrypto = assets.filter((asset) => asset.type === "crypto");
+    setStocks(filteredStocks);
+    setCrypto(filteredCrypto);
   }, [assets]);
 
   return (
@@ -64,7 +71,7 @@ export const Portfolio = () => {
                 height: 250,
               }}
             >
-              <PieChartWallet assets={assets} />
+              <PieChartWallet stocks={stocks} crypto={crypto} />
             </Paper>
           </Grid>
           {/* Value over Time Chart */}
@@ -75,7 +82,7 @@ export const Portfolio = () => {
                 height: 392,
               }}
             >
-              <ValueOverTime />
+              <ChartOverTime stocks={stocks} crypto={crypto} />
             </Paper>
           </Grid>
         </Grid>

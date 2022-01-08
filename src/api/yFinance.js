@@ -9,9 +9,10 @@ export const yFinanceFetchStock = async (
   setIsLoading,
   interval,
   setSnackbar,
-  setMessage
+  setMessage,
+  append = false
 ) => {
-  setIsLoading(true);
+  if (typeof setIsLoading === "function") setIsLoading(true);
 
   let today = new Date();
   let queryOptions = { period1: "2021-02-01", interval: "1d" };
@@ -19,27 +20,27 @@ export const yFinanceFetchStock = async (
   switch (interval) {
     case "1M": {
       queryOptions = { period1: subDays(today, 30), interval: "1d" };
-      setMessage("1M change: ");
+      if (typeof setMessage === "function") setMessage("1M change: ");
       break;
     }
     case "3M": {
       queryOptions = { period1: subDays(today, 90), interval: "1d" };
-      setMessage("3M change: ");
+      if (typeof setMessage === "function") setMessage("3M change: ");
       break;
     }
     case "1Y": {
       queryOptions = { period1: subDays(today, 365), interval: "1wk" };
-      setMessage("1Y change: ");
+      if (typeof setMessage === "function") setMessage("1Y change: ");
       break;
     }
     case "5Y": {
       queryOptions = { period1: subDays(today, 1826), interval: "1mo" };
-      setMessage("5Y change: ");
+      if (typeof setMessage === "function") setMessage("5Y change: ");
       break;
     }
     default: {
       queryOptions = { period1: subDays(today, 20000), interval: "1mo" };
-      setMessage("All time change: ");
+      if (typeof setMessage === "function") setMessage("All time change: ");
       break;
     }
   }
@@ -52,10 +53,15 @@ export const yFinanceFetchStock = async (
     };
   });
   toPlot = toPlot.reverse();
-  setData(toPlot);
+
   let performance = calculatePerformance(toPlot.at(-1).value, toPlot[0].value);
-  setPerformance(performance);
-  setIsLoading(false);
+  if (typeof setPerformance === "function") setPerformance(performance);
+  if (typeof setIsLoading === "function") setIsLoading(false);
+  if (append) {
+    return toPlot;
+  } else {
+    setData(toPlot);
+  }
 };
 
 export const yFinanceQuote = async (
