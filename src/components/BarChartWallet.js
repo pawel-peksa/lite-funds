@@ -60,7 +60,7 @@ export const BarChartWallet = ({ assets }) => {
 
   return (
     <>
-      <ResponsiveContainer width="100%" height="93%">
+      <ResponsiveContainer width="100%" height="94%">
         <BarChart
           layout="vertical"
           data={dataKey === "value" ? value : pl}

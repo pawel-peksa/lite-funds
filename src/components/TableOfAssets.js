@@ -105,7 +105,7 @@ export const TableOfAssets = ({ assets, isLoading }) => {
         gutterBottom
         sx={{ mt: 2, fontSize: 30, mb: 2 }}
       >
-        Your assets:
+        Your asset details:
       </Typography>
 
       {isLoading ? (
