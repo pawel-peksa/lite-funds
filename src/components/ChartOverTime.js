@@ -7,139 +7,132 @@ import {
   // Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography, Paper } from "@mui/material";
 import { useState, useEffect } from "react";
-// import { getCryptoHistory } from "../api/cryptoApi2";
-import { yFinanceFetchStock } from "../api/yFinance";
-import { parseISO, format, differenceInCalendarDays, addDays } from "date-fns";
+import getSymbolFromCurrency from "currency-symbol-map";
+import { parseISO, format } from "date-fns";
+import { stockOverTime } from "../functions/stockOverTime";
+import { cryptoOverTime } from "../functions/cryptoOverTime";
+
+const CustomTooltip = ({ active, payload, label, currency }) => {
+  if (active) {
+    let data = label;
+    if (label !== 0 && label !== "auto") {
+      data = format(parseISO(label), "eeee, d MMM, yyyy");
+    }
+
+    return (
+      <Paper elevation={14} sx={{ p: 2 }}>
+        <Typography variant="body2">{data}</Typography>
+        <Typography align="center" variant="body1" color="primary.main">
+          {payload && payload[0].value.toFixed(2)}
+          {payload && getSymbolFromCurrency("eur")}
+        </Typography>
+      </Paper>
+    );
+  }
+  return null;
+};
 
 export const ChartOverTime = ({ stocks, crypto }) => {
-  const [interval, setInterval] = useState("3M");
-  const [plot, setPlot] = useState("value");
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [cryptoData, setCryptoData] = useState([]);
+  const [interval, setInterval] = useState("3M"); //for future improvement -> plot difference time periods on value over time chart
+  const [plot, setPlot] = useState("all assets");
+  const [cryptoData, setCryptoData] = useState([]);
   const [stockData, setStockData] = useState([]);
   const [data, setData] = useState([]);
 
-  //prepare stock data to plot
   useEffect(() => {
-    let stockToAppend;
-    stocks.forEach(async (stock) => {
-      stockToAppend = await yFinanceFetchStock(
-        stock.symbol,
-        undefined,
-        undefined,
-        undefined,
-        interval,
-        undefined,
-        undefined,
-        true
-      );
-      //create an array with all days between fetched range
-      let allDays = [];
-      let start = stockToAppend.at(-1).date;
-      let end = stockToAppend[0].date;
-      let days = differenceInCalendarDays(parseISO(end), parseISO(start));
+    //get stock prices data to plot
+    stockOverTime(stocks, interval, setStockData);
+    //get crypto prices data to plot
+    cryptoOverTime(crypto, interval, setCryptoData);
+  }, [crypto, stocks, interval]);
 
-      for (let i = 0; i <= days; i++) {
-        let date = format(addDays(parseISO(start), i), "yyyy-MM-dd");
-        let value = stockToAppend.find((day) => day.date === date);
-        let day = {
-          date,
-          value: value?.value,
-        };
-        allDays.push(day);
+  useEffect(() => {
+    // check if all history data fetched
+    if (
+      //TODO handle corner point when user have only one type of assets crypto or stocks
+      stockData.length > 0 &&
+      stockData.length === stocks.length &&
+      cryptoData.length > 0 &&
+      cryptoData.length === crypto.length
+    ) {
+      let cryptoSum = [];
+      let stockSum = [];
+      if (typeof stockData[0].allDaysNoVoids !== "undefined") {
+        stockData[0].allDaysNoVoids.forEach((day) => {
+          //get array of stock prices for each day
+          let stockPricesArray = stockData.map((stock) => {
+            let dayOfInterest = stock.allDaysNoVoids.find(
+              (obj) => obj.date === day.date
+            );
+            return dayOfInterest.value;
+          });
+          let stockValueSum = stockPricesArray.reduce((a, b) => a + b);
+          let stockDaySum = {
+            date: day.date,
+            value: stockValueSum,
+          };
+
+          //get array of crypto prices for each day
+          let cryptoPricesArray = cryptoData.map((crypto) => {
+            let dayOfInterest = crypto.allDays.find(
+              (obj) => obj.date === day.date
+            );
+            return dayOfInterest.value;
+          });
+          let cryptoValueSum = cryptoPricesArray.reduce((a, b) => a + b);
+          let cryptoDaySum = {
+            date: day.date,
+            value: isNaN(cryptoValueSum) ? null : cryptoValueSum,
+          };
+
+          cryptoSum.push(cryptoDaySum);
+          stockSum.push(stockDaySum);
+        });
       }
 
-      let newObj = {
-        name: stock.name,
-        fetched: stockToAppend,
-        allDays,
-      };
-      setStockData((prev) => [...prev, newObj]);
-    });
-  }, [stocks, interval]);
-
-  useEffect(() => {
-    if (stockData.length > 0 && stockData.length === stocks.length) {
-      console.log(stockData);
-      let sum = [];
-
-      stockData[0].allDays.forEach((day) => {
-        let pricesArray = stockData.map((stock) => {
-          let dayOfInterest = stock.allDays.find(
-            (obj) => obj.date === day.date
-          );
-          return dayOfInterest.value;
-        });
-        let valueSum = pricesArray.reduce((a, b) => a + b);
-        let daySum = {
-          date: day.date,
-          value: isNaN(valueSum) ? null : valueSum,
-        };
-        sum.push(daySum);
-      });
-      console.log(sum);
-      setData(sum);
+      let all = Object.values(
+        [...cryptoSum, ...stockSum].reduce((a, { date, value }) => {
+          a[date] = a[date] || { date, value: 0 };
+          a[date].value = a[date].value + value;
+          return a;
+        }, {})
+      );
+      if (plot === "all assets") setData(() => [...all]);
+      else if (plot === "cryptocurrency") setData(() => [...cryptoSum]);
+      else if (plot === "stocks") setData(() => [...stockSum]);
     }
-  }, [stockData, stocks]);
+  }, [stockData, cryptoData, stocks, crypto, plot]);
 
-  const handlePlotValue = async () => {
-    setPlot("value");
+  const handlePlotAllAssets = async () => {
+    setPlot("all assets");
   };
 
-  const handlePlotProfit = () => {
-    setPlot("profit");
+  const handlePlotCryptocurrency = () => {
+    setPlot("cryptocurrency");
+  };
+  const handlePlotStocks = () => {
+    setPlot("stocks");
   };
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          position: "relative",
-          pb: 2,
-        }}
+      <Typography
+        variant="h5"
+        component="p"
+        color="secondary"
+        align="center"
+        sx={{ fontSize: 16, mb: -2, mt: 1 }}
       >
-        <Box sx={{ zIndex: 100, position: "absolute", right: 0, top: 1 }}>
-          <Button
-            color={interval === "3M" ? "primary" : "secondary"}
-            onClick={() => setInterval(() => "3M")}
-            sx={{ minWidth: "40px" }}
-          >
-            3M
-          </Button>
-          <Button
-            color={interval === "1Y" ? "primary" : "secondary"}
-            onClick={() => setInterval(() => "1Y")}
-            sx={{ minWidth: "40px" }}
-          >
-            1Y
-          </Button>
-          <Button
-            color={interval === "5Y" ? "primary" : "secondary"}
-            onClick={() => setInterval(() => "5Y")}
-            sx={{ minWidth: "40px" }}
-          >
-            5Y
-          </Button>
-          <Button
-            color={interval === "ALL" ? "primary" : "secondary"}
-            onClick={() => setInterval(() => "ALL")}
-            sx={{ minWidth: "40px" }}
-          >
-            All
-          </Button>
-        </Box>
-      </Box>
+        last quarter balance
+      </Typography>
 
       <ResponsiveContainer width="100%" height="82%" margin={{ top: 5 }}>
         <LineChart
           width={500}
           height={250}
-          data={data}
+          data={[...data]}
           margin={{
             top: 5,
             right: 30,
@@ -170,9 +163,11 @@ export const ChartOverTime = ({ stocks, crypto }) => {
               // (dataMax) => dataMax + dataMax / 10,
             ]}
             tickCount={8}
-            tickFormatter={(number) => `${number.toFixed(2)}`}
+            tickFormatter={(number) =>
+              `${getSymbolFromCurrency("eur")}${number}`
+            }
           />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           {/* <Legend /> */}
           <Line
             connectNulls
@@ -192,18 +187,25 @@ export const ChartOverTime = ({ stocks, crypto }) => {
         }}
       >
         <Button
-          color={plot === "value" ? "primary" : "secondary"}
-          onClick={handlePlotValue}
+          color={plot === "all assets" ? "primary" : "secondary"}
+          onClick={handlePlotAllAssets}
           sx={{ minWidth: "40px" }}
         >
-          value over time
+          all assets
         </Button>
         <Button
-          color={plot === "profit" ? "primary" : "secondary"}
-          onClick={handlePlotProfit}
+          color={plot === "cryptocurrency" ? "primary" : "secondary"}
+          onClick={handlePlotCryptocurrency}
           sx={{ minWidth: "40px" }}
         >
-          profit over time
+          cryptocurrency
+        </Button>
+        <Button
+          color={plot === "stocks" ? "primary" : "secondary"}
+          onClick={handlePlotStocks}
+          sx={{ minWidth: "40px" }}
+        >
+          stocks
         </Button>
       </Box>
     </>
