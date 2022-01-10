@@ -5,6 +5,7 @@ import { useSession } from "../auth/UserProvider";
 import { getUserTransactions } from "../db/getUserTransactions";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { deleteTransaction } from "../db/deleteTransaction";
+import { parse, getUnixTime } from "date-fns";
 
 export const History = () => {
   const { user } = useSession();
@@ -41,7 +42,11 @@ export const History = () => {
       headerName: "Date",
       minWidth: 80,
       flex: 0.1,
-      //TODO fix sorting by date
+      sortComparator: (v1, v2) => {
+        let a = getUnixTime(parse(v1, "dd-MM-yyyy", new Date()));
+        let b = getUnixTime(parse(v2, "dd-MM-yyyy", new Date()));
+        return a - b;
+      },
     },
     {
       field: "symbol",
