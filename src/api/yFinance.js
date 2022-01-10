@@ -85,6 +85,7 @@ export const yFinanceQuote = async (
   if (setFetchingStockInfo) {
     setFetchingStockInfo(false);
   }
+  return result.regularMarketPrice;
 };
 
 export const yFinanceSearchEndpoint = async (

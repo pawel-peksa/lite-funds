@@ -9,7 +9,6 @@
     "@mui/lab": "^5.0.0-alpha.60",
     "@mui/material": "^5.2.3",
     "@mui/x-data-grid": "^5.2.0",
-    "binance-api-node": "^0.11.28",
     "coingecko-api": "^1.0.10",
     "crypto-symbol": "^3.2.0",
     "currency-symbol-map": "^5.0.1",
@@ -27,7 +26,6 @@
     "react-spinners": "^0.11.0",
     "recharts": "^2.1.8",
     "xirr": "^1.1.0",
-    "yahoo-finance": "^0.3.7",
     "yahoo-finance2": "^2.1.0"
   },
   "scripts": {

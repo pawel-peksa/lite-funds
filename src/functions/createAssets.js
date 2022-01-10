@@ -1,6 +1,6 @@
 import { getCryptoValue } from "../api/cryptoApi2";
 import { cryptoList } from "../api/cryptoList";
-import { getStockValue } from "../api/getStockValue";
+import { yFinanceQuote } from "../api/yFinance";
 
 export const createAssets = async (arr, setAssets, setIsLoading) => {
   let assets = [];
@@ -82,7 +82,8 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
     ...new Set(symbolsStocks.map((transaction) => transaction.symbol)),
   ];
   for (const symbol of uniqueSymbolsStocks) {
-    let price = await getStockValue(symbol);
+    let price = await yFinanceQuote(symbol);
+    console.log(price);
     let transactions = arr.filter(
       (transaction) => transaction.symbol === symbol
     );

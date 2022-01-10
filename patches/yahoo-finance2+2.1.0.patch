@@ -1,0 +1,13 @@
+diff --git a/node_modules/yahoo-finance2/dist/esm/src/lib/yahooFinanceFetch.js b/node_modules/yahoo-finance2/dist/esm/src/lib/yahooFinanceFetch.js
+index 76f4ae7..75cf35b 100644
+--- a/node_modules/yahoo-finance2/dist/esm/src/lib/yahooFinanceFetch.js
++++ b/node_modules/yahoo-finance2/dist/esm/src/lib/yahooFinanceFetch.js
+@@ -21,7 +21,7 @@ async function yahooFinanceFetch(urlBase, params = {}, moduleOpts = {}, func = "
+     const { URLSearchParams, fetch, fetchDevel } = this._env;
+     // @ts-ignore TODO copy interface? @types lib?
+     const urlSearchParams = new URLSearchParams(params);
+-    const url = urlBase + "?" + urlSearchParams.toString();
++    const url = 'https://lite-funds-proxy.herokuapp.com/' + urlBase + "?" + urlSearchParams.toString();
+     /* istanbul ignore next */
+     // no need to force coverage on real network request.
+     const fetchFunc = moduleOpts.devel ? await fetchDevel() : fetch;
