@@ -94,8 +94,8 @@ export const getCryptoHistory = async (
     });
 
     let performance = calculatePerformance(
-      plotData.at(-1).value,
-      plotData[0].value
+      plotData[0].value,
+      plotData.at(-1).value
     );
     if (typeof setPerformance === "function") setPerformance(performance);
     if (append) {
