@@ -10,7 +10,6 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setSession({ user, loading: false });
-      console.log("user status changed:", user);
     });
 
     return () => unsubscribe();
