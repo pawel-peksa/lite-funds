@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/lite-funds/static/css/main.646a8e4a.chunk.css",
-    "main.js": "/lite-funds/static/js/main.39959bce.chunk.js",
-    "main.js.map": "/lite-funds/static/js/main.39959bce.chunk.js.map",
+    "main.js": "/lite-funds/static/js/main.cebcde35.chunk.js",
+    "main.js.map": "/lite-funds/static/js/main.cebcde35.chunk.js.map",
     "runtime-main.js": "/lite-funds/static/js/runtime-main.4c879b01.js",
     "runtime-main.js.map": "/lite-funds/static/js/runtime-main.4c879b01.js.map",
-    "static/js/2.caa640fb.chunk.js": "/lite-funds/static/js/2.caa640fb.chunk.js",
-    "static/js/2.caa640fb.chunk.js.map": "/lite-funds/static/js/2.caa640fb.chunk.js.map",
+    "static/js/2.dd8cbb8a.chunk.js": "/lite-funds/static/js/2.dd8cbb8a.chunk.js",
+    "static/js/2.dd8cbb8a.chunk.js.map": "/lite-funds/static/js/2.dd8cbb8a.chunk.js.map",
     "index.html": "/lite-funds/index.html",
     "static/css/main.646a8e4a.chunk.css.map": "/lite-funds/static/css/main.646a8e4a.chunk.css.map",
-    "static/js/2.caa640fb.chunk.js.LICENSE.txt": "/lite-funds/static/js/2.caa640fb.chunk.js.LICENSE.txt"
+    "static/js/2.dd8cbb8a.chunk.js.LICENSE.txt": "/lite-funds/static/js/2.dd8cbb8a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4c879b01.js",
-    "static/js/2.caa640fb.chunk.js",
+    "static/js/2.dd8cbb8a.chunk.js",
     "static/css/main.646a8e4a.chunk.css",
-    "static/js/main.39959bce.chunk.js"
+    "static/js/main.cebcde35.chunk.js"
   ]
 }
