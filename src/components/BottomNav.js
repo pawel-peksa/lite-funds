@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import HistoryIcon from "@mui/icons-material/History";

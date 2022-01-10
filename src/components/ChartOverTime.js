@@ -4,7 +4,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  // Legend,
   ResponsiveContainer,
 } from "recharts";
 import { Box, Button, Typography, Paper } from "@mui/material";
