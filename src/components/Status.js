@@ -48,7 +48,7 @@ export const Status = ({ balance, profitLoss }) => {
         sx={{ fontSize: 22, mt: 3.5 }}
       >
         <span style={{ color: showProfitLoss > 0 ? "teal" : "red" }}>
-          {showProfitLoss > 0 ? "+" : "-"}
+          {showProfitLoss > 0 ? "+" : ""}
           {showProfitLoss + getSymbolFromCurrency("EUR")}{" "}
           <span style={{ fontSize: 16 }}>({percents})</span>
         </span>
