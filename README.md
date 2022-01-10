@@ -2,6 +2,8 @@
 
 Simple and lightweight web app to help you keep track of all your investments in one place.
 
+https://pawel-peksa.github.io/lite-funds/
+
 ![image](https://user-images.githubusercontent.com/25892133/148834626-6c579c0c-811e-4448-8bea-6c859cac0758.png)
 
 ### Created by pawel-peksa
