@@ -27,7 +27,6 @@ export const SignUp = () => {
   const [userCreated, setUserCreated] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("userCreated === true", userCreated === true);
     if (userCreated === true) {
       const id = setTimeout(() => {
         navigate("/dashboard");
