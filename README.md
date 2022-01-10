@@ -1,6 +1,6 @@
 # Lite Funds
 
-Simple and lightweight web app to help you keep track of all your investments in one place.
+A simple and lightweight web app to help you keep track of all your investments in one place.
 
 https://pawel-peksa.github.io/lite-funds/
 
@@ -11,9 +11,9 @@ https://pawel-peksa.github.io/lite-funds/
 This is my first project (from idea to deployment) in JavaScript & React.
 It has three main goals:
 
-- make people (and mine) live easier to keep track of their investments
-- show my skills in JavaScript and React
-- and last but not least - have some fun during coding ;)
+- to help people keep track of all of their investments 
+- to show my skills in JavaScript and React
+- and last but not least - to have some fun during coding ;)
 
 Tools, technologies and bigger libraries:
 - Firebase Authentication 
@@ -25,7 +25,7 @@ Tools, technologies and bigger libraries:
 To take care of fetching data I used:
 - coingeko for cryptocurrencies
 - yahoo-finance2 for stock info => Here I had to modify it a little by implementing proxy-server set up on heroku to take care of CORS.
-  Modification of the package will work on every copy thanks to patch-package. If somehow patch will not be installed out of the box run npm i patch-package.
+  Modification of the package will work on every copy thanks to patch-package. If somehow the patch won't be installed out of the box, run npm i patch-package.
   
 
 I would love to get some feedback from you!
