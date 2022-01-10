@@ -26,6 +26,7 @@ export const SignInSignUpContainer = () => {
         container
         component="main"
         alignItems="center"
+        flexDirection="column"
         justify="center"
         sx={{ minHeight: "100vh", backgroundColor: "primary.main" }}
       >
@@ -34,9 +35,9 @@ export const SignInSignUpContainer = () => {
           onClick={handleDemoAccount}
           sx={{
             background: "white",
-            position: "absolute",
-            top: 10,
-            right: 10,
+            m: 1,
+            ml: 2,
+            alignSelf: "flex-end",
             "&:hover": {
               color: "white",
             },
