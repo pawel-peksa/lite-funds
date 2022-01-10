@@ -3,7 +3,12 @@ import { createAssets } from "../functions/createAssets";
 
 const db = getFirestore();
 
-export const getAssets = async (user, setAssets, setIsLoading) => {
+export const getAssets = async (
+  user,
+  setAssets,
+  setIsLoading,
+  setEmptyAssets
+) => {
   const transactionsRef = collection(db, "users", user.uid, "transactions");
   const querySnapshot = await getDocs(transactionsRef);
 
@@ -13,5 +18,12 @@ export const getAssets = async (user, setAssets, setIsLoading) => {
     let transaction = doc.data();
     transactions.push(transaction);
   });
-  createAssets(transactions, setAssets, setIsLoading);
+
+  if (transactions.length === 0) {
+    setEmptyAssets(true);
+    setIsLoading(false);
+  } else {
+    createAssets(transactions, setAssets, setIsLoading);
+    setEmptyAssets(false);
+  }
 };

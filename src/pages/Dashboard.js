@@ -49,7 +49,7 @@ export const Dashboard = () => {
             pb: 3,
           }}
         >
-          {show === "portfolio" && <Portfolio />}
+          {show === "portfolio" && <Portfolio setShow={setShow} />}
           {show === "stocks" && <Market />}
           {/* TODO change name of the Market compoenent and file to Stocks */}
           {show === "crypto" && <Crypto />}

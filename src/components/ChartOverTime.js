@@ -49,15 +49,19 @@ export const ChartOverTime = ({ stocks, crypto }) => {
 
   useEffect(() => {
     // check if all history data fetched
+
+    let all = [];
+    let cryptoSum = [];
+    let stockSum = [];
+
+    // check if all history data fetched
     if (
-      //TODO handle corner point when user have only one type of assets crypto or stocks
       stockData.length > 0 &&
       stockData.length === stocks.length &&
       cryptoData.length > 0 &&
       cryptoData.length === crypto.length
     ) {
-      let cryptoSum = [];
-      let stockSum = [];
+      console.log("Portoflio zawiera crypto i stocks");
       if (typeof stockData[0].allDaysNoVoids !== "undefined") {
         stockData[0].allDaysNoVoids.forEach((day) => {
           //get array of stock prices for each day
@@ -67,7 +71,7 @@ export const ChartOverTime = ({ stocks, crypto }) => {
             );
             return dayOfInterest.value;
           });
-          let stockValueSum = stockPricesArray.reduce((a, b) => a + b);
+          let stockValueSum = stockPricesArray.reduce((a, b) => a + b) ?? 0;
           let stockDaySum = {
             date: day.date,
             value: stockValueSum,
@@ -80,10 +84,10 @@ export const ChartOverTime = ({ stocks, crypto }) => {
             );
             return dayOfInterest.value;
           });
-          let cryptoValueSum = cryptoPricesArray.reduce((a, b) => a + b);
+          let cryptoValueSum = cryptoPricesArray.reduce((a, b) => a + b) ?? 0;
           let cryptoDaySum = {
             date: day.date,
-            value: isNaN(cryptoValueSum) ? null : cryptoValueSum,
+            value: isNaN(cryptoValueSum) ? 0 : cryptoValueSum,
           };
 
           cryptoSum.push(cryptoDaySum);
@@ -91,17 +95,82 @@ export const ChartOverTime = ({ stocks, crypto }) => {
         });
       }
 
-      let all = Object.values(
+      all = Object.values(
         [...cryptoSum, ...stockSum].reduce((a, { date, value }) => {
           a[date] = a[date] || { date, value: 0 };
           a[date].value = a[date].value + value;
           return a;
         }, {})
       );
-      if (plot === "all assets") setData(() => [...all]);
-      else if (plot === "cryptocurrency") setData(() => [...cryptoSum]);
-      else if (plot === "stocks") setData(() => [...stockSum]);
+    } else if (stockData.length > 0 && stockData.length === stocks.length) {
+      console.log("Portoflio zawiera stocks");
+      if (typeof stockData[0].allDaysNoVoids !== "undefined") {
+        stockData[0].allDaysNoVoids.forEach((day) => {
+          //get array of stock prices for each day
+          let stockPricesArray = stockData.map((stock) => {
+            let dayOfInterest = stock.allDaysNoVoids.find(
+              (obj) => obj.date === day.date
+            );
+            return dayOfInterest.value;
+          });
+          let stockValueSum = stockPricesArray.reduce((a, b) => a + b) ?? 0;
+          let stockDaySum = {
+            date: day.date,
+            value: stockValueSum,
+          };
+          let cryptoDaySum = {
+            date: day.date,
+            value: 0,
+          };
+          stockSum.push(stockDaySum);
+          cryptoSum.push(cryptoDaySum);
+        });
+      }
+      //sum-up multiple transaction in the same days into one pair of value and date
+      all = Object.values(
+        [...stockSum].reduce((a, { date, value }) => {
+          a[date] = a[date] || { date, value: 0 };
+          a[date].value = a[date].value + value;
+          return a;
+        }, {})
+      );
+    } else if (cryptoData.length > 0 && cryptoData.length === crypto.length) {
+      console.log("Portoflio zawiera crypto");
+      if (typeof cryptoData[0].allDays !== "undefined") {
+        cryptoData[0].allDays.forEach((day) => {
+          //get array of crypto prices for each day
+          let cryptoPricesArray = cryptoData.map((crypto) => {
+            let dayOfInterest = crypto.allDays.find(
+              (obj) => obj.date === day.date
+            );
+            return dayOfInterest.value;
+          });
+          let cryptoValueSum = cryptoPricesArray.reduce((a, b) => a + b);
+          let cryptoDaySum = {
+            date: day.date,
+            value: cryptoValueSum,
+          };
+          let stockDaySum = {
+            date: day.date,
+            value: 0,
+          };
+          cryptoSum.push(cryptoDaySum);
+          stockSum.push(stockDaySum);
+        });
+      }
+      //sum-up multiple transaction in the same days into one pair of value and date
+      all = Object.values(
+        [...cryptoSum].reduce((a, { date, value }) => {
+          a[date] = a[date] || { date, value: 0 };
+          a[date].value = a[date].value + value;
+          return a;
+        }, {})
+      );
     }
+
+    if (plot === "all assets") setData(() => [...all]);
+    else if (plot === "cryptocurrency") setData(() => [...cryptoSum]);
+    else if (plot === "stocks") setData(() => [...stockSum]);
   }, [stockData, cryptoData, stocks, crypto, plot]);
 
   const handlePlotAllAssets = async () => {
