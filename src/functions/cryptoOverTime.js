@@ -20,7 +20,7 @@ export const cryptoOverTime = (crypto, interval, setCryptoData) => {
 
     //remove first day data duplication
     fetchedCrypto.shift();
-
+    fetchedCrypto.reverse();
     let cryptoToAppend = fetchedCrypto.map((day) => {
       let dayOfInterest = amountAndDate.days.find(
         (amountAndDateDay) => amountAndDateDay.date === day.date
