@@ -1,6 +1,7 @@
 {
+  "homepage": "http://pawel-peksa.github.io/lite-funds",
   "name": "lite-funds",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.0",
