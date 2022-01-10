@@ -2,8 +2,7 @@
 
 Simple and lightweight web app to help you keep track of all your investments in one place.
 
-
-
+![image](https://user-images.githubusercontent.com/25892133/148834381-ed64f5f8-c307-4207-b4a4-5d4a0c2eafd9.png)
 
 ### Created with joy by pawel-peksa
 
