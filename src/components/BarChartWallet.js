@@ -85,10 +85,8 @@ export const BarChartWallet = ({ assets }) => {
           <Bar
             shape={<CustomBar dataKey={dataKey} />}
             dataKey={dataKey}
-            // fill="#91d4dd"
+            maxBarSize={50}
             fill="#61bf9a"
-            // fill="#4a8da7"
-            // fill="#607d8b"
           />
         </BarChart>
       </ResponsiveContainer>
