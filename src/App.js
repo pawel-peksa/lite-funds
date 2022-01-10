@@ -2,7 +2,7 @@ import "./settings/firebaseConfig";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./styles.css";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route,
   Navigate,
