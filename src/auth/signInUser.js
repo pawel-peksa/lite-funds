@@ -7,11 +7,10 @@ export const signInUser = (
   setIsLoading,
   setWrongCredentials
 ) => {
-  setIsLoading(true);
-  setWrongCredentials("");
+  if (typeof setIsLoading !== "undefined") setIsLoading(true);
+  if (typeof setWrongCredentials !== "undefined") setWrongCredentials("");
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // console.log(userCredential.user);
       setIsLoading(false);
       navigate("/dashboard");
     })
@@ -19,12 +18,15 @@ export const signInUser = (
       const errorCode = error.code;
       const errorMessage = error.message;
       if (errorCode === "auth/wrong-password") {
-        setWrongCredentials("Wrong Password");
+        if (typeof setWrongCredentials !== "undefined")
+          setWrongCredentials("Wrong Password");
       } else if (errorCode === "auth/user-not-found") {
-        setWrongCredentials("Account does not exist. Please Sign Up");
+        if (typeof setWrongCredentials !== "undefined")
+          setWrongCredentials("Account does not exist. Please Sign Up");
       } else {
-        setWrongCredentials(errorMessage);
+        if (typeof setWrongCredentials !== "undefined")
+          setWrongCredentials(errorMessage);
       }
-      setIsLoading(false);
+      if (typeof setIsLoading !== "undefined") setIsLoading(false);
     });
 };
