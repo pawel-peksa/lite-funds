@@ -61,7 +61,6 @@ export const ChartOverTime = ({ stocks, crypto }) => {
       cryptoData.length > 0 &&
       cryptoData.length === crypto.length
     ) {
-      console.log("Portoflio zawiera crypto i stocks");
       if (typeof stockData[0].allDaysNoVoids !== "undefined") {
         stockData[0].allDaysNoVoids.forEach((day) => {
           //get array of stock prices for each day
@@ -103,7 +102,6 @@ export const ChartOverTime = ({ stocks, crypto }) => {
         }, {})
       );
     } else if (stockData.length > 0 && stockData.length === stocks.length) {
-      console.log("Portoflio zawiera stocks");
       if (typeof stockData[0].allDaysNoVoids !== "undefined") {
         stockData[0].allDaysNoVoids.forEach((day) => {
           //get array of stock prices for each day
@@ -135,7 +133,6 @@ export const ChartOverTime = ({ stocks, crypto }) => {
         }, {})
       );
     } else if (cryptoData.length > 0 && cryptoData.length === crypto.length) {
-      console.log("Portoflio zawiera crypto");
       if (typeof cryptoData[0].allDays !== "undefined") {
         cryptoData[0].allDays.forEach((day) => {
           //get array of crypto prices for each day

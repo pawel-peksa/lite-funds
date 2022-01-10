@@ -33,7 +33,6 @@ export const Portfolio = ({ setShow }) => {
   useEffect(() => {
     setBalance(calculateBalance(assets));
     setProfitLoss(calculateProfitLoss(assets));
-    console.log(assets);
     let filteredStocks = assets.filter((asset) => asset.type === "stocks");
     let filteredCrypto = assets.filter((asset) => asset.type === "crypto");
     setStocks(filteredStocks);

@@ -83,7 +83,6 @@ export const createAssets = async (arr, setAssets, setIsLoading) => {
   ];
   for (const symbol of uniqueSymbolsStocks) {
     let price = await yFinanceQuote(symbol);
-    console.log(price);
     let transactions = arr.filter(
       (transaction) => transaction.symbol === symbol
     );
