@@ -9,6 +9,7 @@ export const MobileTitle = () => {
         left: 0,
         right: 0,
         bgcolor: "primary.main",
+        zIndex: 10000,
       }}
       variant="outlined"
       square

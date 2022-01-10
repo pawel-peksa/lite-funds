@@ -24,6 +24,8 @@ export const TransactionStep1 = ({ handleChange, value }) => {
           control={<Radio />}
           label="Cryptocurrency"
         />
+        {/* 
+        FUTURE IMPROVEMENT
         <FormControlLabel
           value="bonds"
           control={<Radio />}
@@ -35,7 +37,7 @@ export const TransactionStep1 = ({ handleChange, value }) => {
           control={<Radio />}
           label="Gold"
           disabled
-        />
+        /> */}
       </RadioGroup>
     </FormControl>
   );

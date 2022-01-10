@@ -1,5 +1,5 @@
 import { getAssets } from "../db/getAssets";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "../auth/UserProvider";
 import { useTheme } from "@mui/material/styles";
@@ -11,11 +11,12 @@ import { PieChartWallet } from "../components/PieChartWallet";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { BarChartWallet } from "../components/BarChartWallet";
 import { ChartOverTime } from "../components/ChartOverTime";
+import CircleLoader from "react-spinners/CircleLoader";
 
 export const Portfolio = () => {
   const { user } = useSession();
   const [assets, setAssets] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [balance, setBalance] = useState(0);
   const [profitLoss, setProfitLoss] = useState(0);
   const theme = useTheme();
@@ -38,7 +39,24 @@ export const Portfolio = () => {
     setCrypto(filteredCrypto);
   }, [assets]);
 
-  return (
+  let loadingScreen = (
+    <Paper
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        height: "calc(100vh - 100px)",
+      }}
+    >
+      <CircleLoader size={100} color="teal" />
+      <Typography variant="h5" component="h2" color="secondary" sx={{ mt: 3 }}>
+        loading data...
+      </Typography>
+    </Paper>
+  );
+
+  let mainScreen = (
     <Grid container spacing={{ xs: 1 }}>
       {/* Firs row container green*/}
       <Grid item container spacing={{ xs: 1 }}>
@@ -112,4 +130,6 @@ export const Portfolio = () => {
       </Grid>
     </Grid>
   );
+
+  return isLoading ? loadingScreen : mainScreen;
 };

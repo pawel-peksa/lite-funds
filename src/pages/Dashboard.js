@@ -34,7 +34,7 @@ export const Dashboard = () => {
           flexGrow: 1,
           overflow: "auto",
           backgroundColor: "#f5f5f5",
-          height: sideNavigation ? "100vh" : "calc(100vh-62px)",
+          height: sideNavigation ? "100vh" : "calc(100vh - 62px)",
           ml: sideNavigation ? "102px" : "",
           mt: sideNavigation ? "" : "22px",
           mb: sideNavigation ? "" : "40px",
@@ -63,7 +63,7 @@ export const Dashboard = () => {
       {sideNavigation ? (
         <SideNav setShow={setShow} />
       ) : (
-        <BottomNav setShow={setShow} />
+        <BottomNav setShow={setShow} show={show} />
       )}
     </LocalizationProvider>
   );
