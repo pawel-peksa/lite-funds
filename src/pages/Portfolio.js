@@ -1,5 +1,5 @@
 import { getAssets } from "../db/getAssets";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "../auth/UserProvider";
 import { useTheme } from "@mui/material/styles";
@@ -42,17 +42,56 @@ export const Portfolio = () => {
   let loadingScreen = (
     <Paper
       sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
         height: "calc(100vh - 100px)",
       }}
     >
-      <CircleLoader size={100} color="teal" />
-      <Typography variant="h5" component="h2" color="secondary" sx={{ mt: 3 }}>
-        loading data...
+      <Typography
+        variant="body2"
+        component="p"
+        // gutterBottom
+        align="center"
+        color="secondary.main"
+        sx={{ fontWeight: 200, pt: 3, fontSize: 18 }}
+      >
+        Welcome to
       </Typography>
+      <Typography
+        variant="body1"
+        component="h1"
+        align="center"
+        color="primary.main"
+        sx={{ fontWeight: 500, fontSize: 20 }}
+      >
+        Lite Funds
+      </Typography>
+      <Typography
+        variant="body2"
+        component="p"
+        align="center"
+        color="secondary.main"
+        sx={{ fontWeight: 200, fontSize: 13 }}
+      >
+        by Paweł Peksa
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          height: "60%",
+        }}
+      >
+        <CircleLoader size={100} color="teal" />
+        <Typography
+          variant="body1"
+          component="h2"
+          color="secondary"
+          sx={{ mt: 3 }}
+        >
+          loading data...
+        </Typography>
+      </Box>
     </Paper>
   );
 
