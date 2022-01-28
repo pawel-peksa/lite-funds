@@ -16,7 +16,9 @@ It has three main goals:
 - and last but not least - to have some fun during coding ;)
 
 Tools, technologies and bigger libraries:
-- Firebase Authentication 
+- React
+- Material UI
+- Firebase Authentication
 - Firestore
 - React Router v6
 - Recharts
