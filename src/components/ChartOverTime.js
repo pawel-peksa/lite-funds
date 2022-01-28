@@ -68,7 +68,7 @@ export const ChartOverTime = ({ stocks, crypto }) => {
             let dayOfInterest = stock.allDaysNoVoids.find(
               (obj) => obj.date === day.date
             );
-            return dayOfInterest.value;
+            return dayOfInterest?.value;
           });
           let stockValueSum = stockPricesArray.reduce((a, b) => a + b) ?? 0;
           let stockDaySum = {
@@ -109,7 +109,7 @@ export const ChartOverTime = ({ stocks, crypto }) => {
             let dayOfInterest = stock.allDaysNoVoids.find(
               (obj) => obj.date === day.date
             );
-            return dayOfInterest.value;
+            return dayOfInterest?.value;
           });
           let stockValueSum = stockPricesArray.reduce((a, b) => a + b) ?? 0;
           let stockDaySum = {
