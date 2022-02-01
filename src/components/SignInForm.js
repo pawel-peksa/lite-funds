@@ -39,6 +39,9 @@ export const SignInForm = ({ setForgotPassword }) => {
     setShowPassword(!showPassword);
   };
 
+  const navigateToRegister = () => {
+    navigate("/sign-up");
+  };
   const handleMouseDownPassword = (event) => {
     event.preventDefault(); //don't loose focus on password input
   };
@@ -152,7 +155,7 @@ export const SignInForm = ({ setForgotPassword }) => {
         <Button
           fullWidth
           variant="outlined"
-          href="/sign-up"
+          onClick={navigateToRegister}
           size="large"
           color="primary"
           sx={{ mt: 3 }}
