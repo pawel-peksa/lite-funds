@@ -50,6 +50,10 @@ export const SignUp = () => {
     event.preventDefault(); //don't loose focus on password input
   };
 
+  const navigateToLogin = () => {
+    navigate("/sign-in");
+  };
+
   return (
     <>
       <Typography component="h1" variant="h4" sx={{ mt: 3 }}>
@@ -185,7 +189,7 @@ export const SignUp = () => {
         )}
         <Button
           fullWidth
-          href="/sign-in"
+          onClick={navigateToLogin}
           size="large"
           color="primary"
           sx={{ mt: 6 }}
